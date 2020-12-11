@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+$api = app('Dingo\Api\Routing\Router');
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$api->post('login', 'MobileApps\Auth\LoginController@login');
+$api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
+$api->post('register', 'MobileApps\Auth\RegisterController@register');
+$api->post('forgot', 'MobileApps\Auth\ForgotPasswordController@forgot');
+$api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
+$api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
+$api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
+
+
+$api->get('home', 'MobileApps\HomeController@home');
