@@ -18,6 +18,27 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\CustomerRegistered' => [
+            'App\Listeners\CustomerRegisterListner',
+        ],
+        'App\Events\SendOtp'=>[
+            'App\Listeners\SendOtpListner',
+        ],
+
+        'App\Events\OrderConfirmed'=>[
+            'App\Listeners\OrderConfirmListner'
+        ],
+
+        'App\Events\RescheduleConfirmed'=>[
+            'App\Listeners\RescheduleConfirmListner'
+        ],
+
+        'App\Events\RechargeConfirmed'=>[
+            'App\Listeners\RechargeConfirmListner'
+        ],
+        'App\Events\TherapistRegistered' => [
+            'App\Listeners\TherapistRegisterListner',
+        ],
     ];
 
     /**
