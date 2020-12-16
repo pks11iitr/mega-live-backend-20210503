@@ -8,6 +8,16 @@ use App\Models\Product;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Height;
+use App\Models\Languages;
+use App\Models\Religion;
+use App\Models\Income;
+use App\Models\Ocupation;
+use App\Models\Employment;
+use App\Models\State;
+use App\Models\Education;
+use App\Models\Country;
+use App\Models\City;
 
 class HomeController extends Controller
 {
