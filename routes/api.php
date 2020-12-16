@@ -23,4 +23,9 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 $api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
 
 
-$api->get('home', 'MobileApps\HomeController@home');
+$api->group(['middleware' => ['customer-api-auth']], function ($api) {
+
+    $api->get('get-options', 'MobileApps\ProfileController@getOptions');
+
+    $api->get('home', 'MobileApps\HomeController@home');
+});
