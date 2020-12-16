@@ -12,6 +12,8 @@ use App\Models\Income;
 use App\Models\Languages;
 use App\Models\Ocupation;
 use App\Models\State;
+use App\Models\Religion;
+
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
