@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\MobileApps\Api;
+namespace App\Http\Controllers\MobileApps;
 
 use App\Models\Banner;
 use App\Models\Configuration;
