@@ -54,7 +54,7 @@ class RegisterController extends Controller
             ];
         }
         $user = $this->create($request->all());
-        //event(new CustomerRegistered($user));
+        event(new CustomerRegistered($user));
 
         return [
             'status'=>'success',
