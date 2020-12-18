@@ -53,9 +53,9 @@ class ProfileController extends Controller
             'state_id'=>'required|integer',
             'city_id'=>'required|integer',
             'pincode'=>'required|integer',
-            'day'=>'required|integer',
-            'month'=>'required|integer',
-            'year'=>'required|integer',
+            'day'=>'required',
+            'month'=>'required',
+            'year'=>'required',
         ]);
 
         $date=$request->year.'-'.$request->month.'-'.$request->day;
