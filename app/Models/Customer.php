@@ -9,7 +9,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Customer extends Authenticatable implements JWTSubject
 {
-    //use DocumentUploadTrait;
+    use DocumentUploadTrait;
 
     protected $table='customers';
 

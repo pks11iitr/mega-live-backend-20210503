@@ -26,6 +26,10 @@ $api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePa
 $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
     $api->get('get-options', 'MobileApps\ProfileController@getOptions');
+    $api->post('basic-info', 'MobileApps\ProfileController@updateBasicInfo');
+    $api->post('work-education', 'MobileApps\ProfileController@updateWorkInfo');
+    $api->post('personal-details', 'MobileApps\ProfileController@updatePersonalInfo');
+    $api->post('about', 'MobileApps\ProfileController@updateAboutMe');
 
     $api->get('home', 'MobileApps\HomeController@home');
 });
