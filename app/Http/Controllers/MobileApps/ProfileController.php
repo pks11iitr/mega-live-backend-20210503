@@ -82,7 +82,7 @@ class ProfileController extends Controller
             'education_id'=>'required|integer',
             'occupation_id'=>'required|integer',
             'employement_id'=>'required|integer',
-            'salaray_id'=>'required|integer',
+            'salary_id'=>'required|integer',
         ]);
 
             $result=$request->user->update($request->only('education_id', 'occupation_id', 'employement_id', 'salary_id'));
