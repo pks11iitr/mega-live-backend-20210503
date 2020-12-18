@@ -22,9 +22,9 @@ class ProfileController extends Controller
 
         $height=Height::select('name', 'id')->get();
         $language=Languages::select('name', 'id')->get();
-        $country=Country::select('name', 'id')->get();
-        $state=State::select('name', 'id')->get();
-        $city=City::select('name', 'id')->get();
+        $country=Country::with('states.cities')->select('name', 'id')->get();
+//        $state=State::select('name', 'id')->get();
+//        $city=City::select('name', 'id')->get();
         $education=Education::select('name', 'id')->get();
         $occupation=Ocupation::select('name', 'id')->get();
         $employment=Employment::select('name', 'id')->get();
@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
             'status'=>'success',
             'message'=>'',
-            'data'=>compact('height', 'language', 'country', 'state', 'city', 'education','occupation', 'employment', 'income', 'religion', 'marital')
+            'data'=>compact('height', 'language', 'country', 'education','occupation', 'employment', 'income', 'religion', 'marital')
 
         ];
 
