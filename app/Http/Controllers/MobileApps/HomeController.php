@@ -22,7 +22,8 @@ class HomeController extends Controller
         $profiles=Customer::with([ 'city',  'religion', 'salary', 'height'])
             ->where('gender', ($user->gender=='Female')?'Male':'Female')
             ->whereNotNull('gender')
-            ->select('id', 'name','image')
+            ->where('id', '!=', $user->id)
+            ->select('id', 'name','image', 'dob')
             ->get();
         $stories=Story::active()->get();
         $news=NewsUpdate::active()->get();
