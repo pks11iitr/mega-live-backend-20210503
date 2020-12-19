@@ -21,6 +21,8 @@ class Customer extends Authenticatable implements JWTSubject
         'password','created_at','deleted_at','updated_at','email','mobile'
     ];
 
+    protected $appends=['age'];
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -63,5 +65,40 @@ class Customer extends Authenticatable implements JWTSubject
 
     public function religion(){
         return $this->belongsTo('App\Models\City', 'religion_id');
+    }
+
+    public function salary(){
+        return $this->belongsTo('App\Models\Income', 'salary_id');
+    }
+
+    public function height(){
+        return $this->belongsTo('App\Models\Height', 'height_id');
+    }
+
+    public function getAgeAttribute($value){
+        die($this->getOriginal('dob'));
+        if($this->getOriginal('dob'))
+            return $this->getAgeDifference($value);
+        return '--';
+    }
+
+    function getAgeDifference($date){
+
+        $text='--';
+
+        if($date){
+            $date1 = new DateTime(date('Y-m-d H:i:s'));
+            $date2 = $date1->diff(new DateTime($date));
+
+            $text='';
+
+            if($date2->y)
+                $text=$text.$date2->y.' year';
+
+            if($date2->m)
+                $text=$text.$date2->m.' month';
+        }
+
+        return $text;
     }
 }
