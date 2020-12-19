@@ -4,7 +4,10 @@ namespace App\Http\Controllers\MobileApps;
 
 use App\Models\Banner;
 use App\Models\Configuration;
+use App\Models\Customer;
+use App\Models\NewsUpdate;
 use App\Models\Product;
+use App\Models\Story;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,18 +19,13 @@ class HomeController extends Controller
         $user=auth()->guard('customerapi')->user();
 
         $banners=Banner::active()->get();
-        $products=Product::active()->where('top_deal', true)->get();
-        $videos=Video::active()->get();
-        $services=[
-            [
-            'name'=>'Clinics',
-            'url'=>route('clinics.list')
-            ],
-            [
-                'name'=>'Therapies',
-                'url'=>route('therapies.list')
-            ],
-        ];
+        $profiles=Customer::with(['name', 'city',  'religion'])
+            ->where('gender', ($user->gender=='Female')?'Male':'Female')
+            ->whereNotNull('gender')
+            //->select('name', 'city',  'religion')
+            ->get();
+        $stories=Story::active()->get();
+        $news=NewsUpdate::active()->get();
 
         $user=[
             'name'=>$user->name??'',
@@ -35,11 +33,9 @@ class HomeController extends Controller
             'mobile'=>$user->mobile??''
         ];
 
-        $channel_url=Configuration::where('param', 'channel_url')->first();
-        $channel_url=$channel_url->value;
         return [
             'status'=>'success',
-            'data'=>compact('services','products','videos', 'banners', 'channel_url', 'user')
+            'data'=>compact('profiles', 'banners',  'user', 'stories', 'news')
         ];
     }
 }

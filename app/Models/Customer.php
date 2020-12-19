@@ -31,6 +31,7 @@ class Customer extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -44,6 +45,23 @@ class Customer extends Authenticatable implements JWTSubject
     public function getImageAttribute($value){
         if($value)
             return Storage::url($value);
-        return null;
+        return Storage::url('customers/default.jpeg');
+    }
+
+    public function city(){
+        return $this->belongsTo('App\Models\City', 'city_id');
+    }
+
+    public function country(){
+        return $this->belongsTo('App\Models\Country', 'country_id');
+    }
+
+    public function state(){
+        return $this->belongsTo('App\Models\State', 'state_id');
+    }
+
+
+    public function religion(){
+        return $this->belongsTo('App\Models\City', 'religion_id');
     }
 }
