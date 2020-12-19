@@ -76,7 +76,7 @@ class Customer extends Authenticatable implements JWTSubject
     }
 
     public function getAgeAttribute($value){
-        die($this->getOriginal('dob'));
+        var_dump($this->getOriginal('dob'));
         if($this->getOriginal('dob'))
             return $this->getAgeDifference($value);
         return '--';
