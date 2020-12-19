@@ -19,7 +19,7 @@ class HomeController extends Controller
         $user=auth()->guard('customerapi')->user();
 
         $banners=Banner::active()->get();
-        $profiles=Customer::with(['name', 'city',  'religion'])
+        $profiles=Customer::with([ 'city',  'religion'])
             ->where('gender', ($user->gender=='Female')?'Male':'Female')
             ->whereNotNull('gender')
             //->select('name', 'city',  'religion')
