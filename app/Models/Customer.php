@@ -6,7 +6,7 @@ use App\Models\Traits\DocumentUploadTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use DateTime;
 class Customer extends Authenticatable implements JWTSubject
 {
     use DocumentUploadTrait;
@@ -77,7 +77,7 @@ class Customer extends Authenticatable implements JWTSubject
 
     public function getAgeAttribute($value){
         if($this->dob)
-            return $this->getAgeDifference($value);
+            return $this->getAgeDifference($this->dob);
         return '--';
     }
 
@@ -92,7 +92,7 @@ class Customer extends Authenticatable implements JWTSubject
             $text='';
 
             if($date2->y)
-                $text=$text.$date2->y.' year';
+                $text=$text.$date2->y.' year'.' ';
 
             if($date2->m)
                 $text=$text.$date2->m.' month';
