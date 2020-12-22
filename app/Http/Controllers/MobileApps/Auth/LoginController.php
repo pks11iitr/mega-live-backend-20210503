@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MobileApps\Auth;
 use App\Events\SendOtp;
 use App\Models\Customer;
 use App\Models\OTPModel;
+use App\Models\User;
 use App\Services\SMS\Msg91;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -107,8 +108,13 @@ class LoginController extends Controller
         $this->validateOTPLogin($request);
 
         $user=Customer::where('mobile', $request->mobile)->first();
-        if(!$user)
-            return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
+        if(!$user){
+            //return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
+            $user=User::create([
+               'mobile'=>$request->mobile,
+               'password'=>'none'
+            ]);
+        }
 
         if(!in_array($user->status, [0,1]))
             return ['status'=>'failed', 'message'=>'This account has been blocked'];

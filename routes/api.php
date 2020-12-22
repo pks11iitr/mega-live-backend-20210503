@@ -14,13 +14,13 @@ $api = app('Dingo\Api\Routing\Router');
 |
 */
 
-$api->post('login', 'MobileApps\Auth\LoginController@login');
+//$api->post('login', 'MobileApps\Auth\LoginController@login');
 $api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
-$api->post('register', 'MobileApps\Auth\RegisterController@register');
-$api->post('forgot', 'MobileApps\Auth\ForgotPasswordController@forgot');
+//$api->post('register', 'MobileApps\Auth\RegisterController@register');
+//$api->post('forgot', 'MobileApps\Auth\ForgotPasswordController@forgot');
 $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
-$api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
-$api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
+//$api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
+//$api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
 
 
 $api->group(['middleware' => ['customer-api-auth']], function ($api) {
