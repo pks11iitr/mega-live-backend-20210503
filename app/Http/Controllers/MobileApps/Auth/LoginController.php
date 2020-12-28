@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //adding jsut test comment
+    //adding jsut test commentas
     /**
      * Get the login username to be used by the controller.
      *
