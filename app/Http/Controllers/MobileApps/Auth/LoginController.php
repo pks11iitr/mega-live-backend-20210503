@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //adding
+    //adding fg
     /**
      * Get the login username to be used by the controller.
      *
