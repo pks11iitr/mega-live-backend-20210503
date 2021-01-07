@@ -5,11 +5,13 @@ namespace App\Http\Controllers\MobileApps;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Document;
 use App\Models\Education;
 use App\Models\Employment;
 use App\Models\Height;
 use App\Models\Income;
 use App\Models\Languages;
+use App\Models\Membership;
 use App\Models\Ocupation;
 use App\Models\State;
 use App\Models\Religion;
@@ -18,6 +20,93 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function settings(Request $request){
+        $user=$request->user;
+
+        $memberships=Membership::active()
+            ->select('title', 'description', 'price')
+            ->get();
+
+        return [
+
+            'status'=>'success',
+            'message'=>'',
+            'data'=>compact('user', 'memberships')
+
+
+        ];
+
+    }
+
+    public function pictures(Request $request){
+        $user=$request->user;
+
+        $images=$user->gallery->only('id', 'file_path');
+        return [
+            'status'=>'success',
+            'message'=>'',
+            'data'=>compact('images')
+        ];
+    }
+
+
+    public function uploadpictures(Request $request){
+
+        $request->validate([
+            'images'=>'required|array',
+        ]);
+
+        $user=$request->user;
+
+        foreach($request->images as $image)
+            $user->saveDocument($image);
+
+        $images=$user->gallery->only('id', 'file_path');
+
+        return [
+            'status'=>'success',
+            'message'=>'',
+            'data'=>compact('images')
+        ];
+    }
+
+    public function deletepic(Request $request, $id){
+        $user=$request->user;
+        Document::where('id', $id)
+            ->where('entity_type', 'App\Models\Customer')
+            ->where('entity_id', $user->id)
+            ->delete();
+
+        $images=$user->gallery->only('id', 'file_path');
+
+        return [
+            'status'=>'success',
+            'message'=>'',
+            'data'=>compact('images')
+        ];
+    }
+
+    public function updateProfilePic(Request $request, $id){
+        $user=$request->user;
+        $document=Document::where('id', $id)
+            ->where('entity_type', 'App\Models\Customer')
+            ->where('entity_id', $user->id)
+            ->first();
+        if(!$document)
+            return [
+                'status'=>'failed',
+                'message'=>'invalid request',
+                'data'=>[]
+            ];
+        $user->image=$document->getOriginal('doc_path');
+        return [
+            'status'=>'success',
+            'message'=>'success',
+            'data'=>[]
+        ];
+    }
+
+
     public function getOptions(Request $request){
 
         $height=Height::select('name', 'id')->get();
