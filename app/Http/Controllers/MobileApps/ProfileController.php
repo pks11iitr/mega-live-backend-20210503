@@ -9,7 +9,8 @@ use App\Models\Country;
 use App\Models\Document;
 use App\Models\Education;
 use App\Models\Employment;
-use App\Models\FaimlyPlan;
+use App\Models\EthniCity;
+use App\Models\FamilyPlan;
 use App\Models\Height;
 use App\Models\Income;
 use App\Models\Kid;
@@ -24,6 +25,67 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+
+
+    public function getprofile(Request $request){
+        $user=$request->user;
+        $profile=array(
+                      'id'=>$user->id,
+                      'image'=>$user->image,
+                      'gender'=>$user->gender,
+                      'age'=>$user->dob,
+                      'mobile_no'=>$user->mobile,
+                      'email'=>$user->email,
+                      'address'=>$user->address,
+                      'about_me'=>$user->about_me,
+                      'height'=>$user->Height->name??'',
+                      'ethnicity'=>$user->Ethnicity->name??'',
+                      'kid'=>$user->Kids->name??'',
+                      'family_plan'=>$user->Family->name??'',
+                      'work'=>$user->Work->name??'',
+                      'job'=>$user->Job->name??'',
+                      'education'=>$user->Education->name??'',
+                      'attendedlavel'=>$user->AttendedLavel->name??'',
+                      'religion'=>$user->Religion->name??'',
+                      'Politics'=>$user->Politics->name??'',
+                       'drinking'=>$user->drinking,
+                       'smoking'=>$user->smoking,
+                       'marijuana'=>$user->marijuana,
+                       'drugs'=>$user->drugs,
+                       'age_show'=>$user->age_show,
+                       'distance_show'=>$user->distance_show,
+
+            );
+
+        $height=Height::select('name', 'id')->get();
+        ///  $language=Languages::select('name', 'id')->get();
+        // $country=Country::with('states.cities')->select('name', 'id')->get();
+//        $state=State::select('name', 'id')->get();
+        $ethnicity=EthniCity::select('name', 'id')->get();
+        $kids=Kid::select('name', 'id')->get();
+        $familyplan=FamilyPlan::select('name', 'id')->get();
+        $occupation=Ocupation::select('name', 'id')->get();
+        $employment=Employment::select('name', 'id')->get();
+        $education=Education::select('name', 'id')->get();
+        $attended=AttendedLavel::select('name', 'id')->get();
+        $politics=Politics::select('name', 'id')->get();
+
+        // $income=Income::select('name', 'id')->get();
+        $religion=Religion::select('name', 'id')->get();
+        $marital=config('myconfig.marrital');
+
+        return [
+
+            'status'=>'success',
+            'message'=>'',
+            'profile'=>$profile,
+            'data'=>compact('height','ethnicity','kids','familyplan','occupation','employment','education','attended', 'religion', 'politics','marital')
+
+        ];
+
+
+    }
+
     public function settings(Request $request){
         $user=$request->user;
 
@@ -42,10 +104,11 @@ class ProfileController extends Controller
 
     }
 
-    public function pictures(Request $request){
+//get user images
+    public function picures(Request $request){
         $user=$request->user;
 
-        $images=$user->gallery->only('id', 'file_path');
+        $images=$user->gallery()->select('id', 'file_path')->get();
         return [
             'status'=>'success',
             'message'=>'',
@@ -53,7 +116,7 @@ class ProfileController extends Controller
         ];
     }
 
-
+//upload user images
     public function uploadpictures(Request $request){
 
         $request->validate([
@@ -61,11 +124,10 @@ class ProfileController extends Controller
         ]);
 
         $user=$request->user;
-
         foreach($request->images as $image)
-            $user->saveDocument($image);
+            $user->saveDocument($image,'profile');
 
-        $images=$user->gallery->only('id', 'file_path');
+        $images=$user->gallery()->select('id', 'file_path')->get();
 
         return [
             'status'=>'success',
@@ -73,7 +135,7 @@ class ProfileController extends Controller
             'data'=>compact('images')
         ];
     }
-
+//delete pic
     public function deletepic(Request $request, $id){
         $user=$request->user;
         Document::where('id', $id)
@@ -81,7 +143,7 @@ class ProfileController extends Controller
             ->where('entity_id', $user->id)
             ->delete();
 
-        $images=$user->gallery->only('id', 'file_path');
+        $images=$user->gallery()->select('id', 'file_path')->get();
 
         return [
             'status'=>'success',
@@ -89,7 +151,7 @@ class ProfileController extends Controller
             'data'=>compact('images')
         ];
     }
-
+//update picture on profile pic
     public function updateProfilePic(Request $request, $id){
         $user=$request->user;
         $document=Document::where('id', $id)
@@ -102,43 +164,14 @@ class ProfileController extends Controller
                 'message'=>'invalid request',
                 'data'=>[]
             ];
-        $user->image=$document->getOriginal('doc_path');
+
+        $user->image=$document->getOriginal('file_path');
+        $user->save();
         return [
             'status'=>'success',
             'message'=>'success',
             'data'=>[]
         ];
-    }
-
-
-    public function getOptions(Request $request){
-
-        $height=Height::select('name', 'id')->get();
-      ///  $language=Languages::select('name', 'id')->get();
-       // $country=Country::with('states.cities')->select('name', 'id')->get();
-//        $state=State::select('name', 'id')->get();
-        $ethnicity=City::select('name', 'id')->get();
-        $kids=Kid::select('name', 'id')->get();
-        $familyplan=FaimlyPlan::select('name', 'id')->get();
-        $occupation=Ocupation::select('name', 'id')->get();
-        $employment=Employment::select('name', 'id')->get();
-        $education=Education::select('name', 'id')->get();
-        $attended=AttendedLavel::select('name', 'id')->get();
-        $politics=Politics::select('name', 'id')->get();
-
-       // $income=Income::select('name', 'id')->get();
-        $religion=Religion::select('name', 'id')->get();
-        $marital=config('myconfig.marrital');
-
-        return [
-
-            'status'=>'success',
-            'message'=>'',
-            'data'=>compact('height','ethnicity','kids','familyplan' ,'employment','occupation','education','attended', 'religion', 'politics','marital')
-
-        ];
-
-
     }
 
 

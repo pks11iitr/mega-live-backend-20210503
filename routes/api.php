@@ -25,10 +25,12 @@ $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
 
 $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
+    $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
+
     $api->get('pictures', 'MobileApps\ProfileController@picures');
-    $api->post('pictures', 'MobileApps\ProfileController@uploadpictures');
+    $api->post('upload-pictures', 'MobileApps\ProfileController@uploadpictures');
     $api->get('delete-picture/{id}', 'MobileApps\ProfileController@deletepic');
-    $api->get('set-profile-pic', 'MobileApps\ProfileController@updateProfilePic');
+    $api->get('set-profile-pic/{id}', 'MobileApps\ProfileController@updateProfilePic');
 
     $api->get('profile', 'MobileApps\ProfileController@profile');
 
