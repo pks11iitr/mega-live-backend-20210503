@@ -106,11 +106,13 @@ class LoginController extends Controller
 
     public function loginWithOtp(Request $request){
         $this->validateOTPLogin($request);
-
+        //die('aaad');
         $user=Customer::where('mobile', $request->mobile)->first();
+
         if(!$user){
+            //return $request->all();
             //return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
-            $user=User::create([
+            $user=Customer::create([
                'mobile'=>$request->mobile,
                'password'=>'none'
             ]);
@@ -130,7 +132,7 @@ class LoginController extends Controller
     protected function validateOTPLogin(Request $request)
     {
         $request->validate([
-            'mobile' => 'required|digits:10|string|exists:customers',
+            'mobile' => 'required|digits:10|string',
         ]);
     }
 
