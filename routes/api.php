@@ -33,6 +33,8 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->get('set-profile-pic/{id}', 'MobileApps\ProfileController@updateProfilePic');
 
     $api->get('profile', 'MobileApps\ProfileController@profile');
+    $api->get('get-mypreferences', 'MobileApps\ProfileController@getmypreferences');
+    $api->post('update-mypreferences', 'MobileApps\ProfileController@updatemypreferences');
 
     $api->get('my-matches', 'MobileApps\MatchesController@findMatches');
 
