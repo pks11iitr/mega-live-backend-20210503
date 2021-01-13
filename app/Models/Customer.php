@@ -14,7 +14,7 @@ class Customer extends Authenticatable implements JWTSubject
     protected $table='customers';
 
     protected $fillable = [
-        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'employement_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender'
+        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'job_id', 'ethicity_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender', 'drinking', 'smoking', 'marijuana', 'drugs'
     ];
 
     protected $hidden = [
@@ -57,48 +57,48 @@ class Customer extends Authenticatable implements JWTSubject
     public function Ethnicity(){
         return $this->belongsTo('App\Models\EthniCity', 'ethicity_id');
     }
-    public function Kids(){
-        return $this->belongsTo('App\Models\Kid', 'kids_id');
-    }
-    public function Family(){
-        return $this->belongsTo('App\Models\FamilyPlan', 'family_id');
-    }
+//    public function Kids(){
+//        return $this->belongsTo('App\Models\Kid', 'kids_id');
+//    }
+//    public function Family(){
+//        return $this->belongsTo('App\Models\FamilyPlan', 'family_id');
+//    }
 
     public function Work(){
-        return $this->belongsTo('App\Models\Ocupation', 'occupation');
+        return $this->belongsTo('App\Models\Ocupation', 'occupation_id');
     }
     public function Job(){
         return $this->belongsTo('App\Models\Employment', 'job_id');
     }
     public function Education(){
-        return $this->belongsTo('App\Models\Education', 'education');
+        return $this->belongsTo('App\Models\Education', 'education_id');
     }
-    public function AttendedLavel(){
-        return $this->belongsTo('App\Models\AttendedLavel', 'attended_lave_id');
-    }
+//    public function AttendedLavel(){
+//        return $this->belongsTo('App\Models\AttendedLavel', 'attended_lave_id');
+//    }
 
     public function Religion(){
         return $this->belongsTo('App\Models\Religion', 'religion_id');
     }
-    public function Politics(){
-        return $this->belongsTo('App\Models\Politics', 'politics_id');
-    }
+//    public function Politics(){
+//        return $this->belongsTo('App\Models\Politics', 'politics_id');
+//    }
 
 
-    public function country(){
-        return $this->belongsTo('App\Models\Country', 'country_id');
-    }
-    public function city(){
-        return $this->belongsTo('App\Models\City', 'city_id');
-    }
-    public function state(){
-        return $this->belongsTo('App\Models\State', 'state_id');
-    }
-
-
-    public function salary(){
-        return $this->belongsTo('App\Models\Income', 'salary_id');
-    }
+//    public function country(){
+//        return $this->belongsTo('App\Models\Country', 'country_id');
+//    }
+//    public function city(){
+//        return $this->belongsTo('App\Models\City', 'city_id');
+//    }
+//    public function state(){
+//        return $this->belongsTo('App\Models\State', 'state_id');
+//    }
+//
+//
+//    public function salary(){
+//        return $this->belongsTo('App\Models\Income', 'salary_id');
+//    }
 
 
 

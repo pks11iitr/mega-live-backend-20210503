@@ -26,6 +26,7 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
     $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
+    $api->post('update-profile', 'MobileApps\ProfileController@updateprofile');
 
     $api->get('pictures', 'MobileApps\ProfileController@picures');
     $api->post('upload-pictures', 'MobileApps\ProfileController@uploadpictures');

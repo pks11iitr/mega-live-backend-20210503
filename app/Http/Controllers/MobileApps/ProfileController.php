@@ -29,60 +29,75 @@ class ProfileController extends Controller
 
     public function getprofile(Request $request){
         $user=$request->user;
-        $profile=array(
-                      'id'=>$user->id,
-                      'image'=>$user->image,
-                      'gender'=>$user->gender,
-                      'age'=>$user->dob,
-                      'mobile_no'=>$user->mobile,
-                      'email'=>$user->email,
-                      'address'=>$user->address,
-                      'about_me'=>$user->about_me,
-                      'height'=>$user->Height->name??'',
-                      'ethnicity'=>$user->Ethnicity->name??'',
-                      'kid'=>$user->Kids->name??'',
-                      'family_plan'=>$user->Family->name??'',
-                      'work'=>$user->Work->name??'',
-                      'job'=>$user->Job->name??'',
-                      'education'=>$user->Education->name??'',
-                      'attendedlavel'=>$user->AttendedLavel->name??'',
-                      'religion'=>$user->Religion->name??'',
-                      'Politics'=>$user->Politics->name??'',
-                       'drinking'=>$user->drinking,
-                       'smoking'=>$user->smoking,
-                       'marijuana'=>$user->marijuana,
-                       'drugs'=>$user->drugs,
-                       'age_show'=>$user->age_show,
-                       'distance_show'=>$user->distance_show,
+//        $profile=array(
+//                      'id'=>$user->id,
+//                      'image'=>$user->image,
+//                      'gender'=>$user->gender,
+//                      'dob'=>$user->dob,
+//                      'mobile'=>$user->mobile,
+//                      'email'=>$user->email,
+//                      'address'=>$user->address,
+//                      'about_me'=>$user->about_me,
+//                      'height'=>$user->Height->name??'',
+//                      'ethnicity'=>$user->Ethnicity->name??'',
+//                      //'kid'=>$user->Kids->name??'',
+//                      //'family_plan'=>$user->Family->name??'',
+//                      'work'=>$user->Work->name??'',
+//                      'job'=>$user->Job->name??'',
+//                      'education'=>$user->Education->name??'',
+//                      //'attendedlavel'=>$user->AttendedLavel->name??'',
+//                      'religion'=>$user->Religion->name??'',
+//                      //'Politics'=>$user->Politics->name??'',
+//                       'drinking'=>$user->drinking,
+//                       'smoking'=>$user->smoking,
+//                       'marijuana'=>$user->marijuana,
+//                       'drugs'=>$user->drugs,
+//                       'age_show'=>$user->age_show,
+//                       'distance_show'=>$user->distance_show,
+//
+//            );
 
-            );
+        $profile=$user->only('gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show');
 
         $height=Height::select('name', 'id')->get();
         ///  $language=Languages::select('name', 'id')->get();
         // $country=Country::with('states.cities')->select('name', 'id')->get();
 //        $state=State::select('name', 'id')->get();
         $ethnicity=EthniCity::select('name', 'id')->get();
-        $kids=Kid::select('name', 'id')->get();
-        $familyplan=FamilyPlan::select('name', 'id')->get();
+        //$kids=Kid::select('name', 'id')->get();
+        //$familyplan=FamilyPlan::select('name', 'id')->get();
         $occupation=Ocupation::select('name', 'id')->get();
         $employment=Employment::select('name', 'id')->get();
         $education=Education::select('name', 'id')->get();
-        $attended=AttendedLavel::select('name', 'id')->get();
+        //$attended=AttendedLavel::select('name', 'id')->get();
         $politics=Politics::select('name', 'id')->get();
 
         // $income=Income::select('name', 'id')->get();
         $religion=Religion::select('name', 'id')->get();
-        $marital=config('myconfig.marrital');
+        //$marital=config('myconfig.marrital');
 
         return [
 
             'status'=>'success',
             'message'=>'',
             'profile'=>$profile,
-            'data'=>compact('height','ethnicity','kids','familyplan','occupation','employment','education','attended', 'religion', 'politics','marital')
+            'data'=>compact('height','ethnicity', 'occupation','employment','education', 'religion', 'politics')
 
         ];
 
+
+    }
+
+    public function updateprofile(Request $request){
+        $user=$request->user;
+
+        $user->update($request->only('gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show'));
+
+        return [
+            'status'=>'success',
+            'message'=>'Profile has been updated',
+            'data'=>[]
+        ];
 
     }
 
@@ -151,7 +166,7 @@ class ProfileController extends Controller
             'data'=>compact('images')
         ];
     }
-//update picture on profile pic
+    //update picture on profile pic
     public function updateProfilePic(Request $request, $id){
         $user=$request->user;
         $document=Document::where('id', $id)
