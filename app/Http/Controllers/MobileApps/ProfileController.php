@@ -57,7 +57,7 @@ class ProfileController extends Controller
 //
 //            );
 
-        $profile=$user->only('gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show');
+        $profile=$user->only('gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image');
 
         $height=Height::select('name', 'id')->get();
         ///  $language=Languages::select('name', 'id')->get();
