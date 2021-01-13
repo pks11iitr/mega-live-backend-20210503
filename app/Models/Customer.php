@@ -51,10 +51,10 @@ class Customer extends Authenticatable implements JWTSubject
     }*/
 
 
-    public function Height(){
+    public function height(){
         return $this->belongsTo('App\Models\Height', 'height_id');
     }
-    public function Ethnicity(){
+    public function ethnicity(){
         return $this->belongsTo('App\Models\EthniCity', 'ethicity_id');
     }
 //    public function Kids(){
