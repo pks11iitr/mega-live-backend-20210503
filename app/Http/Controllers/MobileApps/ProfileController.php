@@ -140,14 +140,14 @@ class ProfileController extends Controller
 
         $user=$request->user;
         foreach($request->images as $image)
-            $user->saveDocument($image,'profile');
+            $document=$user->saveDocument($image,'profile');
 
-        $images=$user->gallery()->select('id', 'file_path')->get();
+        //$images=$user->gallery()->select('id', 'file_path')->get();
 
         return [
             'status'=>'success',
             'message'=>'',
-            'data'=>compact('images')
+            'data'=>compact('document')
         ];
     }
 //delete pic
