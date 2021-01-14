@@ -70,7 +70,7 @@ class ProfileController extends Controller
         $employment=Employment::select('name', 'id')->get();
         $education=Education::select('name', 'id')->get();
         //$attended=AttendedLavel::select('name', 'id')->get();
-        $politics=Politics::select('name', 'id')->get();
+        //$politics=Politics::select('name', 'id')->get();
 
         // $income=Income::select('name', 'id')->get();
         $religion=Religion::select('name', 'id')->get();
