@@ -81,7 +81,7 @@ class ProfileController extends Controller
             'status'=>'success',
             'message'=>'',
             'profile'=>$profile,
-            'data'=>compact('height','ethnicity', 'occupation','employment','education', 'religion', 'politics')
+            'data'=>compact('height','ethnicity', 'occupation','employment','education', 'religion')
 
         ];
 
