@@ -169,10 +169,13 @@ class ProfileController extends Controller
     //update picture on profile pic
     public function updateProfilePic(Request $request, $id){
         $user=$request->user;
-        $document=Document::where('id', $id)
-            ->where('entity_type', 'App\Models\Customer')
+        $document=Document::where('entity_type', 'App\Models\Customer')
             ->where('entity_id', $user->id)
-            ->first();
+            ->find($id);
+
+        //var_dump($document->isDirty());die;
+
+        //echo $document->getRawOriginal('file_path');die;
         if(!$document)
             return [
                 'status'=>'failed',
@@ -180,7 +183,7 @@ class ProfileController extends Controller
                 'data'=>[]
             ];
 
-        $user->image=$document->getOriginal('file_path');
+        $user->image=$document->getRawOriginal('file_path');
         $user->save();
         return [
             'status'=>'success',

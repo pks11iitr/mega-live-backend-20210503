@@ -127,4 +127,10 @@ class Customer extends Authenticatable implements JWTSubject
 
         return $text;
     }
+
+    public function getImageAttribute($value){
+        if($value)
+            return Storage::url($value);
+        return '';
+    }
 }
