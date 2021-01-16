@@ -301,15 +301,16 @@ class ProfileController extends Controller
     public function updatemypreferences(Request $request){
 
         $request->validate([
-            'height_feet'=>'required|string',
+            'from_height'=>'required',
+            'to_height'=>'required',
             'from_age'=>'required|integer',
             'to_age'=>'required|integer',
             'from_distance'=>'required|integer',
-            'to_distance'=>'required|integer',
+            //'to_distance'=>'required|integer',
             'pref_gender'=>'required|string',
         ]);
 
-        $result=$request->user->update($request->only('height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender'));
+        $result=$request->user->update($request->only('from_height','to_height', 'from_age', 'to_age','from_distance','to_distance','pref_gender'));
         if($result){
             return [
                 'status'=>'success',
@@ -328,11 +329,13 @@ class ProfileController extends Controller
         $user=$request->user;
         $myuserpref=array(
             'id'=>$user->id,
-            'height_feet'=>$user->height_feet,
+            //'height_feet'=>$user->from_height,
+            'from_height'=>$user->from_height,
+            'to_height'=>$user->to_height,
             'from_age'=>$user->from_age,
             'to_age'=>$user->to_age,
             'from_distance'=>$user->from_distance,
-            'to_distance'=>$user->to_distance,
+            //'to_distance'=>$user->to_distance,
             'pref_gender'=>$user->pref_gender,
 
         );
