@@ -333,8 +333,8 @@ class ProfileController extends Controller
         $myuserpref=array(
             'id'=>$user->id,
             //'height_feet'=>$user->from_height,
-            'from_height'=>$user->from_height,
-            'to_height'=>$user->to_height,
+            'from_height'=>round($user->from_height*30),
+            'to_height'=>round($user->to_height*20),
             'from_age'=>$user->from_age,
             'to_age'=>$user->to_age,
             'from_distance'=>$user->from_distance,
