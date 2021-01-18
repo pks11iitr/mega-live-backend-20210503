@@ -310,7 +310,10 @@ class ProfileController extends Controller
             'pref_gender'=>'required|string',
         ]);
 
-        $result=$request->user->update($request->only('from_height','to_height', 'from_age', 'to_age','from_distance','to_distance','pref_gender'));
+        $from_height=round($request->from_height/30, 1);
+        $to_height=round($request->to_height/30, 1);
+
+        $result=$request->user->update(array_merge($request->only('from_age', 'to_age','from_distance','to_distance','pref_gender'), ['from_height'=>$from_height,'to_height'=>$to_height]));
         if($result){
             return [
                 'status'=>'success',
