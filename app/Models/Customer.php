@@ -71,7 +71,7 @@ class Customer extends Authenticatable implements JWTSubject
         return $this->belongsTo('App\Models\Employment', 'job_id');
     }
     public function Education(){
-        return $this->belongsTo('App\Models\Education', 'education');
+        return $this->belongsTo('App\Models\Education', 'education_id');
     }
     public function AttendedLavel(){
         return $this->belongsTo('App\Models\AttendedLavel', 'attended_lave_id');
@@ -99,8 +99,6 @@ class Customer extends Authenticatable implements JWTSubject
     public function salary(){
         return $this->belongsTo('App\Models\Income', 'salary_id');
     }
-
-
 
     public function getAgeAttribute($value){
         if($this->dob)

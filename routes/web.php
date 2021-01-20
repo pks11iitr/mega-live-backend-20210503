@@ -37,6 +37,15 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
         Route::get('delete/{id}', 'SuperAdmin\BannerController@delete')->name('banners.delete');
     });
 
+    Route::group(['prefix'=>'customer'], function(){
+        Route::get('/','SuperAdmin\CustomerController@index')->name('customer.list');
+        Route::get('edit/{id}','SuperAdmin\CustomerController@edit')->name('customer.edit');
+        Route::get('details/{id}','SuperAdmin\CustomerController@details')->name('customer.details');
+        Route::post('update/{id}','SuperAdmin\CustomerController@update')->name('customer.update');
+
+    });
+
+
     Route::group(['prefix'=>'news'], function(){
         Route::get('/','SuperAdmin\NewsUpdateController@index')->name('news.list');
         Route::get('create','SuperAdmin\NewsUpdateController@create')->name('news.create');
