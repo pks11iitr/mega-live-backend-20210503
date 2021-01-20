@@ -12,6 +12,7 @@ trait DocumentUploadTrait {
         \Storage::put($path, $contents, 'public');
         $document=new Document(['file_path'=>$path]);
         $this->gallery()->save($document);
+        return $document;
     }
 
     public function gallery(){

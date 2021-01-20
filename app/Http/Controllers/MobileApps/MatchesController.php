@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MobileApps;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MatchesController extends Controller
 {
@@ -12,39 +13,30 @@ class MatchesController extends Controller
 
         $user=$request->user;
 
-        $profiles=Customer::with('city')->select('id', 'name','image', 'dob', 'city_id');
+        $profiles=Customer::select('id', 'name','image', 'dob')->where('id', '!=', $user->id);
 
-        if($user->gender=='Male')
-            $profiles=$profiles->where('gender', 'Female');
-        else
+        if($user->pref_gender=='Male')
             $profiles=$profiles->where('gender', 'Male');
+        else
+            $profiles=$profiles->where('gender', 'Female');
 
-        if(!empty($request->income))
-            $profiles=$profiles->where('salary_id', $request->income);
-        if(!empty($request->religion))
-            $profiles=$profiles->where('religion_id', $request->religion);
-        if(!empty($request->city))
-            $profiles=$profiles->where('city_id', $request->city);
-        if(!empty($request->state))
-            $profiles=$profiles->where('state_id', $request->state);
-        if(!empty($request->country))
-            $profiles=$profiles->where('country_id', $request->country);
-        if(!empty($request->religion))
-            $profiles=$profiles->where('religion_id', $request->religion);
-        if(!empty($request->language))
-            $profiles=$profiles->where('language_id', $request->language);
-        if(!empty($request->height))
-            $profiles=$profiles->where('height_id', $request->height);
-        if(!empty($request->education))
-            $profiles=$profiles->where('education_id', $request->education);
-        if(!empty($request->occupation))
-            $profiles=$profiles->where('occupation_id', $request->occupation);
-        if(!empty($request->member_type))
-            $profiles=$profiles->where('is_premium', $request->member_type);
-        if(!empty($request->eating))
-            $profiles=$profiles->where('eating', $request->eating);
-        if(!empty($request->manglik))
-            $profiles=$profiles->where('manglik', $request->manglik);
+        if($user->from_height && $user->to_height){
+            $profiles=$profiles->whereHas('height', function($height)use($user){
+                $height->where('numeric_height', '>=', $user->from_height)->where('numeric_height', '<=', $user->to_height);
+            });
+        }
+
+        if($user->from_age){
+            $profiles=$profiles
+                ->whereNotNull('dob')
+                ->where(DB::raw("DATEDIFF('".date('Y-m-d')."', dob ) / 365"), '>=', $user->from_age);
+        }
+
+        if($user->to_age){
+            $profiles=$profiles
+            ->whereNotNull('dob')
+                ->where(DB::raw("DATEDIFF('".date('Y-m-d')."', dob ) / 365"), '<=', $user->to_age);
+        }
 
         $profiles=$profiles->paginate(4);
 
