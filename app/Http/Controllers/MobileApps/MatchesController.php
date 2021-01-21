@@ -44,11 +44,25 @@ class MatchesController extends Controller
 
             'status'=>'success',
             'message'=>'',
-            'data'=>compact('profiles')
+            'apidata'=>compact('profiles')
 
 
         ];
 
 
+    }
+
+
+    public function matchDetails(Request $request, $id){
+        $user=$request->user;
+
+        $details=Customer::with(['gallery', 'Height', 'Ethicity', 'Education', 'Job', 'Work', 'Religion'])->select('gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
+            ->findOrFail('id', $id);
+
+
+        return [
+            'status'=>'success',
+            'data'=>compact('details')
+        ];
     }
 }

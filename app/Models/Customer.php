@@ -44,6 +44,12 @@ class Customer extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function getImageAttribute($value){
+        if($value)
+            return Storage::url($value);
+        return Storage::url('customers/default.jpeg');
+    }
+
     /*public function getImageAttribute($value){
         if($value)
             return Storage::url($value);
