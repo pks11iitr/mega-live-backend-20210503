@@ -39,12 +39,41 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 
     Route::group(['prefix'=>'customer'], function(){
         Route::get('/','SuperAdmin\CustomerController@index')->name('customer.list');
+        Route::get('create','SuperAdmin\CustomerController@create')->name('customer.create');
+        Route::post('store','SuperAdmin\CustomerController@store')->name('customer.store');
         Route::get('edit/{id}','SuperAdmin\CustomerController@edit')->name('customer.edit');
         Route::get('details/{id}','SuperAdmin\CustomerController@details')->name('customer.details');
+        Route::post('upload-images/{id}','SuperAdmin\CustomerController@images')->name('customer.images.uploads');
+        Route::get('image-delete/{id}','SuperAdmin\CustomerController@deleteimage')->name('customer.image.delete');
         Route::post('update/{id}','SuperAdmin\CustomerController@update')->name('customer.update');
 
     });
 
+    Route::group(['prefix'=>'membership'], function(){
+        Route::get('/','SuperAdmin\MemberShipController@index')->name('membership.list');
+        Route::get('create','SuperAdmin\MemberShipController@create')->name('membership.create');
+        Route::post('store','SuperAdmin\MemberShipController@store')->name('membership.store');
+        Route::get('edit/{id}','SuperAdmin\MemberShipController@edit')->name('membership.edit');
+        Route::post('update/{id}','SuperAdmin\MemberShipController@update')->name('membership.update');
+
+    });
+
+    Route::group(['prefix'=>'coins'], function(){
+        Route::get('/','SuperAdmin\CoinsController@index')->name('coins.list');
+        Route::get('create','SuperAdmin\CoinsController@create')->name('coins.create');
+        Route::post('store','SuperAdmin\CoinsController@store')->name('coins.store');
+        Route::get('edit/{id}','SuperAdmin\CoinsController@edit')->name('coins.edit');
+        Route::post('update/{id}','SuperAdmin\CoinsController@update')->name('coins.update');
+
+    });
+    Route::group(['prefix'=>'gift'], function(){
+        Route::get('/','SuperAdmin\GiftController@index')->name('gift.list');
+        Route::get('create','SuperAdmin\GiftController@create')->name('gift.create');
+        Route::post('store','SuperAdmin\GiftController@store')->name('gift.store');
+        Route::get('edit/{id}','SuperAdmin\GiftController@edit')->name('gift.edit');
+        Route::post('update/{id}','SuperAdmin\GiftController@update')->name('gift.update');
+
+    });
 
     Route::group(['prefix'=>'news'], function(){
         Route::get('/','SuperAdmin\NewsUpdateController@index')->name('news.list');

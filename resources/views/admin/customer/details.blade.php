@@ -33,11 +33,13 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             <div class="card-body">
+                                <div class="row">
+                                <div class="col-md-6">
                                 <table id="example2" class="table table-bordered table-hover">
 
                                 <thead>
+                                <th>Key</th>
                                 <th>Value</th>
-                                <th>Details</th>
                                 </thead>
                                     <tbody>
                                     <tr>
@@ -66,64 +68,71 @@
                                     </tr>
                                     <tr>
                                         <th>Profile Picture</th>
-                                        <td><img src="{{$customers->image}}" height="80px" width="80px"/></td>
+                                        <td>@if(!empty($customers->image))<img src="{{$customers->image}}" height="80px" width="80px"/>@endif</td>
                                     </tr>
-                                    <tr>
-                                        <th>Ethnicity</th>
-                                        <td>{{$customers->ethnicity->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kids</th>
-                                        <td>{{$customers->kids->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Family</th>
-                                        <td>{{$customers->family->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Work</th>
-                                        <td>{{$customers->work->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Job</th>
-                                        <td>{{$customers->job->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>AttendedLavel</th>
-                                        <td>{{$customers->attended_lavel->name??''}}</td>
-                                    </tr>
+
                                     <tr>
                                         <th>Religion</th>
                                         <td>{{$customers->religion->name??''}}</td>
                                     </tr>
-                                    <tr>
-                                        <th>Politics</th>
-                                        <td>{{$customers->politics->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Education</th>
-                                        <td>{{$customers->education->name??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Drinking</th>
-                                        <td>{{$customers->drinking??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Smoking</th>
-                                        <td>{{$customers->smoking??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Marijuana</th>
-                                        <td>{{$customers->marijuana??''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Drugs</th>
-                                        <td>{{$customers->drugs??''}}</td>
-                                    </tr>
+
 
                                     </tbody>
 
                                 </table>
+                            </div>
+                                <div class="col-md-6">
+                                    <table id="example2" class="table table-bordered table-hover">
+
+                                        <thead>
+                                        <th>Key</th>
+                                        <th>Value</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>Ethnicity</th>
+                                            <td>{{$customers->ethnicity->name??''}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Work</th>
+                                            <td>{{$customers->work->name??''}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Job</th>
+                                            <td>{{$customers->job->name??''}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Education</th>
+                                            <td>{{$customers->education->name??''}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Drinking</th>
+                                            <td>@if($customers->drinking==1){{'Yes'}}@else{{'NO'}}@endif</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Smoking</th>
+                                            <td>@if($customers->smoking==1){{'Yes'}}@else{{'NO'}}@endif</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Marijuana</th>
+                                            <td>@if($customers->marijuana==1){{'Yes'}}@else{{'NO'}}@endif</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Drugs</th>
+                                            <td>@if($customers->drugs==1){{'Yes'}}@else{{'NO'}}@endif</td>
+                                        </tr>
+                                        <tr>
+                                            <th>About</th>
+                                            <td>{{$customers->about_me}}</td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                </div>
+
                             </div>
                         </div>
                         <!-- /.card -->
@@ -134,7 +143,49 @@
             </div>
         </section>
         <!-- /.content -->
-
+        <section class="content">
+            <div class="container-fluid">
+                <!-- SELECT2 EXAMPLE -->
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Customer Images Add</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <form action="{{route('customer.images.uploads',['id'=>$customers->id])}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Customer Image</label>
+                                        <input type="file" class="form-control" name="images[]" id="exampleInputEmail1" placeholder="Select image" multiple>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-block btn-primary btn-sm">Add</button>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="row">
+                                <!-- /.col -->
+                                @foreach($customers->gallery as $Image)
+                                    <div class="form-group">
+                                        <img src="{{$Image->file_path}}" height="100" width="200"> &nbsp; &nbsp; <a href="{{route('customer.image.delete',['id'=>$Image->id])}}">X</a>
+                                        &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          &nbsp; &nbsp; &nbsp; &nbsp;
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
     <!-- ./wrapper -->
 @endsection

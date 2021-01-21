@@ -117,14 +117,14 @@
 {{--                            </p>--}}
 {{--                        </a>--}}
 
-                    <li class="nav-item">
+                   {{-- <li class="nav-item">
                         <a href="{{route('banners.list')}}" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Banners</p>
                         </a>
 
                     </li>
-
+--}}
 
                     <li class="nav-item">
                         <a href="{{route('customer.list')}}" class="nav-link">
@@ -135,8 +135,37 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('membership.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Membership
+
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('coins.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Coins
+
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
+                        <a href="{{route('gift.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Gifts
+
+                            </p>
+                        </a>
+                    </li>
+
+
+                   {{-- <li class="nav-item">
                         <a href="{{route('story.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -144,7 +173,7 @@
 
                             </p>
                         </a>
-                    </li>
+                    </li>--}}
 
 
 
@@ -652,7 +681,7 @@
     </aside>
     <div>
         @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
+            <div class="alert alert-success alert-block" style="margin-left: 257px;">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
@@ -660,7 +689,7 @@
 
 
         @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
+            <div class="alert alert-danger alert-block" style="margin-left: 257px;">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
@@ -668,7 +697,7 @@
 
 
         @if ($message = Session::get('warning'))
-            <div class="alert alert-warning alert-block">
+            <div class="alert alert-warning alert-block" style="margin-left: 257px;">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
@@ -676,7 +705,7 @@
 
 
         @if ($message = Session::get('info'))
-            <div class="alert alert-info alert-block">
+            <div class="alert alert-info alert-block" style="margin-left: 257px;">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
@@ -685,7 +714,7 @@
     <!-- this is for validation errors -->
         @if ($errors->any())
             <?php var_dump($errors); ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" style="margin-left: 257px;">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 Please check the form below for errors
             </div>

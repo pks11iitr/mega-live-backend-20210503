@@ -10,8 +10,7 @@ class Membership extends Model
 {
     use HasFactory, Active;
 
-    protected $table='memberships';
-
-
-    protected $fillable=['title', 'description', 'price', 'cut_price', 'isactive'];
+    protected $table='membership';
+    protected $fillable=['title', 'description', 'price', 'validity_days', 'isactive'];
+    protected $hidden = ['created_at','deleted_at','updated_at'];
 }

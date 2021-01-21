@@ -39,5 +39,9 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
     $api->get('my-matches', 'MobileApps\MatchesController@findMatches');
 
+    //membership
+    $api->get('membership-list', 'MobileApps\MemberShipController@membership');
+    $api->get('coins-list', 'MobileApps\CoinsController@coins');
+
 
 });

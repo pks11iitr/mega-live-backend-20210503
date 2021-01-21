@@ -27,8 +27,11 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
+
 				 <div class="row">
-                     <div class="col-12">
+                     <div class="col-3">
+                         <a href="{{route('customer.create')}}" class="btn btn-primary">Add Customer</a> </div>
+                     <div class="col-9">
                          <form class="form-validate form-horizontal"  method="get" action="" enctype="multipart/form-data">
                      <div class="row">
                          <div class="col-4">
