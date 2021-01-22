@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Height</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="height_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($height as $h)
                                     <option value="{{$h->id}}">{{$h->name}}</option>
@@ -90,7 +90,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Religion</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="religion_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($religion as $re)
                                         <option value="{{$re->id}}">{{$re->name}}</option>
@@ -108,7 +108,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Ethnicity</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="ethicity_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($ethnicity as $et)
                                         <option value="{{$et->id}}">{{$et->name}}</option>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Occupation</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="occupation_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($occupation as $ocp)
                                         <option value="{{$ocp->id}}">{{$ocp->name}}</option>
@@ -128,7 +128,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Employment</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="job_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($employment as $emp)
                                         <option value="{{$emp->id}}">{{$emp->name}}</option>
@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Education</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="education_id" required>
                                     <option value="">Please Select</option>
                                     @foreach($education as $edu)
                                         <option value="{{$edu->id}}">{{$edu->name}}</option>
@@ -148,7 +148,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Drinking</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="drinking" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Smoking</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="smoking" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -167,7 +167,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Marijuana</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="marijuana" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -176,7 +176,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Is Age Show</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="age_show" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -184,12 +184,11 @@
                                 </select>
                             </div>
 
-
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Drugs</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="drugs" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -199,7 +198,7 @@
 
                             <div class="form-group">
                                 <label>Is Distance Show</label>
-                                <select class="form-control" name="height" required>
+                                <select class="form-control" name="distance_show" required>
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>

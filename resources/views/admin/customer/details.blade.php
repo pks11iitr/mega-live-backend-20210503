@@ -76,6 +76,11 @@
                                         <td>{{$customers->religion->name??''}}</td>
                                     </tr>
 
+                                    <tr>
+                                        <th>Is Age Show</th>
+                                        <td>@if($customers->age_show==1){{'Yes'}}@else{{'No'}}@endif</td>
+                                    </tr>
+
 
                                     </tbody>
 
@@ -123,10 +128,14 @@
                                             <td>@if($customers->drugs==1){{'Yes'}}@else{{'NO'}}@endif</td>
                                         </tr>
                                         <tr>
-                                            <th>About</th>
+                                            <th>About Me</th>
                                             <td>{{$customers->about_me}}</td>
                                         </tr>
 
+                                        <tr>
+                                            <th>Is Distance Show</th>
+                                            <td>@if($customers->distance_show==1){{'Yes'}}@else{{'No'}}@endif</td>
+                                        </tr>
                                         </tbody>
 
                                     </table>
