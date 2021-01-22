@@ -4,6 +4,8 @@ namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coin;
+use App\Models\Membership;
+use Faker\Provider\ar_SA\Payment;
 use Illuminate\Http\Request;
 
 class CoinsController extends Controller
@@ -11,7 +13,7 @@ class CoinsController extends Controller
     public function coins()
     {
         $coins = Coin::active()->get();
-        if ($coins->count() > 0) {
+        if (count($coins) > 0) {
             return [
                 'status' => 'success',
                 'message' => 'success',
@@ -26,6 +28,26 @@ class CoinsController extends Controller
 
         }
 
+    }
+
+    public function buycoins(Request $request, $plan_id){
+        $user=$request->user;
+
+        $coins = Coin::active()->findOrFail($plan_id);
+
+        $payment=Payment::create([
+            'type'=>'COINS',
+            'amount'=>$coins->price,
+            'user_id'=>$user->id
+        ]);
+
+        return [
+            'status'=>'success',
+            'message'=>'Please proceed to payment',
+            'data'=>[
+                'id'=>$payment->id
+            ]
+        ];
     }
 
 }

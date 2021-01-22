@@ -41,8 +41,13 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->get('match-details/{id}', 'MobileApps\MatchesController@matchDetails');
 
     //membership
-    $api->get('membership-list', 'MobileApps\MemberShipController@membership');
-    $api->get('coins-list', 'MobileApps\CoinsController@coins');
+    $api->get('membership-list', 'MobileApps\MemberShipController@index');
+    $api->get('subscribe-membership/{plan_id}', 'MobileApps\MemberShipController@subscribe');
+
+    //coins
+    $api->get('coins-list', 'MobileApps\CoinsController@index');
+    $api->get('buy-coins/{plan_id}', 'MobileApps\CoinsController@buycoins');
+
 
 
 });
