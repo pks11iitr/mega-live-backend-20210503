@@ -38,7 +38,7 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->post('update-mypreferences', 'MobileApps\ProfileController@updatemypreferences');
 
     $api->get('my-matches', 'MobileApps\MatchesController@findMatches');
-    $api->get('matches-details/{id}', 'MobileApps\MatchesController@matchDetails');
+    $api->get('match-details/{id}', 'MobileApps\MatchesController@matchDetails');
 
     //membership
     $api->get('membership-list', 'MobileApps\MemberShipController@membership');

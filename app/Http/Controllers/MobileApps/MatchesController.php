@@ -56,8 +56,8 @@ class MatchesController extends Controller
     public function matchDetails(Request $request, $id){
         $user=$request->user;
 
-        $details=Customer::with(['gallery', 'Height', 'Ethicity', 'Education', 'Job', 'Work', 'Religion'])->select('gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
-            ->findOrFail('id', $id);
+        $details=Customer::with(['gallery', 'Height', 'Ethnicity', 'Education', 'Job', 'Work', 'Religion'])->select('name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
+            ->findOrFail($id);
 
 
         return [
