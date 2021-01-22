@@ -12,6 +12,7 @@ use App\Models\Height;
 use App\Models\Ocupation;
 use App\Models\Religion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -67,46 +68,72 @@ class CustomerController extends Controller
         $religion=Religion::select('name', 'id')->get();
         return view('admin.customer.add',['height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion]);
     }
+   public function store(Request $request)
+   {
+       $request->validate([
+           'name' => 'required',
+           'gender' => 'required',
+           'dob' => 'required',
+           'mobile' => 'required|unique:customers',
+           'email' => 'required',
+           'about_me' => 'required',
+           'height_id' => 'required',
+           'ethicity_id' => 'required',
+           'education_id' => 'required',
+           'occupation_id' => 'required',
+           'religion_id' => 'required',
+           'job_id' => 'required',
+           'image' => 'image'
+       ]);
+       if ($customers = Customer::create($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show', 'image', 'password'))){
+           $customers->password=Hash::make($request->password);
+           $customers->save();
+           $customers->saveImage($request->image, 'customers');
+           return redirect()->route('customer.list')->with('success', 'Customer has been created');
+       }
+       return redirect()->back()->with('error', 'Customer create failed');
 
+   }
     public function edit(Request $request,$id){
         $customers = Customer::findOrFail($id);
-        return view('admin.customer.edit',['customers'=>$customers]);
+        $height=Height::select('name', 'id')->get();
+        $ethnicity=EthniCity::select('name', 'id')->get();
+        $occupation=Ocupation::select('name', 'id')->get();
+        $employment=Employment::select('name', 'id')->get();
+        $education=Education::select('name', 'id')->get();
+        $religion=Religion::select('name', 'id')->get();
+        return view('admin.customer.edit',['customers'=>$customers,'height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion]);
     }
 
     public function update(Request $request,$id){
         $request->validate([
-            'status'=>'required',
-            'name'=>'required',
-            'dob'=>'required',
-            'address'=>'required',
-            'city'=>'required',
-            'state'=>'required',
-            'image'=>'image'
+            'name' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'mobile' => 'required|unique:customers',
+            'email' => 'required',
+            'about_me' => 'required',
+            'height_id' => 'required',
+            'ethicity_id' => 'required',
+            'education_id' => 'required',
+            'occupation_id' => 'required',
+            'religion_id' => 'required',
+            'job_id' => 'required',
+            'image' => 'image'
         ]);
-
         $customers = Customer::findOrFail($id);
-        if($request->image){
-            $customers->update([
-                'status'=>$request->status,
-                'name'=>$request->name,
-                'dob'=>$request->dob,
-                'address'=>$request->address,
-                'city'=>$request->city,
-                'state'=>$request->state,
-                'image'=>'a']);
-            $customers->saveImage($request->image, 'customers');
-        }else{
-            $customers->update([
-                'status'=>$request->status,
-                'name'=>$request->name,
-                'dob'=>$request->dob,
-                'address'=>$request->address,
-                'city'=>$request->city,
-                'state'=>$request->state
-            ]);
-        }
-        if($customers)
-        {
+        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show'))){
+
+            if(isset($request->password))
+            {
+                $customers->password=Hash::make($request->password);
+                $customers->save();
+
+            }
+
+            if($request->image){
+                $customers->saveImage($request->image, 'customers');
+            }
             return redirect()->route('customer.list')->with('success', 'Customer has been updated');
         }
         return redirect()->back()->with('error', 'Customer update failed');
