@@ -22,9 +22,9 @@ class CoinWallet extends Model
     }
 
     public static function balance($user_id){
-            $received=Wallet::where('receiver_id', $user_id)
+            $received=CoinWallet::where('receiver_id', $user_id)
                 ->sum('coins');
-            $sent=Wallet::where('sender_id', $user_id)
+            $sent=CoinWallet::where('sender_id', $user_id)
                 ->sum('coins');
             return ($received??0)-($sent??0);
     }

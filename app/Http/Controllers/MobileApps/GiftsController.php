@@ -30,6 +30,7 @@ class GiftsController extends Controller
 
     public function sendGift(Request $request){
         $user=$request->user;
+        //var_dump($user->toArray());die;
 
         $gift=Gift::active()->findOrFail($request->gift_id);
         $receiver=Customer::findOrFail($request->profile_id);
