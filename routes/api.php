@@ -50,6 +50,9 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
     $api->post('send-gift', 'MobileApps\GiftsController@sendGift');
 
+    $api->get('like/{id}', 'MobileApps\LikeDislikeController@like');
+    $api->get('dislike/{id}', 'MobileApps\LikeDislikeController@dislike');
+
 
 
 });
