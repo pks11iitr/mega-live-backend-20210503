@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Models\Gift;
@@ -42,6 +43,16 @@ class GiftsController extends Controller
                'gift_id'=>$gift->id,
                'coins'=>$gift->coins,
             ]);
+
+            $chat=Chat::create([
+                'user_1'=>$user->id,
+                'user_2'=>$receiver->id,
+                'message'=>$request->message??'',
+                'type'=>'gift',
+                'image'=>$gift->getRawOriginal('image')
+            ]);
+
+            $chat->save();
 
             return [
                 'status'=>'success',
