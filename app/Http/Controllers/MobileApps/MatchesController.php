@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\LikeDislike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -59,10 +60,15 @@ class MatchesController extends Controller
         $details=Customer::with(['gallery', 'Height', 'Ethnicity', 'Education', 'Job', 'Work', 'Religion'])->select('name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
             ->findOrFail($id);
 
+        $like=LikeDislike::where('sender_id', $user->id)
+            ->where('receiver_id', $id)
+            ->first();
+
+        $like_status=isset($like)?$like->type:2;
 
         return [
             'status'=>'success',
-            'data'=>compact('details')
+            'data'=>compact('details', 'like_status')
         ];
     }
 }
