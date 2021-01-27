@@ -97,7 +97,7 @@ class ChatCotroller extends Controller
 
         $chats=[];
         foreach ($chatsobj as $c){
-            if($c->user_1==$user->id){
+            if(($c->user_1==$user->id && $c->direction==0)||($c->user_2==$user->id && $c->direction==1)){
                 $chats[]=[
                     'user_id'=>$c->user2->id,
                     'user_image'=>$c->user2->image,
@@ -138,8 +138,9 @@ class ChatCotroller extends Controller
         $user=$request->user;
 
         $chat=Chat::create([
-            'user_1'=>$user->id,
-            'user_2'=>$user_id,
+            'user_1'=>($user->id < $user_id)?$user->id:$user_id,
+            'user_2'=>($user->id < $user_id)?$user_id:$user->id,
+            'direction'=>($user->id < $user_id)?0:1,
             'message'=>$request->message??'',
             'type'=>$request->type
         ]);

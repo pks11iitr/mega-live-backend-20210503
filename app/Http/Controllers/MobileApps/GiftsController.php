@@ -37,6 +37,7 @@ class GiftsController extends Controller
         $receiver=Customer::findOrFail($request->profile_id);
 
         if($gift->coins<CoinWallet::balance($user->id)){
+
             CoinWallet::create([
                'sender_id'=>$user->id,
                'receiver_id'=>$receiver->id,
@@ -44,15 +45,14 @@ class GiftsController extends Controller
                'coins'=>$gift->coins,
             ]);
 
-            $chat=Chat::create([
-                'user_1'=>$user->id,
-                'user_2'=>$receiver->id,
+            Chat::create([
+                'user_1'=>($user->id < $receiver->id)?$user->id:$receiver->id,
+                'user_2'=>($user->id < $receiver->id)?$receiver->id:$user->id,
                 'message'=>$request->message??'',
                 'type'=>'gift',
-                'image'=>$gift->getRawOriginal('image')
+                'image'=>$gift->getRawOriginal('image'),
+                'direction'=>($user->id < $receiver->id)?0:1,
             ]);
-
-            $chat->save();
 
             return [
                 'status'=>'success',
