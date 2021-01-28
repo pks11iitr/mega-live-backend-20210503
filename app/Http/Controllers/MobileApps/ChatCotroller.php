@@ -130,8 +130,9 @@ class ChatCotroller extends Controller
     public function send(Request $request, $user_id){
 
         $request->validate([
-            'message'=>'required',
+
             'type'=>'required|in:text,image',
+            'message'=>'required_if:type,text',
             'image'=>'required_if:type,image',
         ]);
 
