@@ -48,6 +48,8 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->get('coins-list', 'MobileApps\CoinsController@index');
     $api->get('buy-coins/{plan_id}', 'MobileApps\CoinsController@buycoins');
 
+
+    $api->get('gifts', 'MobileApps\GiftsController@index');
     $api->post('send-gift', 'MobileApps\GiftsController@sendGift');
 
     $api->get('like/{id}', 'MobileApps\LikeDislikeController@like');
