@@ -54,6 +54,8 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
     $api->get('like/{id}', 'MobileApps\LikeDislikeController@like');
     $api->get('dislike/{id}', 'MobileApps\LikeDislikeController@dislike');
+    $api->get('ilike', 'MobileApps\LikeDislikeController@ilike');
+    $api->get('likeme', 'MobileApps\LikeDislikeController@likeme');
 
     $api->get('chats', 'MobileApps\ChatCotroller@chatlist');
     $api->get('chats/{user_id}', 'MobileApps\ChatCotroller@chatDetails');
