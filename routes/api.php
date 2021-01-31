@@ -64,7 +64,7 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->post('send-message/{user_id}', 'MobileApps\ChatCotroller@send');
 
 
-    $api->group(['prefix' => 'admin'], function ($api) {
+    $api->group(['prefix' => 'admin','middleware' => ['admin-api-auth']], function ($api) {
         $api->get('users', 'MobileApps\AdminUsersApp\UsersController@index');
         $api->get('chats', 'MobileApps\AdminUsersApp\ChatController@chatlist');
         $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');
