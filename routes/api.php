@@ -22,6 +22,8 @@ $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
 $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 //$api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
 
+$api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
+
 
 $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
@@ -61,6 +63,13 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->get('chats/{user_id}', 'MobileApps\ChatCotroller@chatDetails');
     $api->post('send-message/{user_id}', 'MobileApps\ChatCotroller@send');
 
+
+    $api->group(['prefix' => 'admin'], function ($api) {
+        $api->get('users', 'MobileApps\AdminUsersApp\UsersController@index');
+        $api->get('chats', 'MobileApps\AdminUsersApp\ChatController@chatlist');
+        $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');
+        $api->post('send-message/{user_id}', 'MobileApps\AdminUsersApp\ChatController@send');
+    });
 
 
 });
