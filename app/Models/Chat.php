@@ -30,4 +30,8 @@ class Chat extends Model
             return Storage::url($value);
         return '';
     }
+
+    public function getCreatedAtAttribute($value){
+        return date('d/m/Y h:ia', strtotime($value));
+    }
 }
