@@ -4,7 +4,9 @@ namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
+use App\Models\Customer;
 use App\Models\Gift;
+use App\Services\Notification\FCMNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -138,6 +140,8 @@ class ChatCotroller extends Controller
 
         $user=$request->user;
 
+        $receiver=Customer::findOrFail($user_id);
+
         $chat=Chat::create([
             'user_1'=>($user->id < $user_id)?$user->id:$user_id,
             'user_2'=>($user->id < $user_id)?$user_id:$user->id,
@@ -151,6 +155,8 @@ class ChatCotroller extends Controller
                 $chat->saveImage($request->image, 'chats');
                 break;
         }
+
+        //$receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));
 
         return [
             'status'=>'success',
