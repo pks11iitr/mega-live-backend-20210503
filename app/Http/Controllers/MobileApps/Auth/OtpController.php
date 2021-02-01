@@ -44,7 +44,7 @@ class OtpController extends Controller
         $user=Customer::where('mobile', $request->mobile)->first();
         if($user->status==0){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
-
+                $user->notification_token=$request->notification_token;
                 $user->status=1;
                 $user->save();
 
