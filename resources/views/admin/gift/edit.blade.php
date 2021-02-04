@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gift Update</h1>
+            <h1>Gifts</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Gift Update</li>
+              <li class="breadcrumb-item active">Gifts</li>
             </ol>
           </div>
         </div>
@@ -36,30 +36,36 @@
               <form role="form" method="post" enctype="multipart/form-data" action="{{route('gift.update',['id'=>$gift->id])}}">
                  @csrf
                 <div class="card-body">
-					<div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name" value="{{$gift->name}}">
-                  </div>
-					<div class="form-group">
-                    <label for="exampleInputEmail1">Coins</label><br>
-                        <input type="number" min="0" name="coins" class="form-control" id="exampleInputEmail1" placeholder="Enter name" value="{{$gift->coins}}">
-                  </div>
-
-                    <div class="form-group">
-                        <label>Is Active</label>
-                        <select class="form-control" name="isactive" required>
-                           <option  selected="selected" value="1" {{$gift->isactive==1?'selected':''}}>Yes</option>
-                            <option value="0" {{$gift->isactive==0?'selected':''}}>No</option>
-                        </select>
-                      </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-
-                        <input type="file" name="image" class="form-control" id="exampleInputFile" value="{{request('image')}}" accept="image/*">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-
-                  </div>
-                  <img src="{{$gift->image}}" height="100" width="200">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name" value="{{$gift->name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Coins</label><br>
+                                <input type="number" min="0" name="coins" class="form-control" id="exampleInputEmail1" placeholder="Enter name" value="{{$gift->coins}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" name="image" class="form-control" id="exampleInputFile" value="{{request('image')}}" accept="image/*">
+                            </div>
+                            <img src="{{$gift->image}}" height="100" width="200">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Is Active</label>
+                                <select class="form-control" name="isactive" required>
+                                   <option  selected="selected" value="1" {{$gift->isactive==1?'selected':''}}>Yes</option>
+                                    <option value="0" {{$gift->isactive==0?'selected':''}}>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -72,10 +78,8 @@
           <!--/.col (right) -->
         </div>
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
-
 </div>
 <!-- ./wrapper -->
 @endsection
