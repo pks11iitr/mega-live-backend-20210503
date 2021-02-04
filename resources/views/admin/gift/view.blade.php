@@ -27,25 +27,22 @@
             <div class="card">
               <div class="card-header">
                <div class="row">
-						 <div class="col-3">
-                         <a href="{{route('gift.create')}}" class="btn btn-primary">Add Gift</a> </div>
-         <div class="col-9">
-
-        <form class="form-validate form-horizontal"  method="get" action="" enctype="multipart/form-data">
-              <div class="row">
-					      <div class="col-4">
+                   <div class="col-3">
+                       <a href="{{route('gift.create')}}" class="btn btn-primary">Add Gift</a>                     </div>
+                    <div class="col-9">
+                        <form class="form-validate form-horizontal"  method="get" action="" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-4">
                            <input  id="fullname"  class="form-control" name="search" placeholder=" search title" value="{{request('search')}}"  type="text" />
-                           </div>
-
+                        </div>
                     <div class="col-4">
                        <button type="submit" name="save" class="btn btn-primary">Submit</button>
                      </div>
                   </div>
               </form>
-         </div>
-
-     </div>
-  </div>
+            </div>
+               </div>
+        </div>
 
               <!-- /.card-header -->
               <div class="card-body">

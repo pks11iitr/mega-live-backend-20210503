@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>MemberShip Add</h1>
+            <h1>MemberShip</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">MemberShip Add</li>
+              <li class="breadcrumb-item active">MemberShip</li>
             </ol>
           </div>
         </div>
@@ -35,31 +35,41 @@
               <form role="form" method="post" enctype="multipart/form-data" action="{{route('membership.store')}}">
                  @csrf
                 <div class="card-body">
-					<div class="form-group">
-                    <label for="exampleInputEmail1">Title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title">
-                  </div>
-					<div class="form-group">
-                   <label for="exampleInputEmail1">Description</label>
-                        <input type="text" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter description">
-                  </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Price</label><br>
-                        <input type="number"min="0" name="price" class="form-control" id="exampleInputEmail1" placeholder="Enter Price">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Price</label><br>
+                                <input type="number"min="0" name="price" class="form-control" id="exampleInputEmail1" placeholder="Enter Price">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Validity Days</label><br>
+                                <input type="number" min="0" name="validity_days" class="form-control" id="exampleInputEmail1" placeholder="Enter validity Days">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                                <label>Is Active</label>
+                                <select class="form-control" name="isactive" required>
+                                   <option value="1">Yes</option>
+                                   <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter description" rows="3"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Validity Days</label><br>
-                        <input type="number" min="0" name="validity_days" class="form-control" id="exampleInputEmail1" placeholder="Enter validity Days">
-                    </div>
-
-                   <div class="form-group">
-                        <label>Is Active</label>
-                        <select class="form-control" name="isactive" required>
-                           <option value="1">Yes</option>
-                           <option value="0">No</option>
-                        </select>
-                    </div>
-
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

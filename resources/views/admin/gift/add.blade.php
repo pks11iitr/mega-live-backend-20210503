@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gift Add</h1>
+            <h1>Gift</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Gift Add</li>
+              <li class="breadcrumb-item active">Gifts</li>
             </ol>
           </div>
         </div>
@@ -35,29 +35,36 @@
               <form role="form" method="post" enctype="multipart/form-data" action="{{route('gift.store')}}">
                  @csrf
                 <div class="card-body">
-					<div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
-                  </div>
-					<div class="form-group">
-                   <label for="exampleInputEmail1">Coins</label><br>
-                        <input type="number" min="0" name="coins" class="form-control" id="exampleInputEmail1" placeholder="Enter coins">
-                  </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Coins</label><br>
+                                <input type="number" min="0" name="coins" class="form-control" id="exampleInputEmail1" placeholder="Enter coins">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" class="form-control" name="image" id="exampleInputFile" accept="image/*" value="{{request('image')}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                                <label>Is Active</label>
+                                <select class="form-control" name="isactive" required>
+                                   <option value="1">Yes</option>
+                                   <option value="0">No</option>
+                                </select>
+                           </div>
+                        </div>
 
-                   <div class="form-group">
-                        <label>Is Active</label>
-                        <select class="form-control" name="isactive" required>
-                           <option value="1">Yes</option>
-                           <option value="0">No</option>
-                        </select>
                     </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-
-                        <input type="file" class="form-control" name="image" id="exampleInputFile" accept="image/*" value="{{request('image')}}" required>
-
-
-                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

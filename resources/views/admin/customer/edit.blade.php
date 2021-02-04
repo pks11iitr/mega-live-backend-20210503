@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Customer Update</h1>
+            <h1>Customers</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Customer Update</li>
+              <li class="breadcrumb-item active">Customers</li>
             </ol>
           </div>
         </div>
@@ -219,16 +219,54 @@
 
                       </div>
                       <div class="col-md-6">
-                      <div class="form-group">
-                          <label>Is Age Show</label>
-                          <select class="form-control" name="age_show" required>
-                              <option  selected="selected" value="1" {{$customers->age_show==1?'selected':''}}>Yes</option>
-                              <option value="0" {{$customers->age_show==0?'selected':''}}>No</option>
+                          <div class="form-group">
+                              <label>Is Age Show</label>
+                              <select class="form-control" name="age_show" required>
+                                  <option  selected="selected" value="1" {{$customers->age_show==1?'selected':''}}>Yes</option>
+                                  <option value="0" {{$customers->age_show==0?'selected':''}}>No</option>
 
-                          </select>
+                              </select>
+                          </div>
                       </div>
-                  </div>
-
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="exampleInputEmail1">Rate</label>
+                              <input type="number" name="rate" class="form-control" id="exampleInputEmail1" placeholder="Enter Rate" value="{{$customers->rate}}">
+                          </div>
+                          <div class="form-group">
+                              <label>Account Type</label>
+                              <select class="form-control" name="account_type" required>
+                                  <option value="">Please Select</option>
+                                  <option value="ADMIN" {{$customers->account_type=='ADMIN'?'selected':''}}>Admin</option>
+                                  <option value="USER" {{$customers->account_type=='USER'?'selected':''}}>User</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Country</label>
+                              <select class="form-control" name="country" required>
+                                  <option  selected="selected" value="{{$customers->country}}">{{$customers->countryName->name??''}}</option>
+                                  @foreach($countries as $country)
+                                      <option value="{{$country->id}}">{{$country->name}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+                          <div class="form-group">
+                              <label>Address</label>
+                              <input type="text" name="address" class="form-control" id="exampleInputEmail1" placeholder="Enter address" value="{{$customers->address}}">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Plan:-</label> {{$customers->plan->title??''}}
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Membership Expiry:-</label> {{$customers->membership_expiry}}
+                          </div>
+                      </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -244,6 +282,50 @@
         <!-- /.row -->
       </div>
     </section>
+      <!-- /.content -->
+      <section class="content">
+          <div class="container-fluid">
+              <!-- SELECT2 EXAMPLE -->
+              <div class="card card-primary">
+                  <div class="card-header">
+                      <h3 class="card-title">Customer Images Add</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <form action="{{route('customer.images.uploads',['id'=>$customers->id])}}" method="post" enctype="multipart/form-data">
+                      @csrf
+                      <div class="card-body">
+                          <!-- /.row -->
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">Customer Image</label>
+                                      <input type="file" class="form-control" name="images[]" id="exampleInputEmail1" placeholder="Select image" multiple>
+                                      <br>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-block btn-primary btn-sm">Add</button>
+                              </div>
+                          </div>
+                          <!-- /.col -->
+                          <div class="row">
+                              <!-- /.col -->
+                              @foreach($customers->gallery as $Image)
+                                  <div class="form-group">
+                                      <img src="{{$Image->file_path}}" height="100" width="200"> &nbsp; &nbsp; <a href="{{route('customer.image.delete',['id'=>$Image->id])}}">X</a>
+                                      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          &nbsp; &nbsp; &nbsp; &nbsp;
+                                  </div>
+                              @endforeach
+                          </div>
+                      </div>
+                      <!-- /.row -->
+                  </form>
+              </div>
+          </div>
+      </section>
     <!-- /.content -->
 
 </div>

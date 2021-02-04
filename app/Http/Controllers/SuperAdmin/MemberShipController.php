@@ -10,9 +10,13 @@ class MemberShipController extends Controller
 {
     public function index(Request $request){
 
-        $memberships=Membership::where(function($memberships) use($request){
-            $memberships->where('title','LIKE','%'.$request->search.'%');
-        });
+        $memberships=Membership::orderBy('id', 'DESC');
+
+        if(isset($request->search)) {
+        $memberships = $memberships->where(function ($memberships) use ($request) {
+            $memberships->where('title', 'LIKE', '%' . $request->search . '%');
+            });
+        }
 
         $memberships=$memberships->paginate(10);
         return view('admin.membership.view',['memberships'=>$memberships]);

@@ -7,18 +7,17 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>MemberShip Update</h1>
+            <h1>MemberShip</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Membership Update</li>
+              <li class="breadcrumb-item active">Membership</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
 
     <!-- Main content -->
     <section class="content">
@@ -36,32 +35,42 @@
               <form role="form" method="post" enctype="multipart/form-data" action="{{route('membership.update',['id'=>$membership->id])}}">
                  @csrf
                 <div class="card-body">
-					<div class="form-group">
-                    <label for="exampleInputEmail1">Title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title" value="{{$membership->title}}">
-                  </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title" value="{{$membership->title}}">
+                            </div>
+                        </div>
 
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Description</label>
-                      <input type="text" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter description" value="{{$membership->description}}">
-                  </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Price</label><br>
-                        <input type="number"min="0" name="price" class="form-control" id="exampleInputEmail1"  value="{{$membership->price}}" placeholder="Enter Price">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Price</label><br>
+                                <input type="number"min="0" name="price" class="form-control" id="exampleInputEmail1"  value="{{$membership->price}}" placeholder="Enter Price">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Validity Days</label><br>
+                                <input type="number" min="0" name="validity_days" class="form-control" id="exampleInputEmail1" value="{{$membership->validity_days}}" placeholder="Enter validity Days">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Is Active</label>
+                                <select class="form-control" name="isactive" required>
+                                   <option  selected="selected" value="1" {{$membership->isactive==1?'selected':''}}>Yes</option>
+                                    <option value="0" {{$membership->isactive==0?'selected':''}}>No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter description" rows="3">{{$membership->description}}</textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Validity Days</label><br>
-                        <input type="number" min="0" name="validity_days" class="form-control" id="exampleInputEmail1" value="{{$membership->validity_days}}" placeholder="Enter validity Days">
-                    </div>
-                    <div class="form-group">
-                        <label>Is Active</label>
-                        <select class="form-control" name="isactive" required>
-                           <option  selected="selected" value="1" {{$membership->isactive==1?'selected':''}}>Yes</option>
-                            <option value="0" {{$membership->isactive==0?'selected':''}}>No</option>
-                        </select>
-                      </div>
-
-
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
