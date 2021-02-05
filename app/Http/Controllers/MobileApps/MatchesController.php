@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
+use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Models\LikeDislike;
 use Illuminate\Http\Request;
@@ -69,9 +70,16 @@ class MatchesController extends Controller
 
         $like_status=isset($like)?$like->type:2;
 
+        $gifts=CoinWallet::with('gift')
+                ->where('receiver_id', $user->id)
+                ->where('gift_id', '!=', null)
+                ->groupBy('gift_id')
+                ->select(DB::raw('count(*) as count'), 'gift_id')
+                ->get();
+
         return [
             'status'=>'success',
-            'data'=>compact('details', 'like_status')
+            'data'=>compact('details', 'like_status', 'gifts')
         ];
     }
 }
