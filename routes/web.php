@@ -46,6 +46,7 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
         Route::post('upload-images/{id}','SuperAdmin\CustomerController@images')->name('customer.images.uploads');
         Route::get('image-delete/{id}','SuperAdmin\CustomerController@deleteimage')->name('customer.image.delete');
         Route::post('update/{id}','SuperAdmin\CustomerController@update')->name('customer.update');
+        Route::get('chat/{id}','SuperAdmin\CustomerController@chat')->name('customer.chat');
 
     });
 

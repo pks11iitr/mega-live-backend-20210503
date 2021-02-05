@@ -75,9 +75,6 @@
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>DOB</th>
-                  <!--  <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>-->
                     <th>Image</th>
                     <th>Isactive</th>
                    <th>Action</th>
@@ -90,9 +87,6 @@
 					  <td>{{$customer->mobile}}</td>
 					  <td>{{$customer->email}}</td>
 					  <td>{{$customer->dob}}</td>
-					 <!-- <td>{{$customer->address}}</td>
-					  <td>{{$customer->city}}</td>
-					  <td>{{$customer->state}}</td>-->
                       <td><img src="{{$customer->image}}" height="80px" width="80px"/></td>
                       <td>
                         @if($customer->status==1){{'Active'}}
@@ -101,7 +95,8 @@
                       </td>
                       <td>
                           <a href="{{route('customer.edit',['id'=>$customer->id])}}" class="btn btn-success">Edit</a>
-                          <a href="{{route('customer.details',['id'=>$customer->id])}}" class="btn btn-success">Details</a>
+                          <a href="{{route('customer.chat',['id'=>$customer->id])}}" class="btn btn-info">Chat</a>
+{{--                          <a href="{{route('customer.details',['id'=>$customer->id])}}" class="btn btn-info">Details</a>--}}
 {{--                          <br><br>--}}
 {{--                          <a href="{{route('customer.edit',['id'=>$customer->id])}}" class="open-AddBookDialog btn btn-success" data-toggle="modal" data-target="#exampleModal" data-id="{{$customer->id}}">Notification</a>--}}
                       </td>
@@ -114,9 +109,6 @@
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>DOB</th>
-                   <!-- <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>-->
                     <th>Image</th>
                     <th>Isactive</th>
                    <th>Action</th>

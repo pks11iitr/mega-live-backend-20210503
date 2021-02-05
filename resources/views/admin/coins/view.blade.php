@@ -27,14 +27,10 @@
             <div class="card">
               <div class="card-header">
                <div class="row">
-						 <div class="col-3">
-                         <a href="{{route('coins.create')}}" class="btn btn-primary">Add Coins</a> </div>
-         <div class="col-9">
-
-         </div>
-
-     </div>
-  </div>
+                   <div class="col-3">
+                       <a href="{{route('coins.create')}}" class="btn btn-primary">Add Coins</a>                    </div>
+               </div>
+            </div>
 
               <!-- /.card-header -->
               <div class="card-body">
@@ -52,12 +48,14 @@
                   <tr>
 					  <td>{{$coin->coin}}</td>
                       <td>{{$coin->price}}</td>
-                       <td>
+                      <td>
                         @if($coin->isactive==1){{'Yes'}}
                              @else{{'No'}}
                              @endif
-                        </td>
-                      <td><a href="{{route('coins.edit',['id'=>$coin->id])}}" class="btn btn-success">Edit</a></td>
+                      </td>
+                      <td>
+                          <a href="{{route('coins.edit',['id'=>$coin->id])}}" class="btn btn-success">Edit</a>
+                      </td>
                  </tr>
                  @endforeach
                   </tbody>
@@ -81,11 +79,7 @@
         </div>
         <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
-
-  <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 @endsection

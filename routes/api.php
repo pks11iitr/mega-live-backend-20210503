@@ -42,6 +42,9 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
     $api->get('my-matches', 'MobileApps\MatchesController@findMatches');
     $api->get('match-details/{id}', 'MobileApps\MatchesController@matchDetails');
 
+    //dating
+    $api->get('dating/{type}', 'MobileApps\DatingController@dating');
+
     //membership
     $api->get('membership-list', 'MobileApps\MemberShipController@index');
     $api->get('subscribe-membership/{plan_id}', 'MobileApps\MemberShipController@subscribe');
@@ -73,3 +76,4 @@ $api->group(['middleware' => ['customer-api-auth']], function ($api) {
 
 
 });
+

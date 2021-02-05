@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Active;
 use App\Models\Traits\DocumentUploadTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,13 +11,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use DateTime;
 class Customer extends Authenticatable implements JWTSubject
 {
-    use DocumentUploadTrait, Notifiable;
+    use DocumentUploadTrait, Notifiable, Active;
 
     protected $table='customers';
 
     protected $fillable = [
-        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'employement_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender'
-    ,'smoking','marijuana','drugs','drinking','job_id','ethicity_id', 'account_type', 'rate', 'country', 'country_flag','age_show','distance_show'];
+        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'employement_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender','smoking','marijuana','drugs','drinking','job_id','ethicity_id', 'account_type', 'rate', 'country', 'country_flag','age_show','distance_show','plan_id','membership_expiry'];
 
     protected $hidden = [
         'password','created_at','deleted_at','updated_at','email','mobile'
@@ -81,6 +81,10 @@ class Customer extends Authenticatable implements JWTSubject
 //        return $this->belongsTo('App\Models\FamilyPlan', 'family_id');
 //    }
 
+    public function Plan(){
+        return $this->belongsTo('App\Models\Membership', 'plan_id');
+    }
+
     public function Work(){
         return $this->belongsTo('App\Models\Ocupation', 'occupation_id');
     }
@@ -102,9 +106,9 @@ class Customer extends Authenticatable implements JWTSubject
 //    }
 //
 //
-//    public function country(){
-//        return $this->belongsTo('App\Models\Country', 'country_id');
-//    }
+    public function countryName(){
+        return $this->belongsTo('App\Models\Country', 'country');
+    }
 //    public function city(){
 //        return $this->belongsTo('App\Models\City', 'city_id');
 //    }

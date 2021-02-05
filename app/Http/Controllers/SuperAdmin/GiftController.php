@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 class GiftController extends Controller
 {
     public function index(Request $request){
+        $gifts=Gift::orderBy('id', 'DESC');
 
-        $gifts=Gift::where(function($gifts) use($request){
-            $gifts->where('name','LIKE','%'.$request->search.'%');
-        });
+        if(isset($request->search)) {
+            $gifts = $gifts->where(function ($gifts) use ($request) {
+                $gifts->where('name', 'LIKE', '%' . $request->search . '%');
+            });
+        }
 
         $gifts=$gifts->paginate(10);
         return view('admin.gift.view',['gifts'=>$gifts]);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
+use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Document;
 use App\Models\Education;
@@ -44,20 +46,22 @@ class CustomerController extends Controller
         $customers = Customer::with('Height','Ethnicity','Work','Job','gallery','Education')->findOrFail($id);
         return view('admin.customer.details',['customers'=>$customers]);
     }
-  public function images(Request  $request,$id){
-      $request->validate([
-          'images'=>'required|array',
-      ]);
-         $customer=Customer::find($id);
-      foreach($request->images as $image)
-          $document=$customer->saveDocument($image,'profile');
-      return redirect()->back()->with('success', 'Customer images uploaded Successfully');
-  }
-  public function deleteimage (Request $request,$id){
-      Document::where('id', $id)->delete();
-      return redirect()->back()->with('success', 'Images has been deleted');
 
-  }
+      public function images(Request  $request,$id){
+          $request->validate([
+              'images'=>'required|array',
+          ]);
+             $customer=Customer::find($id);
+          foreach($request->images as $image)
+              $document=$customer->saveDocument($image,'profile');
+          return redirect()->back()->with('success', 'Customer images uploaded Successfully');
+      }
+
+      public function deleteimage (Request $request,$id){
+          Document::where('id', $id)->delete();
+          return redirect()->back()->with('success', 'Images has been deleted');
+
+      }
 
     public function create(Request $request){
         $height=Height::select('name', 'id')->get();
@@ -66,8 +70,10 @@ class CustomerController extends Controller
         $employment=Employment::select('name', 'id')->get();
         $education=Education::select('name', 'id')->get();
         $religion=Religion::select('name', 'id')->get();
-        return view('admin.customer.add',['height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion]);
+        $countries= Country::select('name','id')->get();
+        return view('admin.customer.add',['height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion,'countries'=>$countries]);
     }
+
    public function store(Request $request)
    {
        $request->validate([
@@ -85,7 +91,11 @@ class CustomerController extends Controller
            'job_id' => 'required',
            'image' => 'image'
        ]);
-       if ($customers = Customer::create($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show', 'image', 'password'))){
+         $country = Country::find($request->country);
+
+       if ($customers = Customer::create($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show', 'image', 'password','rate','account_type','address'))){
+           $customers->country=$country->id??'';
+           $customers->country_flag=$country->getRawOriginal('image')??'';
            $customers->password=Hash::make($request->password);
            $customers->save();
            $customers->saveImage($request->image, 'customers');
@@ -94,6 +104,7 @@ class CustomerController extends Controller
        return redirect()->back()->with('error', 'Customer create failed');
 
    }
+
     public function edit(Request $request,$id){
         $customers = Customer::findOrFail($id);
         $height=Height::select('name', 'id')->get();
@@ -102,7 +113,9 @@ class CustomerController extends Controller
         $employment=Employment::select('name', 'id')->get();
         $education=Education::select('name', 'id')->get();
         $religion=Religion::select('name', 'id')->get();
-        return view('admin.customer.edit',['customers'=>$customers,'height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion]);
+        $countries= Country::select('name','id')->get();
+
+        return view('admin.customer.edit',['customers'=>$customers,'height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion,'countries'=>$countries]);
     }
 
     public function update(Request $request,$id){
@@ -122,14 +135,19 @@ class CustomerController extends Controller
             'image' => 'image'
         ]);
         $customers = Customer::findOrFail($id);
-        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show'))){
+        $country = Country::find($request->country);
+
+        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show','rate','account_type','address'))){
+
+             $customers->country=$country->id??'';
+             $customers->country_flag=$country->getRawOriginal('image')??'';
 
             if(isset($request->password))
             {
                 $customers->password=Hash::make($request->password);
-                $customers->save();
 
             }
+            $customers->save();
 
             if($request->image){
                 $customers->saveImage($request->image, 'customers');
@@ -138,6 +156,11 @@ class CustomerController extends Controller
         }
         return redirect()->back()->with('error', 'Customer update failed');
 
+    }
+
+    public function chat(Request $request,$id){
+        $chats =Chat::findOrFail($id);
+        return view('admin.customer.chat',['chats'=>$chats]);
     }
 
 }
