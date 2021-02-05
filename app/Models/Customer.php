@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Active;
 use App\Models\Traits\DocumentUploadTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use DateTime;
 class Customer extends Authenticatable implements JWTSubject
 {
-    use DocumentUploadTrait, Notifiable;
+    use DocumentUploadTrait, Notifiable, Active;
 
     protected $table='customers';
 

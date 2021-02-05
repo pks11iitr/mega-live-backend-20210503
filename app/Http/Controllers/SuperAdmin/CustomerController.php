@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Document;
@@ -155,6 +156,11 @@ class CustomerController extends Controller
         }
         return redirect()->back()->with('error', 'Customer update failed');
 
+    }
+
+    public function chat(Request $request,$id){
+        $chats =Chat::findOrFail($id);
+        return view('admin.customer.chat',['chats'=>$chats]);
     }
 
 }
