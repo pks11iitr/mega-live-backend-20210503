@@ -29,4 +29,10 @@ class CoinWallet extends Model
             return ($received??0)-($sent??0);
     }
 
+    public function gift(){
+        return $this->belongsTo('App\Models\Gift', 'gift_id');
+    }
+
+
+
 }
