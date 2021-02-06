@@ -15,8 +15,8 @@ class MatchesController extends Controller
 
         $user=$request->user;
 
-        $profiles=Customer::with('gallery')
-            ->select('id', 'name','image', 'dob')
+        $profiles=Customer::with('gallery', 'country')
+            ->select('id', 'name','image', 'dob','country_id', 'country_flag')
             ->where('id', '!=', $user->id);
 
 //        if($user->pref_gender=='Male')
