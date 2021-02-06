@@ -138,10 +138,11 @@ class Customer extends Authenticatable implements JWTSubject
             $text='';
 
             if($date2->y)
-                $text=$text.$date2->y.' year'.' ';
+                $text=$text.$date2->y;
+//                $text=$text.$date2->y.' year'.' ';
 
-            if($date2->m)
-                $text=$text.$date2->m.' month';
+//            if($date2->m)
+//                $text=$text.$date2->m.' month';
         }
 
         return $text;
