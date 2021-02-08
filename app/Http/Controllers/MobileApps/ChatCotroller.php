@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
+use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Models\Gift;
 use App\Services\Notification\FCMNotification;
@@ -142,6 +143,19 @@ class ChatCotroller extends Controller
 
         $receiver=Customer::findOrFail($user_id);
 
+        if(config('message_charge') > CoinWallet::balance($user->id))
+            return [
+                'status'=>'failed',
+                'message'=>'recharge'
+            ];
+
+        CoinWallet::create([
+            'sender_id'=>$user->id,
+            'receiver_id'=>$receiver->id,
+            //'gift_id'=>$gift->id,
+            'coins'=>config('message_charge'),
+        ]);
+
         $chat=Chat::create([
             'user_1'=>($user->id < $user_id)?$user->id:$user_id,
             'user_2'=>($user->id < $user_id)?$user_id:$user->id,
@@ -156,7 +170,7 @@ class ChatCotroller extends Controller
                 break;
         }
 
-        $receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));
+        $receiver->notify(new FCMNotification('New Message', 'New Message From '.$user->name, ['type'=>'Chat']));
 
         return [
             'status'=>'success',

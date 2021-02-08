@@ -8,6 +8,7 @@ use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Models\Gift;
 use App\Models\Membership;
+use App\Services\Notification\FCMNotification;
 use Illuminate\Http\Request;
 
 class GiftsController extends Controller
@@ -36,35 +37,33 @@ class GiftsController extends Controller
         $gift=Gift::active()->findOrFail($request->gift_id);
         $receiver=Customer::findOrFail($request->profile_id);
 
-        if($gift->coins<CoinWallet::balance($user->id)){
-
-            CoinWallet::create([
-               'sender_id'=>$user->id,
-               'receiver_id'=>$receiver->id,
-               'gift_id'=>$gift->id,
-               'coins'=>$gift->coins,
-            ]);
-
-            Chat::create([
-                'user_1'=>($user->id < $receiver->id)?$user->id:$receiver->id,
-                'user_2'=>($user->id < $receiver->id)?$receiver->id:$user->id,
-                'message'=>$request->message??'',
-                'type'=>'gift',
-                'image'=>$gift->getRawOriginal('image'),
-                'direction'=>($user->id < $receiver->id)?0:1,
-            ]);
-
+        if($gift->coins > CoinWallet::balance($user->id))
             return [
-                'status'=>'success',
-                'message'=>'Gift Sent Successfully'
+                'status'=>'failed',
+                'message'=>'recharge'
             ];
 
+        CoinWallet::create([
+           'sender_id'=>$user->id,
+           'receiver_id'=>$receiver->id,
+           'gift_id'=>$gift->id,
+           'coins'=>$gift->coins,
+        ]);
 
-        }
+        Chat::create([
+            'user_1'=>($user->id < $receiver->id)?$user->id:$receiver->id,
+            'user_2'=>($user->id < $receiver->id)?$receiver->id:$user->id,
+            'message'=>$request->message??'',
+            'type'=>'gift',
+            'image'=>$gift->getRawOriginal('image'),
+            'direction'=>($user->id < $receiver->id)?0:1,
+        ]);
+
+        $receiver->notify(new FCMNotification('New Gift', 'New Gift From '.$user->name, ['type'=>'Gift']));
 
         return [
-            'status'=>'failed',
-            'message'=>'Recharge coins balance'
+            'status'=>'success',
+            'message'=>'Gift Sent Successfully'
         ];
 
     }
