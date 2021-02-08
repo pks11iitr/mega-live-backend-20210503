@@ -102,8 +102,8 @@ class ChatCotroller extends Controller
         foreach ($chatsobj as $c){
             if(($c->user_1==$user->id && $c->direction==0)||($c->user_2==$user->id && $c->direction==1)){
                 $chats[]=[
-                    'user_id'=>$c->user2->id,
-                    'user_image'=>$c->user2->image,
+                    'user_id'=>$user->id,
+                    'user_image'=>$user->image,
                     'image'=>$c->image,
                     'message'=>$c->message,
                     'date'=>$c->created_at,
@@ -112,8 +112,8 @@ class ChatCotroller extends Controller
                 ];
             }else{
                 $chats[]=[
-                    'user_id'=>$c->user1->id,
-                    'user_image'=>$c->user1->image,
+                    'user_id'=>($c->user_1==$user->id)?$c->user2->id:$c->user1->id,
+                    'user_image'=>($c->user_1==$user->id)?$c->user2->image:$c->user1->image,
                     'image'=>$c->image,
                     'message'=>$c->message,
                     'date'=>$c->created_at,
