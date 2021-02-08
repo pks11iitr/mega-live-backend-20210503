@@ -47,6 +47,7 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
         Route::get('image-delete/{id}','SuperAdmin\CustomerController@deleteimage')->name('customer.image.delete');
         Route::post('update/{id}','SuperAdmin\CustomerController@update')->name('customer.update');
         Route::get('chat/{id}','SuperAdmin\CustomerController@chat')->name('customer.chat');
+        Route::post('image','SuperAdmin\CustomerController@image')->name('customer.image');
 
     });
 
@@ -93,6 +94,11 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
         Route::post('update/{id}','SuperAdmin\StoryController@update')->name('story.update');
 
     });
+
+});
+
+Route::group(['prefix'=>'url'], function(){
+    Route::get('privacy-policy','SuperAdmin\UrlController@privacy');
 
 });
 
