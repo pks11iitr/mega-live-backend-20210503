@@ -108,6 +108,7 @@ class ChatCotroller extends Controller
                     'message'=>$c->message,
                     'date'=>$c->created_at,
                     'direction'=>0,
+                    'type'=>$c->type
                 ];
             }else{
                 $chats[]=[
@@ -116,7 +117,8 @@ class ChatCotroller extends Controller
                     'image'=>$c->image,
                     'message'=>$c->message,
                     'date'=>$c->created_at,
-                    'direction'=>1
+                    'direction'=>1,
+                    'type'=>$c->type
                 ];
             }
         }
