@@ -148,8 +148,8 @@ class Customer extends Authenticatable implements JWTSubject
         return $text;
     }
 
-    public function getLastSeenAttribute($date){
-        $text='--';
+    public function getLastSeenAttribute($value){
+        $date=$this->late_active;
 
         if($date){
             $date1 = new DateTime(date('Y-m-d H:i:s'));
