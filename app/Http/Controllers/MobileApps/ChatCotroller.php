@@ -145,7 +145,7 @@ class ChatCotroller extends Controller
 
         $receiver=Customer::findOrFail($user_id);
 
-        if(config('message_charge') > CoinWallet::balance($user->id))
+        if(config('myconfig.message_charge') > CoinWallet::balance($user->id))
             return [
                 'status'=>'failed',
                 'message'=>'recharge'
@@ -155,7 +155,7 @@ class ChatCotroller extends Controller
             'sender_id'=>$user->id,
             'receiver_id'=>$receiver->id,
             //'gift_id'=>$gift->id,
-            'coins'=>config('message_charge'),
+            'coins'=>config('myconfig.message_charge'),
         ]);
 
         $chat=Chat::create([
