@@ -17,7 +17,7 @@ class LastActivityLogger
     public function handle(Request $request, Closure $next)
     {
         $user=auth()->guard('customerapi')->user();
-        $user->late_active=date('Y-m-d H:i:s');
+        $user->last_active=date('Y-m-d H:i:s');
         $user->save();
         return $next($request);
     }
