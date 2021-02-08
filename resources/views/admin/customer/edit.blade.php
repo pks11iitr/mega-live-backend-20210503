@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
   <!-- Content Wrapper. Contains page content -->
+
+{{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1  /jquery.min.js"></script>--}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -89,7 +92,7 @@
                           <div class="form-group">
                               <label for="exampleInputFile">Profile picture</label>
 
-                              <input type="file" class="form-control" name="image" id="exampleInputFile" accept="image/*" >
+{{--                              <input type="file" class="form-control" name="image" id="exampleInputFile" accept="image/*" >--}}
                           </div>
                           <img src="{{$customers->image}}" height="80px" width="80px"/>
                       </div>
@@ -315,7 +318,11 @@
                               <!-- /.col -->
                               @foreach($customers->gallery as $Image)
                                   <div class="form-group">
-                                      <img src="{{$Image->file_path}}" height="100" width="200"> &nbsp; &nbsp; <a href="{{route('customer.image.delete',['id'=>$Image->id])}}">X</a>
+                                      <img src="{{$Image->file_path}}" height="100" width="200"> &nbsp; &nbsp; <a href="{{route('customer.image.delete',['id'=>$Image->id])}}">X</a> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                                      <input type="radio" name="image" value="{{$Image->id}}" {{($Image->file_path==$customers->image)? "checked" : ""}} >
+                                      <input type="hidden" id="user_id" value="{{$customers->id}}" >
+
                                       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          &nbsp; &nbsp; &nbsp; &nbsp;
                                   </div>
                               @endforeach
@@ -325,9 +332,37 @@
                   </form>
               </div>
           </div>
+
       </section>
     <!-- /.content -->
+      <script>
+          $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
 
+              $('input[type="radio"]').click(function(){
+                  var id = $(this).val();
+                  var user_id = document.getElementById("user_id").value;
+                  // alert(id + user_id);
+                  $.ajax({
+                      "url":"{{  route('customer.image') }}",
+                      "method":"POST",
+                      "data":{
+                          "_token":"{{ csrf_token() }}",
+                          "id":id,
+                          "user_id":user_id
+                      },
+                      "success":function(data){
+                          location.reload();
+                          $('#message').html("<h2>Current image has been updated!</h2>")
+                      }
+                  });
+              });
+          });
+      </script>
 </div>
 <!-- ./wrapper -->
 @endsection

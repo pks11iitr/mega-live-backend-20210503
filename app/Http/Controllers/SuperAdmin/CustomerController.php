@@ -14,6 +14,7 @@ use App\Models\Height;
 use App\Models\Ocupation;
 use App\Models\Religion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
@@ -155,6 +156,16 @@ class CustomerController extends Controller
             return redirect()->route('customer.list')->with('success', 'Customer has been updated');
         }
         return redirect()->back()->with('error', 'Customer update failed');
+
+    }
+
+    public function image(Request $request){
+            $document= Document::findOrFail($request->id);
+
+            $customer = Customer::findOrFail($request->user_id);
+            $customer->image=$document->getRawOriginal('file_path');
+
+            $customer->save();
 
     }
 
