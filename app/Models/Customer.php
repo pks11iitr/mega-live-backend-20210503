@@ -22,7 +22,7 @@ class Customer extends Authenticatable implements JWTSubject
         'password','created_at','deleted_at','updated_at','email','mobile'
     ];
 
-    protected $appends=['age'];
+    protected $appends=['age', 'last_seen'];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -146,5 +146,33 @@ class Customer extends Authenticatable implements JWTSubject
         }
 
         return $text;
+    }
+
+    public function getLastSeenAttribute($date){
+        $text='--';
+
+        if($date){
+            $date1 = new DateTime(date('Y-m-d H:i:s'));
+            $date2 = $date1->diff(new DateTime($date));
+
+            if($date2->y)
+                return $date2->y.' yrs ago';
+
+            if($date2->m)
+                return $date2->m.' months ago';
+
+            if($date2->d)
+                return $date2->d.' days ago';
+
+            if($date2->h)
+                return $date2->h.' hours ago';
+
+            if($date2->i)
+                return $date2->i.' mins ago';
+
+            return 'now';
+
+        }
+
     }
 }

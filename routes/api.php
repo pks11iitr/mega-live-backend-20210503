@@ -25,7 +25,7 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 $api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
 
-$api->group(['middleware' => ['customer-api-auth']], function ($api) {
+$api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
 
     $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
     $api->post('update-profile', 'MobileApps\ProfileController@updateprofile');
