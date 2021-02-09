@@ -44,8 +44,21 @@ class MatchesController extends Controller
 
         //$profiles=$profiles->inRandomOrder();
         $profiles=$profiles->paginate(50);
+
+        $like=LikeDislike::where('sender_id', $user->id)->select('receiver_id', 'type')->get();
+        $likes=[];
+        foreach ($like as $l){
+            $likes[$l->receiver_id]=$l->type;
+        }
+
         foreach($profiles as $d)
         {
+            if(isset($likes[$d->id])){
+                $d->like_status=$like->type;
+            }else{
+                $d->like_status=2;
+            }
+
             if(date('Y-m-d H:i:s', strtotime('+1 mins',strtotime($d->last_active))>date('Y-m-d H:i:s')))
                 $d->is_online=1;
             else
