@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
+use App\Models\CoinWallet;
+use App\Models\Customer;
 use App\Models\LikeDislike;
 use Illuminate\Http\Request;
 
@@ -73,6 +75,8 @@ class LikeDislikeController extends Controller
 
         $user=$request->user;
 
+        $receiver=Customer::findOrFail($id);
+
         LikeDislike::updateOrCreate([
             'sender_id'=>$user->id,
             'receiver_id'=>$id,
@@ -80,7 +84,21 @@ class LikeDislikeController extends Controller
 
         return [
             'status'=>'success',
-            'message'=>'Profile Liked'
+            'message'=>'Profile Liked',
+            'data'=>[
+                'screen'=>(CoinWallet::balance($this->user_id)>0)?2:1,
+                'sender'=>[
+                    'name'=>$user->name,
+                    'image'=>$user->image,
+                    'sendbird_id'=>'Matchon'.$user->id,
+                    'sendbird_token'=>$user->sendbird_token
+                ],
+                'receiver'=>[
+                    'name'=>$receiver->name,
+                    'image'=>$receiver->image,
+                    'id'=>$receiver->id,
+                ]
+            ]
         ];
 
     }

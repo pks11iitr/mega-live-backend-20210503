@@ -55,6 +55,12 @@ class Customer extends Authenticatable implements JWTSubject
         return $this->notification_token;
     }
 
+    public function isPremiumUser(){
+        if(CoinWallet::balance($this->user_id)>0){
+            return true;
+        }
+    }
+
     public function getImageAttribute($value){
         if($value)
             return Storage::url($value);
