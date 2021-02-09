@@ -12,7 +12,7 @@ class LikeDislikeController extends Controller
     public function ilike(Request $request){
         $user=$request->user;
 
-        $likes=LikeDislike::with('receiver')
+        $likes=LikeDislike::with('receiver','countryName')
             ->where('sender_id', $user->id)
             ->where('type', 1)
             ->orderBy('id', 'desc')
@@ -41,7 +41,7 @@ class LikeDislikeController extends Controller
     public function likeme(Request $request){
         $user=$request->user;
 
-        $likes=LikeDislike::with('sender')
+        $likes=LikeDislike::with('sender','countryName')
             ->where('receiver_id', $user->id)
             ->where('type', 1)
             ->orderBy('id', 'desc')
