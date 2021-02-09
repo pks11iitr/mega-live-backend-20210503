@@ -42,7 +42,8 @@ class MatchesController extends Controller
 //                ->where(DB::raw("DATEDIFF('".date('Y-m-d')."', dob ) / 365"), '<=', $user->to_age);
 //        }
 
-        $profiles=$profiles->inRandomOrder()->paginate(50);
+        //$profiles=$profiles->inRandomOrder();
+        $profiles=$profiles->paginate(50);
 
         return [
 
