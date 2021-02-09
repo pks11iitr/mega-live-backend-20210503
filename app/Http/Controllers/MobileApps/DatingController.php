@@ -13,7 +13,7 @@ class DatingController extends Controller
         //$user=$request->user;
 
         $dating =Customer::with('countryName')
-            ->select('name','image', 'dob','country', 'last_active')
+            ->select('id','name','image', 'dob','country', 'last_active')
             ->inRandomOrder();
 
         if($type=='single'){
