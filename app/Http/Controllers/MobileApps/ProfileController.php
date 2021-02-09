@@ -188,7 +188,9 @@ class ProfileController extends Controller
         return [
             'status'=>'success',
             'message'=>'success',
-            'data'=>[]
+            'data'=>[
+                'image'=>$document->file_path
+            ]
         ];
     }
 
