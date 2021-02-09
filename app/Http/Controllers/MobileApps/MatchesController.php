@@ -54,7 +54,7 @@ class MatchesController extends Controller
         foreach($profiles as $d)
         {
             if(isset($likes[$d->id])){
-                $d->like_status=$like->type;
+                $d->like_status=$likes[$d->id];
             }else{
                 $d->like_status=2;
             }
