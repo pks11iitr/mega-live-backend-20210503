@@ -12,7 +12,7 @@ class LikeDislikeController extends Controller
     public function ilike(Request $request){
         $user=$request->user;
 
-        $likes=LikeDislike::with('receiver','countryName')
+        $likes=LikeDislike::with('receiver.countryName')
             ->where('sender_id', $user->id)
             ->where('type', 1)
             ->orderBy('id', 'desc')
@@ -26,8 +26,8 @@ class LikeDislikeController extends Controller
                 'name'=>$like->receiver->name,
                 'rate'=>$like->receiver->rate,
                 'age'=>$like->receiver->age,
-                'country'=>$like->receiver->country,
-                'country_flag'=>$like->receiver->country_flag
+                'country'=>$like->receiver->countryName->name,
+                'country_flag'=>$like->receiver->countryName->image
             ];
         }
 
@@ -41,7 +41,7 @@ class LikeDislikeController extends Controller
     public function likeme(Request $request){
         $user=$request->user;
 
-        $likes=LikeDislike::with('sender','countryName')
+        $likes=LikeDislike::with('sender.countryName')
             ->where('receiver_id', $user->id)
             ->where('type', 1)
             ->orderBy('id', 'desc')
@@ -55,8 +55,8 @@ class LikeDislikeController extends Controller
                 'name'=>$like->sender->name,
                 'rate'=>$like->sender->rate,
                 'age'=>$like->sender->age,
-                'country'=>$like->sender->country,
-                'country_flag'=>$like->sender->country_flag
+                'country'=>$like->sender->countryName->name??'',
+                'country_flag'=>$like->sender->countryName->image??''
             ];
         }
 
