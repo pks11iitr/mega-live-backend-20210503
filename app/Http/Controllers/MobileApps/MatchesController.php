@@ -15,8 +15,8 @@ class MatchesController extends Controller
 
         $user=$request->user;
 
-        $profiles=Customer::with('gallery', 'countryName')
-            ->select('id', 'name','image', 'dob','country', 'country_flag')
+        $profiles=Customer::with('gallery', 'countryName', 'Height')
+            ->select('id', 'name','image', 'dob','country', 'country_flag', 'height_id')
             ->where('id', '!=', $user->id);
 
 //        if($user->pref_gender=='Male')
@@ -44,6 +44,14 @@ class MatchesController extends Controller
 
         //$profiles=$profiles->inRandomOrder();
         $profiles=$profiles->paginate(50);
+        foreach($profiles as $d)
+        {
+            if(date('Y-m-d H:i:s', strtotime('+1 mins',strtotime($d->last_active))>date('Y-m-d H:i:s')))
+                $d->is_online=1;
+            else
+                $d->is_online=0;
+        }
+
 
         return [
 
@@ -62,7 +70,7 @@ class MatchesController extends Controller
         $user=$request->user;
 
         $details=Customer::with(['gallery', 'Height', 'Ethnicity', 'Education', 'Job', 'Work', 'Religion'])
-            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
+            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'interests')
             ->findOrFail($id);
 
         $like=LikeDislike::where('sender_id', $user->id)

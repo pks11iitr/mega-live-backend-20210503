@@ -57,7 +57,7 @@ class ProfileController extends Controller
 //
 //            );
 
-        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image');
+        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image', 'interests');
 
         $height=Height::select('name', 'id')->get();
         ///  $language=Languages::select('name', 'id')->get();
@@ -91,7 +91,7 @@ class ProfileController extends Controller
     public function updateprofile(Request $request){
         $user=$request->user;
 
-        $user->update($request->only('name','gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show'));
+        $user->update($request->only('name','gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'interests'));
 
         return [
             'status'=>'success',
