@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CoinsController extends Controller
 {
-    public function coins()
+    public function index()
     {
         $coins = Coin::active()->get();
         if (count($coins) > 0) {
