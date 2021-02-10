@@ -66,7 +66,7 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
     $api->get('chats/{user_id}', 'MobileApps\ChatCotroller@chatDetails');
     $api->post('send-message/{user_id}', 'MobileApps\ChatCotroller@send');
 
-    $api->post('initiate-call/{profile_id}', 'MobileApps\CallCotroller@initiateVideoCall');
+    $api->post('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
 
 
     $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
