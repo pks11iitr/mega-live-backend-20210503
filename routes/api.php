@@ -69,8 +69,8 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
     $api->post('initiate-call/{profile_id}', 'MobileApps\CallCotroller@initiateVideoCall');
 
 
-    $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentCotroller@initiateCoinPayment');
-    $api->post('verify-payment', 'MobileApps\PaymentCotroller@initiateCoinPayment');
+    $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
+    $api->post('verify-payment', 'MobileApps\PaymentController@initiateCoinPayment');
 
 
 
