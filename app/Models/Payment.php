@@ -11,7 +11,17 @@ class Payment extends Model
 
     protected $table='payments';
 
-    protected $fillable=['type', 'user_id', 'amount', 'is_complete'];
+    protected $fillable=['entity_id', 'entity_type', 'user_id', 'amount', 'is_complete', 'refid'];
+
+
+    public function customer(){
+        return $this->belongsTo('App\Models\Customer', 'user_id');
+    }
+
+    public function entity(){
+        return $this->morphTo();
+    }
+
 
 
 }
