@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MobileApps;
 use App\Events\OrderConfirmed;
 use App\Http\Controllers\Controller;
 use App\Models\Coin;
+use App\Models\CoinWallet;
 use App\Models\Payment;
 use App\Services\Notification\FCMNotification;
 use App\Services\Payment\RazorPayService;
@@ -91,12 +92,20 @@ class PaymentController extends Controller
                 'message'=>'Invalid Operation Performed'
             ];
 
+        $plan=Coin::active()->findOrFail($payment->entity_id);
+
         $paymentresult=$this->pay->verifypayment($request->all());
         if($paymentresult) {
             $payment->is_complete = 'true';
             $payment->rp_payment_id = $request->razorpay_payment_id;
             $payment->rp_payment_response = $request->razorpay_signature;
             $payment->save();
+
+            CoinWallet::create([
+                'receiver_id'=>$payment->user_id,
+                'coins'=>$plan->coins,
+                'message'=>'Coin Purchase'
+            ]);
 
             event(new OrderConfirmed($payment));
 
