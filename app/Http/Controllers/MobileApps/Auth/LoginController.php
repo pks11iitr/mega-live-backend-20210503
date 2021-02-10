@@ -116,6 +116,16 @@ class LoginController extends Controller
                'mobile'=>$request->mobile,
                'password'=>'none'
             ]);
+
+            //register on sendbird app
+            $sendbird=app('App\Services\SendBird\SendBird');
+            $response=$sendbird->createUser($user);
+
+            if(isset($response['user_id'])){
+                $user->sendbird_token=$response['access_token']??null;
+                $user->save();
+            }
+
         }
 
         if(!in_array($user->status, [0,1]))
