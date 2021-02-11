@@ -164,6 +164,16 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('payment.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Payment
+
+                            </p>
+                        </a>
+                    </li>
+
 
                    {{-- <li class="nav-item">
                         <a href="{{route('story.list')}}" class="nav-link">
