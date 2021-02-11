@@ -95,6 +95,11 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 
     });
 
+    Route::group(['prefix'=>'payment'], function(){
+        Route::get('/','SuperAdmin\PaymentController@index')->name('payment.list');
+
+    });
+
 });
 
 Route::group(['prefix'=>'url'], function(){
