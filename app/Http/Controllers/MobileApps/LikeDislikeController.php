@@ -23,13 +23,13 @@ class LikeDislikeController extends Controller
         $users=[];
         foreach($likes as $like){
             $users[]=[
-                'id'=>$like->receiver->id,
-                'image'=>$like->receiver->image,
-                'name'=>$like->receiver->name,
-                'rate'=>$like->receiver->rate,
-                'age'=>$like->receiver->age,
-                'country'=>$like->receiver->countryName->name,
-                'country_flag'=>$like->receiver->countryName->image
+                'id'=>$like->receiver->id??'',
+                'image'=>$like->receiver->image??'',
+                'name'=>$like->receiver->name??'',
+                'rate'=>$like->receiver->rate??'',
+                'age'=>$like->receiver->age??'',
+                'country'=>$like->receiver->countryName->name??'',
+                'country_flag'=>$like->receiver->countryName->image??''
             ];
         }
 

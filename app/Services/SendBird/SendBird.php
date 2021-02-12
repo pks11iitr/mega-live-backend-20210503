@@ -3,7 +3,6 @@
 namespace App\Services\SendBird;
 
 use App\Models\Customer;
-use App\Models\Shoppr;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 
