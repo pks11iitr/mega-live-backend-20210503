@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -21,7 +22,7 @@ class OrderConfirmed
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Payment $order)
     {
         $this->order=$order;
     }
