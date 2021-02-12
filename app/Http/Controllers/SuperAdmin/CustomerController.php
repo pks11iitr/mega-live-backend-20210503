@@ -13,6 +13,7 @@ use App\Models\EthniCity;
 use App\Models\Height;
 use App\Models\Ocupation;
 use App\Models\Religion;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -82,7 +83,7 @@ class CustomerController extends Controller
            'gender' => 'required',
            'dob' => 'required',
            'mobile' => 'required|unique:customers',
-           'email' => 'required',
+           'email' => 'required|unique:customers',
            'about_me' => 'required',
            'height_id' => 'required',
            'ethicity_id' => 'required',
@@ -100,6 +101,17 @@ class CustomerController extends Controller
            $customers->password=Hash::make($request->password);
            $customers->save();
            $customers->saveImage($request->image, 'customers');
+
+           if($request->acount_type=='ADMIN'){
+               $user=User::create([
+                  'email'=>$request->email,
+                   'name'=>$request->name,
+                   'customer_id'=>$customers->id,
+                   'password'=>Hash::make($request->password)
+               ]);
+               $user->assignRole('caller');
+           }
+
            return redirect()->route('customer.list')->with('success', 'Customer has been created');
        }
        return redirect()->back()->with('error', 'Customer create failed');
@@ -125,7 +137,7 @@ class CustomerController extends Controller
             'gender' => 'required',
             'dob' => 'required',
             'mobile' => 'required|unique:customers',
-            'email' => 'required',
+            'email' => 'required|unique:customers',
             'about_me' => 'required',
             'height_id' => 'required',
             'ethicity_id' => 'required',
@@ -149,6 +161,29 @@ class CustomerController extends Controller
 
             }
             $customers->save();
+
+            if($request->acount_type=='ADMIN'){
+
+                $user=User::where('customer_id',$customers->id)->first();
+
+                if($user){
+                    $user->update([
+                        'email'=>$request->email,
+                        'name'=>$request->name,
+                        'password'=>Hash::make($request->password)
+                    ]);
+                }else{
+                    $user=User::create([
+                        'email'=>$request->email,
+                        'name'=>$request->name,
+                        'customer_id'=>$customers->id,
+                        'password'=>Hash::make($request->password)
+                    ]);
+                    $user->assignRole('caller');
+                }
+
+                $user->assignRole('caller');
+            }
 
             if($request->image){
                 $customers->saveImage($request->image, 'customers');

@@ -70,7 +70,7 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 
 
     $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
-    $api->post('verify-payment', 'MobileApps\PaymentController@initiateCoinPayment');
+    $api->post('verify-payment', 'MobileApps\PaymentController@verifyPayment');
 
 
 
