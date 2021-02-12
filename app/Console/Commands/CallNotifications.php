@@ -41,9 +41,9 @@ class CallNotifications extends Command
     {
         $date=date('Y-m-d H:i:s', strtotime('-1 minute'));
         $users=Customer::where('account_type', 'USER')
-            ->where('last_active','<',$date)
-            ->where('membership_expiry', '!=', null)
-            ->where('membership_expiry', '<', date('Y-m-d'))
+            ->where('last_active','>',$date)
+//            ->where('membership_expiry', '!=', null)
+//            ->where('membership_expiry', '<', date('Y-m-d'))
             ->get();
 
         $auser=Customer::where('account_type', 'ADMIN')
