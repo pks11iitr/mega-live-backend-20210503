@@ -84,7 +84,7 @@ class PaymentController extends Controller
 
         ]);
 
-        $payment=Payment::with('details')->where('rp_order_id', $request->razorpay_order_id)->first();
+        $payment=Payment::where('rp_order_id', $request->razorpay_order_id)->first();
 
         if(!$payment || $payment->is_complete!=0)
             return [
