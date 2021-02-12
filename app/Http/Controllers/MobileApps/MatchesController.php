@@ -59,7 +59,7 @@ class MatchesController extends Controller
                 $d->like_status=2;
             }
 
-            if(date('Y-m-d H:i:s', strtotime('+1 mins',strtotime($d->last_active))>date('Y-m-d H:i:s')))
+            if(date('Y-m-d H:i:s', strtotime('+1 minutes',strtotime($d->last_active))>date('Y-m-d H:i:s')))
                 $d->is_online=1;
             else
                 $d->is_online=0;
