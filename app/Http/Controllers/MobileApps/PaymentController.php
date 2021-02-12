@@ -103,7 +103,7 @@ class PaymentController extends Controller
 
             CoinWallet::create([
                 'receiver_id'=>$payment->user_id,
-                'coins'=>$plan->coins,
+                'coins'=>$plan->coin,
                 'message'=>'Coin Purchase'
             ]);
 
