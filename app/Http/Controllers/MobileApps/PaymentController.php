@@ -96,7 +96,7 @@ class PaymentController extends Controller
 
         $paymentresult=$this->pay->verifypayment($request->all());
         if($paymentresult) {
-            $payment->is_complete = 'true';
+            $payment->is_complete = true;
             $payment->rp_payment_id = $request->razorpay_payment_id;
             $payment->rp_payment_response = $request->razorpay_signature;
             $payment->save();
