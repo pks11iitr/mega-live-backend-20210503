@@ -46,6 +46,25 @@ class ChatCotroller extends Controller
 
         }
 
+        $unread=Chat::where('seen_at', null)
+            ->where(function($query)use($user){
+                $query->where(function($query) use($user){
+                    $query->where('user_1', $user->id)
+                        ->where('direction', 1);
+                })->orWhere(function($query) use($user){
+                    $query->where('user_2', $user->id)
+                        ->where('direction', 0);
+                });
+            })
+            ->groupBy('user_1', 'user_2')
+            ->select(DB::raw('count(*) as count'), 'user_1', 'user_2')
+            ->get();
+        //return $unread;
+        $unread_count=[];
+        foreach($unread as $u){
+            $unread_count[$u->user_1.'-'.$u->user_2]=$u->count??0;
+        }
+
 
         $userchats=[];
         foreach($chatslist as $userchat){
@@ -55,7 +74,8 @@ class ChatCotroller extends Controller
                     'name'=>$userchat->user2->name,
                     'image'=>$userchat->user2->image,
                     'chat'=>$chats[$userchat->id]->message,
-                    'date'=>$chats[$userchat->id]->created_at
+                    'date'=>$chats[$userchat->id]->created_at,
+                    'unread'=>$unread_count[$userchat->user_1.'-'.$userchat->user_2]??0
                 ];
             }else{
                 $userchats[]=[
@@ -63,7 +83,8 @@ class ChatCotroller extends Controller
                     'name'=>$userchat->user1->name,
                     'image'=>$userchat->user1->image,
                     'chat'=>$chats[$userchat->id]->message,
-                    'date'=>$chats[$userchat->id]->created_at
+                    'date'=>$chats[$userchat->id]->created_at,
+                    'unread'=>$unread_count[$userchat->user_1.'-'.$userchat->user_2]??0
                 ];
             }
         }
