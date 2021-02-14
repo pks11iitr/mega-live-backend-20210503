@@ -181,4 +181,8 @@ class Customer extends Authenticatable implements JWTSubject
         }
 
     }
+
+    public function likesdislikes(){
+        return $this->hasMany('App\Models\LikeDislike', 'receiver_id');
+    }
 }
