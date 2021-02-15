@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Chat;
+use App\Models\LikeDislike;
+use App\Services\Notification\FCMNotification;
 use Illuminate\Console\Command;
 
 class AutomaticMessages extends Command
@@ -37,6 +40,38 @@ class AutomaticMessages extends Command
      */
     public function handle()
     {
-        return 0;
+        $date=date('Y-m-d', strtotime('-1 minute'));
+        $likes=LikeDislike::with(['sender', 'receiver'])
+            ->where('status', '!=', 'completed')
+            ->where('receiver', function($receiver) use($date){
+                    $receiver->where('last_active', '>=', $date);
+                })
+            ->get();
+
+        foreach($likes as $l){
+            $messages=explode('***', $l->sender->system_messages);
+            if(isset($messages[$l->status])){
+                $i=intval($l->status);
+                while(isset($messages[$i])){
+                    Chat::create([
+                        'user_1'=>($l->sender->id < $l->receiver->id)?$l->sender->id:$l->receiver->id,
+                        'user_2'=>($l->sender->id < $l->receiver->id)?$l->receiver->id:$l->sender->id,
+                        'direction'=>($l->sender->id < $l->receiver->id)?0:1,
+                        'message'=>$messages[$i],
+                        'type'=>'text'
+                    ]);
+                    $i++;
+                }
+
+                $l->receiver->notify(new FCMNotification($l->sender->name.' send you a message', $messages[$i-1], ['type'=>'automatic-like', 'name'=>$l->sender->name, 'image'=>$l->sender->image]));
+
+            }
+            $l->status='completed';
+            $l->save();
+        }
+
+
+
+
     }
 }

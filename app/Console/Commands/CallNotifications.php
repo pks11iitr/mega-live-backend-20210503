@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Services\Notification\FCMNotification;
 use Illuminate\Console\Command;
@@ -51,7 +52,8 @@ class CallNotifications extends Command
             ->first();
 
         foreach($users as $u){
-            $u->notify(new FCMNotification('Video Call', 'Call From '.$auser->name, ['type'=>'auto-call', 'name'=>$auser->name, 'image'=>$auser->image]));
+            if(CoinWallet::balance($u->id)<50)
+                $u->notify(new FCMNotification('Video Call', 'Call From '.$auser->name, ['type'=>'auto-call', 'name'=>$auser->name, 'image'=>$auser->image]));
         }
 
     }

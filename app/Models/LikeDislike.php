@@ -11,7 +11,7 @@ class LikeDislike extends Model
 
     protected $table='likes_dislikes';
 
-    protected $fillable=['sender_id', 'receiver_id', 'type'];
+    protected $fillable=['sender_id', 'receiver_id', 'type', 'status'];
 
     public function sender(){
         return $this->belongsTo('App\Models\Customer', 'sender_id');
