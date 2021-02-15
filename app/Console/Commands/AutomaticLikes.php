@@ -16,7 +16,7 @@ class AutomaticLikes extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'automatic:likes';
 
     /**
      * The console command description.

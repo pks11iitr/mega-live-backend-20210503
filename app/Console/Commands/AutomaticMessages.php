@@ -14,7 +14,7 @@ class AutomaticMessages extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'automatic:messages';
 
     /**
      * The console command description.

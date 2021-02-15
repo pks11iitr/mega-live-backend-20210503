@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\CallNotifications'
+        'App\Console\Commands\CallNotifications',
+        'App\Console\Commands\AutomaticMessages',
+        'App\Console\Commands\AutomaticLikes',
     ];
 
     /**
@@ -26,7 +28,14 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('call:notifications')
             ->withoutOverlapping()
-            ->cron('0,30 * * * *');
+            ->cron('* * * * *');
+        $schedule->command('automatic:messages')
+            ->withoutOverlapping()
+            ->cron('* * * * *');
+        $schedule->command('automatic:likes')
+            ->withoutOverlapping()
+            ->cron('* * * * *');
+
     }
 
     /**
