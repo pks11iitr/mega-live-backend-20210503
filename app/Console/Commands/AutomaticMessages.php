@@ -43,8 +43,8 @@ class AutomaticMessages extends Command
         $date=date('Y-m-d', strtotime('-1 minute'));
         $likes=LikeDislike::with(['sender', 'receiver'])
             ->where('status', '!=', 'completed')
-            ->where('receiver', function($receiver) use($date){
-                    $receiver->where('last_active', '>=', $date);
+            ->whereHas('receiver', function($receiver) use($date){
+                    $receiver->where('last_active', '>=', $date)->where('account_type','ADMIN');
                 })
             ->get();
 
