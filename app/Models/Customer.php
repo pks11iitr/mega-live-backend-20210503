@@ -190,4 +190,8 @@ class Customer extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\LikeDislike', 'sender_id');
     }
 
+    public function interests(){
+        return $this->belongsToMany('App\Models\Interest', 'user_interests', 'user_id','interest_id');
+    }
+
 }

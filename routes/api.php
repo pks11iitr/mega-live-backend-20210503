@@ -72,6 +72,9 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
     $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
     $api->post('verify-payment', 'MobileApps\PaymentController@verifyPayment');
 
+    $api->get('my-interests', 'MobileApps\ProfileController@getInterests');
+    $api->post('update-interests', 'MobileApps\ProfileController@updateInterests');
+
 
 
 

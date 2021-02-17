@@ -13,6 +13,7 @@ use App\Models\EthniCity;
 use App\Models\FamilyPlan;
 use App\Models\Height;
 use App\Models\Income;
+use App\Models\Interest;
 use App\Models\Kid;
 use App\Models\Languages;
 use App\Models\Membership;
@@ -360,6 +361,32 @@ class ProfileController extends Controller
         }
 
 
+    }
+
+    public function getInterests(Request $request){
+        $user=$request->user;
+        $interests=Interest::get();
+        $user_interests=$user->interests;
+
+        return [
+            'status'=>'success',
+            'data'=>compact('interests','user_interests')
+        ];
+
+    }
+
+    public function updateInterests(Request $request){
+
+        $user=$request->user;
+
+        $request->validate([
+            'interests'=>'array']);
+
+        $user->interests()->sync($request->interests);
+
+        return [
+            'status'=>'success'
+        ];
     }
 
 }
