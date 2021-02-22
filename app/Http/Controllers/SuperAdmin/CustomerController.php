@@ -29,10 +29,10 @@ class CustomerController extends Controller
         });
 
         if($request->fromdate)
-            $customers=$customers->where('created_at', '>=', $request->fromdate.'00:00:00');
+            $customers=$customers->where('created_at', '>=', $request->fromdate.' 00:00:00');
 
         if($request->todate)
-            $customers=$customers->where('created_at', '<=', $request->todate.'23:59:50');
+            $customers=$customers->where('created_at', '<=', $request->todate.' 23:59:50');
 
         if($request->status)
             $customers=$customers->where('status', $request->status);
@@ -102,7 +102,7 @@ class CustomerController extends Controller
            $customers->save();
            $customers->saveImage($request->image, 'customers');
 
-           if($request->acount_type=='ADMIN'){
+           if($request->account_type=='ADMIN'){
                $user=User::create([
                   'email'=>$request->email,
                    'name'=>$request->name,
@@ -162,7 +162,7 @@ class CustomerController extends Controller
             }
             $customers->save();
 
-            if($request->acount_type=='ADMIN'){
+            if($request->account_type=='ADMIN'){
 
                 $user=User::where('customer_id',$customers->id)->first();
 
