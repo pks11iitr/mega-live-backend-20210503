@@ -310,7 +310,7 @@ class ProfileController extends Controller
             'to_age'=>'required|integer',
             'from_distance'=>'required|integer',
             //'to_distance'=>'required|integer',
-            'pref_gender'=>'required|string',
+            //'pref_gender'=>'required|string',
         ]);
 
         $from_height=round($request->from_height/30, 1);
