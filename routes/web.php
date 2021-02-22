@@ -22,8 +22,8 @@ Route::get('/', function () {
 //})->middleware(['auth'])->name('dashboard');
 
 
-Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
-    Route::get('/redirect', 'SuperAdmin\HomeController@redirect')->name('redirection');
+Route::group(['middleware'=>['auth']], function() {
+    Route::get('/dashboard', 'SuperAdmin\DashboardController@index')->name('home');
 });
 
 
@@ -32,7 +32,7 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-    Route::get('/dashboard', 'SuperAdmin\DashboardController@index')->name('home');
+//    Route::get('/dashboard', 'SuperAdmin\DashboardController@index')->name('home');
 
     Route::group(['prefix' => 'banners'], function () {
         Route::get('/', 'SuperAdmin\BannerController@index')->name('banners.list');
