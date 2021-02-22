@@ -15,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->route('website.home');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
+
+
+Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
+    Route::get('/redirect', 'SuperAdmin\HomeController@redirect')->name('redirection');
+});
+
 
 
 Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
@@ -101,6 +107,12 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
     });
 
 });
+
+Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller'], function() {
+    Route::get('/dashboard', 'CallerAdmin\DashboardController@index')->name('caller.home');
+});
+
+
 
 Route::group(['prefix'=>'url'], function(){
     Route::get('privacy-policy','SuperAdmin\UrlController@privacy');
