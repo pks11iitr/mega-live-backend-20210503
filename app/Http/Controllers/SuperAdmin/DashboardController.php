@@ -32,7 +32,7 @@ class DashboardController extends Controller
         if($user->hasRole('admin')){
             return view('admin.home');
         }else if($user->hasRole('caller')){
-            return redirect('caller.home');
+            return view('caller-admin.home');
         }else{
             Auth::logout();
             return redirect('website.home');
