@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->route('website.home');
+})->name('website.home');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
@@ -109,7 +109,7 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 });
 
 Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller'], function() {
-    Route::get('/dashboard', 'CallerAdmin\DashboardController@index')->name('caller.home');
+//    Route::get('/dashboard', 'CallerAdmin\DashboardController@index')->name('caller.home');
 });
 
 
