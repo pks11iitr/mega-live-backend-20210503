@@ -14,6 +14,7 @@ class HomeController extends Controller
         if($user->hasRole('admin')){
             return redirect('home');
         }else if($user->hasRole('caller')){
+//            die('aaa');
             return redirect('caller.home');
         }else{
             Auth::logout();
