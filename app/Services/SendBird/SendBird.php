@@ -4,6 +4,7 @@ namespace App\Services\SendBird;
 
 use App\Models\Customer;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 
 class SendBird
@@ -48,7 +49,7 @@ class SendBird
                 ]
             ]);
             //echo 'step1';
-        }catch(TransferException $e){
+        }catch(RequestException $e){
             //echo 'step2';
             $response=$e->getResponse();
         }

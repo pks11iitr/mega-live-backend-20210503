@@ -116,7 +116,12 @@ class LoginController extends Controller
                'mobile'=>$request->mobile,
                'password'=>'none'
             ]);
+        }
 
+        if(!in_array($user->status, [0,1]))
+            return ['status'=>'failed', 'message'=>'This account has been blocked'];
+
+        if(!$user->sendbird_token){
             //register on sendbird app
             $sendbird=app('App\Services\SendBird\SendBird');
             $response=$sendbird->createUser($user);
@@ -124,12 +129,10 @@ class LoginController extends Controller
             if(isset($response['user_id'])){
                 $user->sendbird_token=$response['access_token']??null;
                 $user->save();
+            }else{
+                return ['status'=>'failed', 'message'=>'Something went wrong please. Please try again'];
             }
-
         }
-
-        if(!in_array($user->status, [0,1]))
-            return ['status'=>'failed', 'message'=>'This account has been blocked'];
 
         $otp=OTPModel::createOTP('customer', $user->id, 'login');
         $msg=str_replace('{{otp}}', $otp, config('sms-templates.login'));
