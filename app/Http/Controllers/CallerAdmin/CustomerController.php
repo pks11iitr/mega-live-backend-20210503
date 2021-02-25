@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\Customer;
 use App\Services\Notification\FCMNotification;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -30,46 +32,59 @@ class CustomerController extends Controller
             $customers=$customers->orderBy('created_at', $request->ordertype);
 
         $customers=$customers->where('account_type','USER')
-            ->orderBy('late_active','DESC')
+            ->orderBy('last_active','DESC')
             ->paginate(10);
 
         return view('caller-admin.customer.view',['customers'=>$customers]);
     }
 
     public function chat(Request $request,$id){
-        $chats =Chat::orderBy('id','ASC')->where('user_2','=',$id)->get();
-        return view('caller-admin.customer.chat',['chats'=>$chats]);
+        $chats =Chat::orderBy('id','ASC')->limit(20)->where('user_2','=',$id)->get();
+        return view('caller-admin.customer.chat',['chats'=>$chats,'id'=>$id]);
     }
 
-    public function sendChat(Request $request,$id){
+    public function sendChat(Request $request){
 
-        $request->validate([
-            'type'=>'required|in:text,image',
-            'message'=>'required_if:type,text',
-            'image'=>'required_if:type,image',
+       $request->validate([
+           // 'type'=>'required|in:text,image',
+          /*  'message'=>'required_if:type,text',*/
+            'image'=>'image',
         ]);
-
-        $user=$request->user;
+       // var_dump($request->compid);die;
+      //  var_dump($request->image); die('aaaa');
+       $id=$request->compid;
+        $user=Auth::user();
 
         $receiver=Customer::findOrFail($id);
+        $chats =Chat::orderBy('id','ASC')->limit(20)->where('user_2','=',$id)->get();
 
+        if(isset($request->image)){
+            $request->type='image';
+        }else{
+            $request->type='text';
+        }
         $chat=Chat::create([
-            'user_1'=>($user->id < $id)?$user->id:$id,
-            'user_2'=>($user->id < $id)?$id:$user->id,
-            'direction'=>($user->id < $id)?0:1,
-            'message'=>$request->message??'',
+            'user_1'=>$user->customer_id,
+            'user_2'=>$id,
+            'direction'=>0,
+            'message'=>$request->message,
             'type'=>$request->type
         ]);
 
-        switch($request->type){
-            case 'image':
-                $chat->saveImage($request->image, 'chats');
-                break;
+
+        if(isset($request->image)){
+            switch($request->type){
+                case 'image':
+                    $chat->saveImage($request->image, 'chats');
+                    break;
+            }
         }
 
-        $receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));
+
+      /*  $receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));*/
 
         if($chat){
+           // return view('caller-admin.customer.chat',['chats'=>$chats,'id'=>$id]);
             return response()->json(['chat' => $chat], 200);
         }else{
             return response()->json(['msg' => 'No result found!'], 404);
