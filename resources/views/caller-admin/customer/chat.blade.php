@@ -28,11 +28,14 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
+                                {{$chats->links()}}
                                 <div class="card direct-chat direct-chat-primary">
                                     <div class="card-header">
+                                        {{$chats->links()}}
                                         <h3 class="card-title">Direct Chat</h3>
 
                                         <div class="card-tools">
+
                                             <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                 <i class="fas fa-minus"></i>
@@ -47,6 +50,7 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+
                                         <!-- Conversations are loaded here -->
                                         <div class="direct-chat-messages">
                                             <!-- Message. Default to the left -->
@@ -100,6 +104,7 @@
                                         <!-- /.direct-chat-msg -->
 
                                         </div>
+                                    {{$chats->links()}}
                                         <!--/.direct-chat-messages-->
                                     </div>
                                     <!-- /.card-body -->
@@ -108,10 +113,27 @@
                                             @csrf
                                             <div class="input-group">
                                                 <input type="text" id="message" name="message" placeholder="Type message ..." class="form-control">
-                                                <input type="file" id="image" name="image"  id="exampleInputFile" class="form-control" accept="image/*" onchange="readURL(this);">
+
                                                 <span class="input-group-append">
 
                       <button type="submit" id="button" class="btn btn-primary" >Send</button>
+                    </span>
+
+                                            </div>
+                                            <input type="hidden" id="compid" name="compid" placeholder="Type Message ..." class="form-control" value="{{$id}}">
+                                        </form>
+                                    </div>
+
+                                    <!-- /.card-footer-->
+                                    <div class="card-footer">
+                                        <form  role="form"  enctype="multipart/form-data" method="post" action="" >
+                                            @csrf
+                                            <div class="input-group">
+
+                                                <input type="file" id="image" name="image"  id="exampleInputFile" class="form-control" accept="image/*" onchange="readURL(this);">
+                                                <span class="input-group-append">
+
+                      <button type="submit" id="buttonimage" class="btn btn-primary" >Send</button>
                     </span>
 
                                             </div>
@@ -119,10 +141,9 @@
 
 
                                             <img id="blah" src="#" height="100" width="100"><br>
-                                            <b>Image Size (500px * 500px)</b>
+
                                         </form>
                                     </div>
-                                    <!-- /.card-footer-->
                                 </div>
                                 <!--/.direct-chat -->
                             </div>
@@ -156,10 +177,9 @@
 
                 var url = '{{route('caller.send.chat')}}';
                 formdata = new FormData();
-                var files = $("#image")[0].files[0];
-                formdata.append('image',files);
                 formdata.append('message',des);
                 formdata.append('compid',compid);
+                formdata.append('type','text');
                 formdata.append('_token',"{{ csrf_token() }}");
 
                 $.ajax({
@@ -183,6 +203,41 @@
                     }
                 });
             });
+
+            $("#buttonimage").click(function(e){
+
+                e.preventDefault();
+
+                var compid = $("#compid").val();
+                var url = '{{route('caller.send.chat')}}';
+                formdata = new FormData();
+                var files = $("#image")[0].files[0];
+                formdata.append('image',files);
+                formdata.append('compid',compid);
+                formdata.append('type','image');
+                formdata.append('_token',"{{ csrf_token() }}");
+
+                $.ajax({
+                    url:url,
+                    method:'POST',
+                    data:formdata,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success:function(response){
+                        location.reload();
+                        if(response.success){
+
+                            //   alert(response.message) //Message come from controller
+                        }else{
+                            //   alert("Error")
+                        }
+                    },
+                    error:function(error){
+                        console.log(error)
+                    }
+                });
+            });
         </script>
         <script type="text/javascript">
             function readURL(input) {
@@ -197,7 +252,21 @@
                 }
             }
         </script>
+<script>
+    $(function() {
+        var $posts = $("#chats");
+        var $ul = $("ul.pagination");
+        $ul.hide(); // Prevent the default Laravel paginator from showing, but we need the links...
 
+        $(".see-more").click(function() {
+            $.get($ul.find("a[rel='next']").attr("href"), function(response) {
+                $posts.append(
+                    $(response).find("#chats").html()
+                );
+            });
+        });
+    });
+</script>
 
     {{-- </script>
      <script type="text/javascript">

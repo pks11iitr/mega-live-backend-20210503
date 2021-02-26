@@ -39,30 +39,26 @@ class CustomerController extends Controller
     }
 
     public function chat(Request $request,$id){
-        $chats =Chat::orderBy('id','ASC')->limit(20)->where('user_2','=',$id)->get();
+        $chats =Chat::orderBy('id','ASC')->where('user_2','=',$id)->paginate(5);
+
         return view('caller-admin.customer.chat',['chats'=>$chats,'id'=>$id]);
     }
 
     public function sendChat(Request $request){
 
        $request->validate([
-           // 'type'=>'required|in:text,image',
-          /*  'message'=>'required_if:type,text',*/
-            'image'=>'image',
+            'type'=>'required|in:text,image',
+           'message'=>'required_if:type,text',
+            'image'=>'required_if:type,image',
         ]);
        // var_dump($request->compid);die;
       //  var_dump($request->image); die('aaaa');
        $id=$request->compid;
         $user=Auth::user();
 
-        $receiver=Customer::findOrFail($id);
-        $chats =Chat::orderBy('id','ASC')->limit(20)->where('user_2','=',$id)->get();
+     //   $receiver=Customer::findOrFail($id);
+       // $chats =Chat::orderBy('id','ASC')->limit(20)->where('user_2','=',$id)->get();
 
-        if(isset($request->image)){
-            $request->type='image';
-        }else{
-            $request->type='text';
-        }
         $chat=Chat::create([
             'user_1'=>$user->customer_id,
             'user_2'=>$id,
