@@ -56,9 +56,12 @@ class AutomaticLikes extends Command
                 $likes=LikeDislike::where('receiver_id', $c->id)->where('created_at', '>', $date)->first();
                 //if no like received in last minute
                 if(!$likes){
-                    $ausers=Customer::where('account_type', 'ADMIN')->whereDoesntHas('likeddisliked', function($likes) use ($c){
+                    $ausers=Customer::where('account_type', 'ADMIN')
+                        ->whereDoesntHave('likeddisliked', function($likes) use ($c){
                         $likes->where('receiver_id', $c->id);
-                    })->inRandomOrder()->paginate(2);
+                    })
+                        ->inRandomOrder()
+                        ->paginate(2);
 
                     foreach($ausers as $a){
                         LikeDislike::updateOrCreate([

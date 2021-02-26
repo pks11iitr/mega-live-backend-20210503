@@ -27,7 +27,7 @@ class SendBird
 //        }else if($user instanceof Customer){
             $user_id='Matchon'.$user->id;
             $img_url=$user->image;
-            $nick_name=$user->name;
+            $nick_name=$user->name??'Matchon'.$user->id;
 //        }else{
 //            //die('sds');
 //            return;
@@ -46,6 +46,52 @@ class SendBird
                     'profile_url' => $img_url,
                     'nickname' => $nick_name,
                     'issue_access_token' => true,
+                ]
+            ]);
+            //echo 'step1';
+        }catch(RequestException $e){
+            //echo 'step2';
+            $response=$e->getResponse();
+        }
+
+        $response=$response->getBody()->getContents();
+        //echo $response; die;
+        $response=json_decode($response, true);
+
+        return $response;
+    }
+
+
+    public function updateUser($user){
+
+        //die('hello');
+
+//        if($user instanceof Shoppr){
+//            $user_id='Shoppr-'.$user->id;
+//            $img_url=$user->image;
+//            $nick_name=$user->name;
+//        }else if($user instanceof Customer){
+//        $user_id='Matchon'.$user->id;
+        $img_url=$user->image;
+        $nick_name=$user->name??'Matchon'.$user->id;
+//        }else{
+//            //die('sds');
+//            return;
+//        }
+
+
+//        Content-Type: application/json; charset=utf8
+//Api-Token: {master_api_token or secondary_api_token}
+
+        try{
+            $response=$this->client->request('PUT', $this->base_url.'/users/'.'Matchon'.$user->id, [
+                'headers'        => ['Content-Type' => 'application/json; charset=utf8', 'Api-Token'=>env('SENDBIRD_API_TOKEN')],
+                //'decode_content' => false,
+                'json' => [
+                    //'user_id' => $user_id,
+                    'profile_url' => $img_url,
+                    'nickname' => $nick_name,
+                    //'issue_access_token' => true,
                 ]
             ]);
             //echo 'step1';

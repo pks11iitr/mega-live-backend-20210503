@@ -7,6 +7,7 @@ use App\Models\Traits\DocumentUploadTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Kodeine\Acl\Traits\HasRole;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use DateTime;
 class Customer extends Authenticatable implements JWTSubject

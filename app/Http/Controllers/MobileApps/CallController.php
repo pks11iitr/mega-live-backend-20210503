@@ -15,11 +15,13 @@ class CallController extends Controller
         $receiver=Customer::where('account_type', 'ADMIN')
             ->findOrFail($profile_id);
 
-        if(CoinWallet::balance($user->id) < 50)
-            return [
-                'status'=>'failed',
-                'message'=>'recharge'
-            ];
+        //check balance for non admin users
+        if($user->account_type!='ADMIN')
+            if(CoinWallet::balance($user->id) < 50)
+                return [
+                    'status'=>'failed',
+                    'message'=>'recharge'
+                ];
 
         $user_id='Matchon'.$receiver->id;
 
