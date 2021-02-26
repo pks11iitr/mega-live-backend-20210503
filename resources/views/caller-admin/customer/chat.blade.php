@@ -28,10 +28,10 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
-                                {{$chats->links()}}
+
                                 <div class="card direct-chat direct-chat-primary">
                                     <div class="card-header">
-                                        {{$chats->links()}}
+
                                         <h3 class="card-title">Direct Chat</h3>
 
                                         <div class="card-tools">
@@ -104,7 +104,7 @@
                                         <!-- /.direct-chat-msg -->
 
                                         </div>
-                                    {{$chats->links()}}
+
                                         <!--/.direct-chat-messages-->
                                     </div>
                                     <!-- /.card-body -->
