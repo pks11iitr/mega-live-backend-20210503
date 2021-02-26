@@ -12,7 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use DateTime;
 class Customer extends Authenticatable implements JWTSubject
 {
-    use DocumentUploadTrait, Notifiable, Active, HasRole;
+    use DocumentUploadTrait, Notifiable, Active;
 
     protected $table='customers';
 

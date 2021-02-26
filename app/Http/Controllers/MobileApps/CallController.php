@@ -16,7 +16,7 @@ class CallController extends Controller
             ->findOrFail($profile_id);
 
         //check balance for non admin users
-        if(!$user->hasRole('ADMIN'))
+        if(!$user->account_type!='ADMIN')
             if(CoinWallet::balance($user->id) < 50)
                 return [
                     'status'=>'failed',
