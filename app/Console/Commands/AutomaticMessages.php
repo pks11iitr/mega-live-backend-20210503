@@ -55,22 +55,24 @@ class AutomaticMessages extends Command
             if(isset($messages[$l->status])){
                 $i=intval($l->status);
                 //while(isset($messages[$i])){
-                    Chat::create([
-                        'user_1'=>($l->sender->id < $l->receiver->id)?$l->sender->id:$l->receiver->id,
-                        'user_2'=>($l->sender->id < $l->receiver->id)?$l->receiver->id:$l->sender->id,
-                        'direction'=>($l->sender->id < $l->receiver->id)?0:1,
-                        'message'=>$messages[$i],
-                        'type'=>'text'
-                    ]);
-                    $i++;
+                Chat::create([
+                    'user_1'=>($l->sender->id < $l->receiver->id)?$l->sender->id:$l->receiver->id,
+                    'user_2'=>($l->sender->id < $l->receiver->id)?$l->receiver->id:$l->sender->id,
+                    'direction'=>($l->sender->id < $l->receiver->id)?0:1,
+                    'message'=>$messages[$i],
+                    'type'=>'text'
+                ]);
+                $i++;
                 //}
                 $l->status=$i;
                 $l->save();
                 $l->receiver->notify(new FCMNotification($l->sender->name.' send you a message', $messages[$i-1], ['type'=>'automatic-like', 'name'=>$l->sender->name, 'image'=>$l->sender->image]));
 
+            }else{
+                $l->status='completed';
+                $l->save();
             }
-            $l->status='completed';
-            $l->save();
+
         }
 
 
