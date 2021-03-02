@@ -113,7 +113,7 @@ class ChatCotroller extends Controller
                             ->where('user_2', $user->id);
                     });
             })->update(['seen_at'=>date('Y-m-d H:i:s')]);
-        DB::enableQueryLog();
+        //DB::enableQueryLog();
         $chatsobj=Chat::with(['user1', 'user2'])
             ->where(function($query) use($user, $user_id){
                 $query->where(function($query) use($user, $user_id){
@@ -125,9 +125,9 @@ class ChatCotroller extends Controller
                             ->where('user_2', $user->id);
                 });
             })
-            ->orderBy('id','asc')
+            ->orderBy('id','desc')
             ->paginate(20);
-        dd(DB::getQueryLog());
+        //print_r(DB::getQueryLog());
         $next_page_url=$chatsobj->nextPageUrl();
         $prev_page_url=$chatsobj->previousPageUrl();
 
@@ -155,7 +155,7 @@ class ChatCotroller extends Controller
                 ];
             }
         }
-
+        $chats=array_reverse($chats);
         return [
             'status'=>'success',
             'message'=>'',
