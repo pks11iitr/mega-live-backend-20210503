@@ -53,7 +53,7 @@ class CallNotifications extends Command
 
         foreach($users as $u){
             if(CoinWallet::balance($u->id)<50)
-                $u->notify(new FCMNotification('Video Call', 'Call From '.$auser->name, ['type'=>'auto-call', 'name'=>$auser->name, 'image'=>$auser->image], 'calling_screen'));
+                $u->notify(new FCMNotification('Video Call', 'Call From '.$auser->name, ['type'=>'auto-call', 'name'=>$auser->name, 'image'=>$auser->image, 'user_id'=>$auser->id], 'calling_screen'));
         }
 
     }
