@@ -92,6 +92,8 @@ class MatchesController extends Controller
 
         $like_status=isset($like)?$like->type:2;
 
+        $likes_count=LikeDislike::where('receiver_id', $id)->count();
+
         $gifts=CoinWallet::with('gift')
                 ->where('receiver_id', $user->id)
                 ->where('gift_id', '!=', null)
@@ -101,7 +103,7 @@ class MatchesController extends Controller
 
         return [
             'status'=>'success',
-            'data'=>compact('details', 'like_status', 'gifts')
+            'data'=>compact('details', 'like_status', 'gifts', 'likes_count')
         ];
     }
 }
