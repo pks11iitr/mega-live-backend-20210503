@@ -126,7 +126,7 @@ class ChatCotroller extends Controller
                 });
             })
             ->orderBy('id','desc')
-            ->paginate(20);
+            ->paginate(100);
         //print_r(DB::getQueryLog());
         $next_page_url=$chatsobj->nextPageUrl();
         $prev_page_url=$chatsobj->previousPageUrl();

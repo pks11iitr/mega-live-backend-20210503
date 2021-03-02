@@ -93,7 +93,7 @@ class ChatController extends Controller
                     });
             })
             ->orderBy('id','asc')
-            ->paginate(20);
+            ->paginate(100);
 
         $next_page_url=$chatsobj->nextPageUrl();
         $prev_page_url=$chatsobj->previousPageUrl();
@@ -120,7 +120,7 @@ class ChatController extends Controller
                 ];
             }
         }
-
+        $chats=array_reverse($chats);
         return [
             'status'=>'success',
             'message'=>'',
