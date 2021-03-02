@@ -66,7 +66,7 @@ class AutomaticMessages extends Command
                 //}
                 $l->status=$i;
                 $l->save();
-                $l->receiver->notify(new FCMNotification($l->sender->name.' send you a message', $messages[$i-1], ['type'=>'chat', 'name'=>$l->sender->name, 'image'=>$l->sender->image, 'chat_id'=>$l->sender->id], 'chat_screen'));
+                $l->receiver->notify(new FCMNotification($l->sender->name.' send you a message', $messages[$i-1], ['type'=>'chat', 'name'=>$l->sender->name, 'image'=>$l->sender->image, 'chat_id'=>$l->sender->id.''], 'chat_screen'));
 
             }else{
                 $l->status='completed';

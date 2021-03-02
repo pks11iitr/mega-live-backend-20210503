@@ -69,7 +69,7 @@ class AutomaticLikes extends Command
                             'receiver_id'=>$c->id,
                         ], ['type'=>1]);
 
-                        $c->notify(new FCMNotification($a->name.' likes your profile', $a->name.' likes your profile', ['type'=>'automatic-like', 'name'=>$a->name, 'image'=>$a->image], 'likes_screen'));
+                        $c->notify(new FCMNotification($a->name.' likes your profile', $a->name.' likes your profile', ['type'=>'automatic-like', 'name'=>$a->name, 'image'=>$a->image, 'user_id'=>$a->id.''], 'likes_screen'));
                     }
 
 

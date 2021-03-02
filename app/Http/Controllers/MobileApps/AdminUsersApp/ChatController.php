@@ -157,7 +157,7 @@ class ChatController extends Controller
                 break;
         }
 
-        $receiver->notify(new FCMNotification('New Message from '.$user->name, $request->message??"[$request->type]", ['type'=>'chat','chat_id'=>$user->id], 'chat_screen'));
+        $receiver->notify(new FCMNotification('New Message from '.$user->name, $request->message??"[$request->type]", ['type'=>'chat','chat_id'=>$user->id.''], 'chat_screen'));
         return [
             'status'=>'success',
             'message'=>'',
