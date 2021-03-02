@@ -126,7 +126,7 @@ class ChatController extends Controller
             }
         }
 
-        $receiver->notify(new FCMNotification('New Message', 'New Message From '.$user->customer->name??'', ['type'=>'Chat']));
+        $receiver->notify(new FCMNotification('New Message from '.$user->name, $request->message??"[$request->type]", ['type'=>'chat','chat_id'=>$user->customer->id], 'chat_screen'));
 
         if ($chat) {
             // return view('caller-admin.customer.chat',['chats'=>$chats,'id'=>$id]);

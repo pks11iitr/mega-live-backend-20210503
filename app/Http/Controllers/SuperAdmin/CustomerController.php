@@ -22,6 +22,7 @@ class CustomerController extends Controller
 {
     public function index(Request $request){
 
+        //var_dump($request->all());die;
         $customers=Customer::where(function($customers) use($request){
             $customers->where('name','LIKE','%'.$request->search.'%')
                 ->orWhere('mobile','LIKE','%'.$request->search.'%')
@@ -40,7 +41,7 @@ class CustomerController extends Controller
         if($request->ordertype)
             $customers=$customers->orderBy('created_at', $request->ordertype);
 
-        $customers=$customers->paginate(10);
+        $customers=Customer::paginate(10);
         return view('admin.customer.view',['customers'=>$customers]);
     }
 
