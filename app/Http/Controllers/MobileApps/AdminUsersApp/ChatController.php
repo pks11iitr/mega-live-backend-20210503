@@ -92,7 +92,7 @@ class ChatController extends Controller
                             ->where('user_2', $user->id);
                     });
             })
-            ->orderBy('id','asc')
+            ->orderBy('id','desc')
             ->paginate(100);
 
         $next_page_url=$chatsobj->nextPageUrl();
