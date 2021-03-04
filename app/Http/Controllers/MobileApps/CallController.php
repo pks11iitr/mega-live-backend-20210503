@@ -12,8 +12,11 @@ class CallController extends Controller
 {
     public function initiateVideoCall(Request $request, $profile_id){
         $user=$request->user;
-        $receiver=Customer::where('account_type', 'ADMIN')
-            ->findOrFail($profile_id);
+        if($user->account_type=='USER')
+            $receiver=Customer::where('account_type', 'ADMIN')
+                ->findOrFail($profile_id);
+        else
+            $receiver=Customer::findOrFail($profile_id);
 
         //check balance for non admin users
         if($user->account_type!='ADMIN')
