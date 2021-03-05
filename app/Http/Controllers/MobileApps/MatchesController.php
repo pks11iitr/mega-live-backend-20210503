@@ -43,7 +43,7 @@ class MatchesController extends Controller
 //        }
 
         //$profiles=$profiles->inRandomOrder();
-        $profiles=$profiles->paginate(50);
+        $profiles=$profiles->paginate(5);
 
         $like=LikeDislike::where('sender_id', $user->id)->select('receiver_id', 'type')->get();
         $likes=[];
