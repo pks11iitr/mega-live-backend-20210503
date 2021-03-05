@@ -45,6 +45,9 @@ class MatchesController extends Controller
         //$profiles=$profiles->inRandomOrder();
         $profiles=$profiles->paginate(5);
 
+        $next_page_url=$profiles->nextPageUrl();
+        $prev_page_url=$profiles->previousPageUrl();
+
         $like=LikeDislike::where('sender_id', $user->id)->select('receiver_id', 'type')->get();
         $likes=[];
         foreach ($like as $l){
@@ -70,7 +73,7 @@ class MatchesController extends Controller
 
             'status'=>'success',
             'message'=>'',
-            'apidata'=>compact('profiles')
+            'apidata'=>compact('profiles', 'next_page_url', 'prev_page_url')
 
 
         ];
