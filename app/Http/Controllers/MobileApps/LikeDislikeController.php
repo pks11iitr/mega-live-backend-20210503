@@ -86,7 +86,7 @@ class LikeDislikeController extends Controller
             'status'=>'success',
             'message'=>'Profile Liked',
             'data'=>[
-                'screen'=>(CoinWallet::balance($user->id)>0)?2:2,
+                'screen'=>(CoinWallet::balance($user->id)>0)?2:1,
                 'sender'=>[
                     'name'=>$user->name,
                     'image'=>$user->image,
