@@ -273,7 +273,7 @@
                       <div class="col-md-12">
                           <div class="form-group">
                               <label>Automatic Messages</label> {{$customers->membership_expiry}}
-                              <textarea type="text" name="system_messages" class="form-control" id="exampleInputEmail1" placeholder="Enter address" value="{{$customers->system_messages}}">
+                              <textarea type="text" name="system_messages" class="form-control" placeholder="Enter System Messages" value="">{{$customers->system_messages}}</textarea>
                           </div>
                       </div>
                   </div>
