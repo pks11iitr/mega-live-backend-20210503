@@ -270,6 +270,17 @@
                               <label>Membership Expiry:-</label> {{$customers->membership_expiry}}
                           </div>
                       </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Interests</label>
+                              <select class="form-control select2" name="interests[]" multiple id="interests">
+{{--                                  <option  value="">Add Interests</option>--}}
+                                  @foreach($interests as $intersst)
+                                  <option value="{{$intersst->id}}" @foreach($customers->interests as $int) @if($int->id==$intersst->id){{'selected'}}@endif @endforeach>{{$intersst->name??''}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+                      </div>
                       <div class="col-md-12">
                           <div class="form-group">
                               <label>Automatic Messages</label> {{$customers->membership_expiry}}
@@ -372,4 +383,11 @@
 </div>
 <!-- ./wrapper -->
 @endsection
-
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            //$('.select2').select2();
+            $('#interests').select2();
+        });
+    </script>
+@endsection
