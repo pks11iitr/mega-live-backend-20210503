@@ -98,7 +98,7 @@ class MatchesController extends Controller
         $likes_count=LikeDislike::where('receiver_id', $id)->count();
 
         $gifts=CoinWallet::with('gift')
-                ->where('receiver_id', $user->id)
+                ->where('receiver_id', $details->id)
                 ->where('gift_id', '!=', null)
                 ->groupBy('gift_id')
                 ->select(DB::raw('count(*) as count'), 'gift_id')
