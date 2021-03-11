@@ -151,7 +151,7 @@ class CustomerController extends Controller
         $customers = Customer::findOrFail($id);
         $country = Country::find($request->country);
 
-        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show','rate','account_type','address'))){
+        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show','rate','account_type','address', 'system_messages'))){
 
              $customers->country=$country->id??'';
              $customers->country_flag=$country->getRawOriginal('image')??'';

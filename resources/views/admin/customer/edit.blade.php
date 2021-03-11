@@ -270,6 +270,12 @@
                               <label>Membership Expiry:-</label> {{$customers->membership_expiry}}
                           </div>
                       </div>
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <label>Automatic Messages</label> {{$customers->membership_expiry}}
+                              <textarea type="text" name="system_messages" class="form-control" id="exampleInputEmail1" placeholder="Enter address" value="{{$customers->system_messages}}">
+                          </div>
+                      </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
