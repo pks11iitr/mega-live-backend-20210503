@@ -1,6 +1,8 @@
 @extends('layouts.caller-admin')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -85,7 +87,6 @@
                                         {{--                                            @endif--}}
                                                                                 @endforeach
                                         <!-- /.direct-chat-msg -->
-
                                         </div>
                                         <!--/.direct-chat-messages-->
                                     </div>
@@ -98,7 +99,7 @@
                       <button type="submit" class="btn btn-primary" >Send</button>
                     </span>
                                             </div>
-                                            <input type="hidden" id="compid" name="compid" placeholder="Type Message ..." class="form-control" value="">
+                                            <input type="hidden" id="user1" name="user1" placeholder="Type Message ..." class="form-control" value="">
                                         </form>
                                     </div>
                                     <!-- /.card-footer-->
@@ -114,23 +115,23 @@
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-{{--            <script>--}}
-{{--                // Here the value is stored in new variable x--}}
+            <script>
+                // Here the value is stored in new variable x
 
-{{--                function verifySubmit(){--}}
+                function verifySubmit(){
 
-{{--                    var compid = $("#compid").val();--}}
+                    var user1 = $("#user1").val();
 
-{{--                    var des = $("#message").val();--}}
+                    var des = $("#message").val();
 
-{{--                    $.post('{{route('complain.message')}}', {compid:compid, _token:'{{csrf_token()}}', des:des}, function(data){--}}
-{{--                        alert('Message has been sent successfully')--}}
-{{--                    })--}}
+                    $.post('{{route('caller.send.chat')}}', {user1:user1, _token:'{{csrf_token()}}', des:des}, function(data){
+                        alert('Message has been sent successfully')
+                    })
 
-{{--                    window.location.reload();--}}
-{{--                    // console.log(data);--}}
-{{--                }--}}
-{{--            </script>--}}
+                    window.location.reload();
+                    // console.log(data);
+                }
+            </script>
 
     <!-- /.control-sidebar -->
     </div>

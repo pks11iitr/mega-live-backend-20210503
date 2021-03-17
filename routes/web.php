@@ -115,7 +115,7 @@ Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller']
     Route::group(['prefix'=>'customer'], function(){
         Route::get('/','CallerAdmin\CustomerController@index')->name('caller.customer.list');
         Route::get('chat/{id}','CallerAdmin\CustomerController@chat')->name('caller.customer.chat');
-        Route::post('send-chat/{id}','CallerAdmin\CustomerController@sendChat')->name('caller.send.chat');
+        Route::post('send-chat','CallerAdmin\CustomerController@sendChat')->name('caller.send.chat');
 
     });
 

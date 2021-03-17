@@ -41,7 +41,7 @@ class CustomerController extends Controller
         return view('caller-admin.customer.chat',['chats'=>$chats]);
     }
 
-    public function sendChat(Request $request,$id){
+    public function sendChat(Request $request){
 
         $request->validate([
             'type'=>'required|in:text,image',
@@ -51,12 +51,12 @@ class CustomerController extends Controller
 
         $user=$request->user;
 
-        $receiver=Customer::findOrFail($id);
+        $receiver=Customer::findOrFail($request->id);
 
         $chat=Chat::create([
-            'user_1'=>($user->id < $id)?$user->id:$id,
-            'user_2'=>($user->id < $id)?$id:$user->id,
-            'direction'=>($user->id < $id)?0:1,
+            'user_1'=>($user->id < $request->id)?$user->id:$request->id,
+            'user_2'=>($user->id < $request->id)?$request->id:$user->id,
+            'direction'=>($user->id < $request->id)?0:1,
             'message'=>$request->message??'',
             'type'=>$request->type
         ]);
