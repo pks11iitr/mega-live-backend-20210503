@@ -66,6 +66,8 @@ class ChatController extends Controller
             }
         }
 
+
+
         return [
             'status'=>'success',
             'message'=>'',
@@ -90,8 +92,8 @@ class ChatController extends Controller
                             ->where('user_2', $user->id);
                     });
             })
-            ->orderBy('id','asc')
-            ->paginate(20);
+            ->orderBy('id','desc')
+            ->paginate(100);
 
         $next_page_url=$chatsobj->nextPageUrl();
         $prev_page_url=$chatsobj->previousPageUrl();
@@ -118,7 +120,7 @@ class ChatController extends Controller
                 ];
             }
         }
-
+        $chats=array_reverse($chats);
         return [
             'status'=>'success',
             'message'=>'',
@@ -155,8 +157,7 @@ class ChatController extends Controller
                 break;
         }
 
-        $receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));
-
+        $receiver->notify(new FCMNotification('New Message from '.$user->name, $request->message??"[$request->type]", ['type'=>'chat','chat_id'=>$user->id.''], 'chat_screen'));
         return [
             'status'=>'success',
             'message'=>'',

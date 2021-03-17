@@ -56,9 +56,12 @@ class AutomaticLikes extends Command
                 $likes=LikeDislike::where('receiver_id', $c->id)->where('created_at', '>', $date)->first();
                 //if no like received in last minute
                 if(!$likes){
-                    $ausers=Customer::where('account_type', 'ADMIN')->whereDoesntHas('likeddisliked', function($likes) use ($c){
+                    $ausers=Customer::where('account_type', 'ADMIN')
+                        ->whereDoesntHave('likeddisliked', function($likes) use ($c){
                         $likes->where('receiver_id', $c->id);
-                    })->inRandomOrder()->paginate(2);
+                    })
+                        ->inRandomOrder()
+                        ->paginate(2);
 
                     foreach($ausers as $a){
                         LikeDislike::updateOrCreate([
@@ -66,7 +69,7 @@ class AutomaticLikes extends Command
                             'receiver_id'=>$c->id,
                         ], ['type'=>1]);
 
-                        $c->notify(new FCMNotification($a->name.' likes your profile', $a->name.' likes your profile', ['type'=>'automatic-like', 'name'=>$a->name, 'image'=>$a->image]));
+                        $c->notify(new FCMNotification($a->name.' likes your profile', $a->name.' likes your profile', ['type'=>'automatic-like', 'name'=>$a->name, 'image'=>$a->image, 'user_id'=>$a->id.''], 'likes_screen'));
                     }
 
 

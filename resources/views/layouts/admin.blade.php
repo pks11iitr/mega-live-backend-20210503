@@ -163,6 +163,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('interest.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Interests
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{route('payment.list')}}" class="nav-link">

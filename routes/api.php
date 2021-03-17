@@ -83,6 +83,7 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
         $api->get('chats', 'MobileApps\AdminUsersApp\ChatController@chatlist');
         $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');
         $api->post('send-message/{user_id}', 'MobileApps\AdminUsersApp\ChatController@send');
+        $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
     });
 
 

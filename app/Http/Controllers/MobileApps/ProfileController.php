@@ -94,6 +94,9 @@ class ProfileController extends Controller
 
         $user->update($request->only('name','gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'interests'));
 
+        $sendbird=app('App\Services\SendBird\SendBird');
+        $sendbird->updateUser($user);
+
         return [
             'status'=>'success',
             'message'=>'Profile has been updated',
@@ -186,6 +189,10 @@ class ProfileController extends Controller
 
         $user->image=$document->getRawOriginal('file_path');
         $user->save();
+
+        $sendbird=app('App\Services\SendBird\SendBird');
+        $sendbird->updateUser($user);
+
         return [
             'status'=>'success',
             'message'=>'success',
@@ -194,90 +201,6 @@ class ProfileController extends Controller
             ]
         ];
     }
-
-
-//    public function updateBasicInfo(Request $request){
-//
-//        $request->validate([
-//            'gender'=>'required|in:Male,Female',
-//            'height_id'=>'required|integer',
-//            'country_id'=>'required|integer',
-//            'state_id'=>'required|integer',
-//            'city_id'=>'required|integer',
-//            'pincode'=>'required|integer',
-//            'day'=>'required',
-//            'month'=>'required',
-//            'year'=>'required',
-//        ]);
-//
-//        $date=$request->year.'-'.$request->month.'-'.$request->day;
-//        $result=$request->user->update(array_merge($request->only('gender', 'height_id', 'country_id', 'state_id', 'city_id', 'pincode'), ['dob'=>$date]));
-//        if($result){
-//            return [
-//                'status'=>'success',
-//                'message'=>'Profile Has Been Updated',
-//                'data'=>[]
-//                ];
-//        }else{
-//            return [
-//                'status'=>'failed',
-//                'message'=>'Something Went Wrong. Please Try Again',
-//                'data'=>[]
-//            ];
-//        }
-//
-//    }
-//
-//    public function updateWorkInfo(Request $request){
-//
-//        $request->validate([
-//            'education_id'=>'required|integer',
-//            'occupation_id'=>'required|integer',
-//            'employement_id'=>'required|integer',
-//            'salary_id'=>'required|integer',
-//        ]);
-//
-//            $result=$request->user->update($request->only('education_id', 'occupation_id', 'employement_id', 'salary_id'));
-//        if($result){
-//            return [
-//                'status'=>'success',
-//                'message'=>'Profile Has Been Updated',
-//                'data'=>[]
-//            ];
-//        }else{
-//            return [
-//                'status'=>'failed',
-//                'message'=>'Something Went Wrong. Please Try Again',
-//                'data'=>[]
-//            ];
-//        }
-//
-//    }
-//
-//    public function updatePersonalInfo(Request $request){
-//
-//        $request->validate([
-//            'language_id'=>'required|integer',
-//            'religion_id'=>'required|integer',
-//            'marital_status_id'=>'required|integer',
-//        ]);
-//
-//        $result=$request->user->update($request->only('language_id', 'religion_id', 'marital_status_id'));
-//        if($result){
-//            return [
-//                'status'=>'success',
-//                'message'=>'Profile Has Been Updated',
-//                'data'=>[]
-//            ];
-//        }else{
-//            return [
-//                'status'=>'failed',
-//                'message'=>'Something Went Wrong. Please Try Again',
-//                'data'=>[]
-//            ];
-//        }
-//    }
-
 
     public function updateAboutMe(Request $request){
 
@@ -339,8 +262,10 @@ class ProfileController extends Controller
         $myuserpref=array(
             'id'=>$user->id,
             //'height_feet'=>$user->from_height,
-            'from_height'=>round($user->from_height*30),
-            'to_height'=>round($user->to_height*20),
+//            'from_height'=>round($user->from_height*30),
+//            'to_height'=>round($user->to_height*20),
+            'from_height'=>$user->from_height,
+            'to_height'=>$user->to_height,
             'from_age'=>$user->from_age,
             'to_age'=>$user->to_age,
             'from_distance'=>$user->from_distance,

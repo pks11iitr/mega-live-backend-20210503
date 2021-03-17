@@ -83,6 +83,15 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 
     });
 
+    Route::group(['prefix'=>'interests'], function(){
+        Route::get('/','SuperAdmin\InterestController@index')->name('interest.list');
+        Route::get('create','SuperAdmin\InterestController@create')->name('interest.create');
+        Route::post('store','SuperAdmin\InterestController@store')->name('interest.store');
+        Route::get('edit/{id}','SuperAdmin\InterestController@edit')->name('interest.edit');
+        Route::post('update/{id}','SuperAdmin\InterestController@update')->name('interest.update');
+
+    });
+
     Route::group(['prefix'=>'news'], function(){
         Route::get('/','SuperAdmin\NewsUpdateController@index')->name('news.list');
         Route::get('create','SuperAdmin\NewsUpdateController@create')->name('news.create');
@@ -114,8 +123,10 @@ Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller']
 
     Route::group(['prefix'=>'customer'], function(){
         Route::get('/','CallerAdmin\CustomerController@index')->name('caller.customer.list');
-        Route::get('chat/{id}','CallerAdmin\CustomerController@chat')->name('caller.customer.chat');
-        Route::post('send-chat','CallerAdmin\CustomerController@sendChat')->name('caller.send.chat');
+        Route::get('chat/{id}','CallerAdmin\ChatController@chat')->name('caller.customer.chat');
+        Route::get('recent-chat/{id}','CallerAdmin\ChatController@newchats')->name('caller.customer.recent-chat');
+        Route::post('send-chat/{id}','CallerAdmin\ChatController@sendChat')->name('caller.send.chat');
+//        Route::post('send-chat','CallerAdmin\ChatController@sendChat')->name('caller.send.chat');
 
     });
 

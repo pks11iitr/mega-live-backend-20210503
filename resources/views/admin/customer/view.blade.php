@@ -71,11 +71,13 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>Type</th>
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>DOB</th>
                     <th>Image</th>
+                    <th>Coin Balance</th>
                     <th>Isactive</th>
                    <th>Action</th>
                   </tr>
@@ -83,11 +85,13 @@
                   <tbody>
 				@foreach($customers as $customer)
                   <tr>
+					  <td>{{$customer->account_type}}</td>
 					  <td>{{$customer->name}}</td>
 					  <td>{{$customer->mobile}}</td>
 					  <td>{{$customer->email}}</td>
 					  <td>{{$customer->dob}}</td>
                       <td><img src="{{$customer->image}}" height="80px" width="80px"/></td>
+                      <td>{{\App\Models\CoinWallet::balance($customer->id)}}</td>
                       <td>
                         @if($customer->status==1){{'Active'}}
                              @elseif($customer->status==2){{'Blocked'}}@else{{'Inactive'}}
@@ -105,11 +109,13 @@
                   </tbody>
                   <tfoot>
                   <tr>
+                    <th>Type</th>
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>DOB</th>
                     <th>Image</th>
+                    <th>Coin Balance</th>
                     <th>Isactive</th>
                    <th>Action</th>
                   </tr>

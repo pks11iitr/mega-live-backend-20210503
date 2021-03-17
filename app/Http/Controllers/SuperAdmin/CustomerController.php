@@ -11,17 +11,20 @@ use App\Models\Education;
 use App\Models\Employment;
 use App\Models\EthniCity;
 use App\Models\Height;
+use App\Models\Interest;
 use App\Models\Ocupation;
 use App\Models\Religion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\In;
 
 class CustomerController extends Controller
 {
     public function index(Request $request){
 
+        //var_dump($request->all());die;
         $customers=Customer::where(function($customers) use($request){
             $customers->where('name','LIKE','%'.$request->search.'%')
                 ->orWhere('mobile','LIKE','%'.$request->search.'%')
@@ -40,7 +43,7 @@ class CustomerController extends Controller
         if($request->ordertype)
             $customers=$customers->orderBy('created_at', $request->ordertype);
 
-        $customers=$customers->paginate(10);
+        $customers=Customer::paginate(10);
         return view('admin.customer.view',['customers'=>$customers]);
     }
 
@@ -119,7 +122,7 @@ class CustomerController extends Controller
    }
 
     public function edit(Request $request,$id){
-        $customers = Customer::findOrFail($id);
+        $customers = Customer::with('interests')->findOrFail($id);
         $height=Height::select('name', 'id')->get();
         $ethnicity=EthniCity::select('name', 'id')->get();
         $occupation=Ocupation::select('name', 'id')->get();
@@ -127,8 +130,9 @@ class CustomerController extends Controller
         $education=Education::select('name', 'id')->get();
         $religion=Religion::select('name', 'id')->get();
         $countries= Country::select('name','id')->get();
+        $interests=Interest::active()->get();
 
-        return view('admin.customer.edit',['customers'=>$customers,'height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion,'countries'=>$countries]);
+        return view('admin.customer.edit',['customers'=>$customers,'height'=>$height,'ethnicity'=>$ethnicity,'occupation'=>$occupation,'employment'=>$employment,'education'=>$education,'religion'=>$religion,'countries'=>$countries, 'interests'=>$interests]);
     }
 
     public function update(Request $request,$id){
@@ -136,8 +140,8 @@ class CustomerController extends Controller
             'name' => 'required',
             'gender' => 'required',
             'dob' => 'required',
-            'mobile' => 'required|unique:customers',
-            'email' => 'required|unique:customers',
+            'mobile' => "required|unique:customers,mobile,$id",
+            'email' => "required|unique:customers,email,$id",
             'about_me' => 'required',
             'height_id' => 'required',
             'ethicity_id' => 'required',
@@ -150,7 +154,9 @@ class CustomerController extends Controller
         $customers = Customer::findOrFail($id);
         $country = Country::find($request->country);
 
-        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show','rate','account_type','address'))){
+        if ($customers->update($request->only('name', 'gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'age_show', 'distance_show','rate','account_type','address', 'system_messages'))){
+
+            $customers->interests()->sync($request->interests);
 
              $customers->country=$country->id??'';
              $customers->country_flag=$country->getRawOriginal('image')??'';

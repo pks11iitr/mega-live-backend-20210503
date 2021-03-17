@@ -113,7 +113,7 @@ class ChatCotroller extends Controller
                             ->where('user_2', $user->id);
                     });
             })->update(['seen_at'=>date('Y-m-d H:i:s')]);
-
+        //DB::enableQueryLog();
         $chatsobj=Chat::with(['user1', 'user2'])
             ->where(function($query) use($user, $user_id){
                 $query->where(function($query) use($user, $user_id){
@@ -125,9 +125,9 @@ class ChatCotroller extends Controller
                             ->where('user_2', $user->id);
                 });
             })
-            ->orderBy('id','asc')
-            ->paginate(20);
-
+            ->orderBy('id','desc')
+            ->paginate(100);
+        //print_r(DB::getQueryLog());
         $next_page_url=$chatsobj->nextPageUrl();
         $prev_page_url=$chatsobj->previousPageUrl();
 
@@ -155,7 +155,7 @@ class ChatCotroller extends Controller
                 ];
             }
         }
-
+        $chats=array_reverse($chats);
         return [
             'status'=>'success',
             'message'=>'',
@@ -205,7 +205,7 @@ class ChatCotroller extends Controller
                 break;
         }
 
-        $receiver->notify(new FCMNotification('New Message', 'New Message From '.$user->name, ['type'=>'Chat']));
+        $receiver->notify(new FCMNotification('New Message from '.$user->name, $request->message??"[$request->type]", ['type'=>'chat', 'chat_id'=>$user->id.''], 'chat_screen'));
 
         return [
             'status'=>'success',

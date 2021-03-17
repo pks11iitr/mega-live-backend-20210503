@@ -43,7 +43,10 @@ class MatchesController extends Controller
 //        }
 
         //$profiles=$profiles->inRandomOrder();
-        $profiles=$profiles->paginate(50);
+        $profiles=$profiles->paginate(10);
+
+        $next_page_url=$profiles->nextPageUrl();
+        $prev_page_url=$profiles->previousPageUrl();
 
         $like=LikeDislike::where('sender_id', $user->id)->select('receiver_id', 'type')->get();
         $likes=[];
@@ -70,7 +73,7 @@ class MatchesController extends Controller
 
             'status'=>'success',
             'message'=>'',
-            'apidata'=>compact('profiles')
+            'apidata'=>compact('profiles', 'next_page_url', 'prev_page_url')
 
 
         ];
@@ -92,8 +95,10 @@ class MatchesController extends Controller
 
         $like_status=isset($like)?$like->type:2;
 
+        $likes_count=LikeDislike::where('receiver_id', $id)->count();
+
         $gifts=CoinWallet::with('gift')
-                ->where('receiver_id', $user->id)
+                ->where('receiver_id', $details->id)
                 ->where('gift_id', '!=', null)
                 ->groupBy('gift_id')
                 ->select(DB::raw('count(*) as count'), 'gift_id')
@@ -101,7 +106,7 @@ class MatchesController extends Controller
 
         return [
             'status'=>'success',
-            'data'=>compact('details', 'like_status', 'gifts')
+            'data'=>compact('details', 'like_status', 'gifts', 'likes_count')
         ];
     }
 }
