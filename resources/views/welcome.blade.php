@@ -9,7 +9,7 @@
     <meta name="keywords" content="KMS Vets">
     <meta name="author" content="KMS Vets">
 
-    <title>MatchOn</title>
+    <title>MATCHON</title>
     <link rel="icon" href="homepage/img/favicon.png">
     <!-- CSS Files -->
     <link rel="stylesheet" href="homepage/css/bootstrap.min.css">
@@ -26,16 +26,17 @@
 <body>
 <!-- Header Starts -->
 <header class="">
-    <div class="top-menu">
+    <div class="top-menu" style="background-color:#e1a0ff;">
         <div class="container">
             <div class="row">
                 <div class="col-12 py-2">
                     <span class="left">
-                      <a href="tel:+91 9718379922">
-                          <i class="fa fa-phone"></i>+91 9718379922
-                      </a>
+                      <p style="font-size: 25px; margin-bottom: -17px; padding: 14px 15px; color: white;">MATCHON</p>
                     </span>
                     <span class="right">
+                        <a href="tel:+91 9718379922">
+                          <i class="fa fa-phone"></i>+91 9718379922
+                      </a>
                       <a href="mailto:matchon99@gmail.com"><i class="fa fa-envelope"></i>matchon99@gmail.com</a>
                     </span>
                 </div>
@@ -69,7 +70,7 @@
 
                 <div class="carousel-inner carousel-main" role="listbox">
                     <div class="carousel-item slider-img active">
-                        <img src="homepage/img/matchon_banner1.jpg" alt="">
+                        <img src="homepage/img/chat-banner.jpg" alt="">
                     </div>
                 </div>
 
@@ -84,7 +85,7 @@
         <div class="row">
             <div class="col-xl-8 mx-auto mb-3 text-center">
                 <div class="section-title">
-                    <h4>Welcome to "MatchOn"</h4>
+                    <h4>Welcome to "MATCHON"</h4>
                 </div>
             </div>
         </div>
@@ -130,85 +131,130 @@
         <div class="row">
             <div class="col-xl-8 mb-3 mx-auto text-center">
                 <div class="section-title">
-                    <h4>Same of our users</h4>
+                    <h4>PROFILES</h4>
                 </div>
             </div>
         </div>
         <!--<h3 class="heading text-center mb-5">What We Do</h3> -->
         <div class="row">
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-3">
+                <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
                     <div class=" card blog-block pt-2">
                         <img src="homepage/img/funiz4.jpg" class=" img-fluid card-img-top" style="height: 280px; min-height: 220px;">
                         <div style="text-align: center; margin-top:15px;">
-                            <h4 >Our Match</h4>
+                            <h4 >Shipra</h4>
+                            <p>23 years old</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-3">
+                <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
                     <div class=" card blog-block pt-2">
                         <img src="homepage/img/funiz8.jpg" class=" img-fluid card-img-top" style="height: 280px; min-height: 220px;">
                         <div style="text-align: center; margin-top:15px;">
-                            <h4 >Our Match</h4>
+                            <h4 >Zafa Jha</h4>
+                            <p>26 years old</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-3">
+                <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
                     <div class=" card blog-block pt-2">
                         <img src="homepage/img/matchon4.jpg" class=" img-fluid card-img-top" style="height: 280px; min-height: 220px;">
                         <div style="text-align: center; margin-top:15px;">
-                            <h4 >Our Match</h4>
+                            <h4 >Noor Khan</h4>
+                            <p>21 years old</p>
                         </div>
                     </div>
                 </div>
+            <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
+                <div class=" card blog-block pt-2">
+                    <img src="homepage/img/funiz10.jpg" class=" img-fluid card-img-top" style="height: 280px; min-height: 220px;">
+                    <div style="text-align: center; margin-top:15px;">
+                        <h4 >Gima Ashi</h4>
+                        <p>27 years old</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</section>
 
-{{--<section class="bg-blms py-5">--}}
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-xl-8 mx-auto mb-3 text-center">--}}
-{{--                <div class="section-title">--}}
-{{--                    <h4> ABOUT US </h4>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-12">--}}
-{{--                <h4><u>OUR STORY </u></h4>--}}
-{{--                <ul>--}}
-{{--                    <li>1. Looks Salon is one of the most powerful brands in the hair & beauty care sector in Northern & Central India, that has given hairstyling a new horizon. Emerging as the largest single salon chain in the country.</li>--}}
-{{--                    <li>2. With over 3000 employees the company ensures that each one's skills are sharpened at least once a year. Looks has evolved over the years; new techniques and styles while constantly updating its stylists with the ever growing trends in the national and international market. Looks salon constantly strives to educate and train their stylists about the latest techniques & styles with the state of the art technology, by sending the stylists to various classes and by participating in various events across all genres.</li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-12">--}}
-{{--                <h4><u>History of the Company </u></h4>--}}
-{{--                <ul>--}}
-{{--                    <li>Looks salon was established in January 1989 and has consistently shown year on year growth and is now a chain of 118+ branches in Delhi & NCR and Northern & Central India and Dubai. Looks salon is on a growth path of 150 salons by 2020; currently employing over 3000 employees across India & Dubai. Looks salon has remained a pioneer in hair, beauty & nail services and is now setting new bench marks in makeup exceeding all industry standards to give professionalism a new art form.</li><br>--}}
-{{--                    <li>Mr. Sanjay Dutta, Owner of the Looks Salon chain is also the visionary behind the inception of the company 30 years ago. He is the man behind growth and expansion of the company. Mr. Dutta while working on the design and interiors for the salon keeps in mind "Utmost Luxury at Affordable Prices" to ensure the customers get the maximum and beyond expectations. Mr. Dutta says, "I started the salon chain from a small 3 cutting station barber shop and guided the company through the stages – from Barber shop to Beauty Parlor and now 118+ unisex salons across Delhi, NCR and North & Central India".</li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</section>--}}
+</section>
 
 <section class="bg-blms py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="heading text-center">Download Our App : <a href=""><img src="homepage/img/playstore.png" style="width:244px; height:auto;   "></a><a href=""><img src="homepage/img/appstore.png" style="width:200px; height:auto;    "></a></h2>
+            <div class="col-xl-8 mx-auto mb-3 text-center">
+                <div class="section-title">
+                    <h4> Same of our users </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
+                <div class="">
+                    <img src="homepage/img/funiz2.jpg" class=" img-fluid card-img-top" style="height: 280px;  border-radius: 50%;">
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
+                <div class="">
+                    <img src="homepage/img/funiz9.jpg" class=" img-fluid card-img-top" style="height: 280px; border-radius: 50%;">
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
+                <div class="">
+                    <img src="homepage/img/funiz3.jpg" class=" img-fluid card-img-top" style="height: 280px; border-radius: 50%;">
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12 mb-3">
+                <div class="">
+                    <img src="homepage/img/funiz1.jpg" class=" img-fluid card-img-top" style="height: 280px; border-radius: 50%;">
+
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+
+{{--<section class="bg-blms py-5">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <h2 class="heading text-center" style="color: black;">--}}
+{{--                    Download Our App :--}}
+{{--                    <a href=""><img src="homepage/img/playstore.png" style="width:244px; height:auto;   "></a>--}}
+{{--                    <a href=""><img src="homepage/img/appstore.png" style="width:200px; height:auto;    "></a>--}}
+{{--                </h2>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
+
+<section id="services" class="services py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="heading text-center" style="color: #e1a0ff;">FOLLOW US<br><br>
+                <a href="#" class="fa fa-facebook heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" class="fa fa-instagram heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" class="fa fa-snapchat-ghost heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" class="fa fa-google heading text-center"></a>
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- Footer Starts -->
-<footer class="footer pt-3">
+<footer class="footer pt-3" style="background-color:#e1a0ff;">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="footer-text text-center">
-                    <p class="mb-3">Copyright @2020-2021, MatchOn. </p>
+                    <p class="mb-3">Copyright © 2021 | MATCHON | Privacy Policy </p>
+
                 </div>
             </div>
         </div>
