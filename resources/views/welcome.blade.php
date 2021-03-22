@@ -26,17 +26,18 @@
 <body>
 <!-- Header Starts -->
 <header class="">
-    <div class="top-menu" style="background-color:#e1a0ff;">
+    <div class="top-menu" style="background-color:#e1a0ff; margin-bottom: -32px; padding: 5px;">
         <div class="container">
             <div class="row">
                 <div class="col-12 py-2">
-                    <span class="left">
-                      <p style="font-size: 25px; margin-bottom: -17px; padding: 14px 15px; color: white;">MATCHON</p>
+                    <span class="left" style="color: white;  font-size:25px;">
+                        <img style="width:6%;" src="homepage/img/logo.png" height="80%">MATCHON
+{{--                      <p style="font-size: 25px; margin-bottom: -17px; padding: 14px 15px; color: white;">MATCHON</p>--}}
                     </span>
                     <span class="right">
                         <a href="tel:+91 9718379922">
                           <i class="fa fa-phone"></i>+91 9718379922
-                      </a>
+                      </a><br>
                       <a href="mailto:matchon99@gmail.com"><i class="fa fa-envelope"></i>matchon99@gmail.com</a>
                     </span>
                 </div>
@@ -217,34 +218,34 @@
 </section>
 
 
-{{--<section class="bg-blms py-5">--}}
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-12">--}}
-{{--                <h2 class="heading text-center" style="color: black;">--}}
-{{--                    Download Our App :--}}
-{{--                    <a href=""><img src="homepage/img/playstore.png" style="width:244px; height:auto;   "></a>--}}
-{{--                    <a href=""><img src="homepage/img/appstore.png" style="width:200px; height:auto;    "></a>--}}
-{{--                </h2>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</section>--}}
-
-<section id="services" class="services py-5 bg-light">
+<section class="bg-blms py-5">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="heading text-center" style="color: #e1a0ff;">FOLLOW US<br><br>
-                <a href="#" class="fa fa-facebook heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" class="fa fa-instagram heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" class="fa fa-snapchat-ghost heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" class="fa fa-google heading text-center"></a>
+                <h2 class="heading text-center" style="color: black;">
+                    Download Our App :
+                    <a href=""><img src="homepage/img/playstore.png" style="width:244px; height:auto;   "></a>
+{{--                    <a href=""><img src="homepage/img/appstore.png" style="width:200px; height:auto;    "></a>--}}
                 </h2>
             </div>
         </div>
     </div>
 </section>
+
+{{--<section id="services" class="services py-5 bg-light">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <h2 class="heading text-center" style="color: #e1a0ff;">FOLLOW US<br><br>--}}
+{{--                <a href="#" class="fa fa-facebook heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                <a href="#" class="fa fa-instagram heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                <a href="#" class="fa fa-snapchat-ghost heading text-center"></a>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                <a href="#" class="fa fa-google heading text-center"></a>--}}
+{{--                </h2>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
 
 
 <!-- Footer Starts -->
