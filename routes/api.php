@@ -95,7 +95,7 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 
         $api->get('profile', 'MobileApps\AdminUsersApp\ProfileController@profile');
 
-        $api->get('earnings', 'MobileApps\AdminUsersApp\EarningsController@earnings');
+        $api->get('earnings', 'MobileApps\AdminUsersApp\EarningsController@chats');
 
         $api->post('send-bulk', 'MobileApps\AdminUsersApp\ChatController@bulkMessage');
 
