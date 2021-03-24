@@ -65,7 +65,7 @@ class CoinAggregator extends Command
             if($chats>0)
                 Earning::create([
                     'user_id'=>$user->id,
-                    'type'=>'chat',
+                    'type'=>'chats',
                     'count'=>$chats,
                     'coins'=>$chats,
                     'date'=>$date
