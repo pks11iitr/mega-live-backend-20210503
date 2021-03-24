@@ -24,6 +24,8 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 
 $api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
+$api->post('webhook-receive-133232983892', 'MobileApps\WebhookController@receive');
+
 
 $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
 
