@@ -43,7 +43,7 @@ class CoinAggregator extends Command
      */
     public function handle()
     {
-        $date=date('Y-m-d', '-1 days');
+        $date=date('Y-m-d', strtotime('-1 days'));
 
         $users=Customer::where('account_type', 'ADMIN')->get();
 
