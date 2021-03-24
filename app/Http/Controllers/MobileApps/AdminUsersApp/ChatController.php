@@ -181,7 +181,7 @@ class ChatController extends Controller
             $image=$request->image;
             $name = $image->getClientOriginalName();
             $contents = file_get_contents($image);
-            $path = 'chats/' . $this->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
+            $path = 'chats/' . $user->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
             \Storage::put($path, $contents, 'public');
         }
 
