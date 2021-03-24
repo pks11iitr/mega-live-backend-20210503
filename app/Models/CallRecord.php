@@ -12,4 +12,13 @@ class CallRecord extends Model
     protected $table='call_records';
 
     protected $fillable=['call_id', 'caller_id', 'callee_id', 'minutes', 'start', 'end', 'type', 'coins'];
+
+
+    public function caller(){
+        return $this->belongsTo('App\Models\Customer', 'caller_id');
+    }
+
+    public function callee(){
+        return $this->belongsTo('App\Models\Customer', 'callee_id');
+    }
 }
