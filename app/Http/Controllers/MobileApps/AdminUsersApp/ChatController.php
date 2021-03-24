@@ -177,6 +177,14 @@ class ChatController extends Controller
 
         $user=$request->user;
 
+        if($request->image){
+            $image=$request->image;
+            $name = $image->getClientOriginalName();
+            $contents = file_get_contents($image);
+            $path = 'chats/' . $this->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
+            \Storage::put($path, $contents, 'public');
+        }
+
         $this->dispatch(new SendBulkMessages($user, $request->type, $request->message_type,$request->message,$request->image));
 
         return [

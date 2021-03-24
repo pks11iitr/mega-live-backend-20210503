@@ -82,10 +82,6 @@ class SendBulkMessages implements ShouldQueue
 
             }
         }else if($message_type=='image'){
-            $name = $image->getClientOriginalName();
-            $contents = file_get_contents($image);
-            $path = 'chats/' . $this->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
-            \Storage::put($path, $contents, 'public');
 
             foreach($users as $u){
                 Chat::create([
@@ -93,7 +89,7 @@ class SendBulkMessages implements ShouldQueue
                     'user_2'=>($user->id < $u->id)?$u->id:$user->id,
                     'direction'=>($user->id < $u->id)?0:1,
                     'message'=>$message??'',
-                    'image'=>$path,
+                    'image'=>$image,
                     'type'=>'text'
                 ]);
 
