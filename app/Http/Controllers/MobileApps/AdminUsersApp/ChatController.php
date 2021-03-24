@@ -172,7 +172,7 @@ class ChatController extends Controller
             'type'=>'required|in:chat,call',
             'message_type'=>'required_if:type,chat|in:text,image',
             'message'=>'required_if:message_type,text|max:150',
-            'image'=>'required_id:message_type,image'
+            'image'=>'required_if:message_type,image'
         ]);
 
         $user=$request->user;
