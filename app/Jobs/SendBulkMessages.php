@@ -16,6 +16,8 @@ class SendBulkMessages implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
+    protected $type,$user,$message_type,$message,$image;
     /**
      * Create a new job instance.
      *
