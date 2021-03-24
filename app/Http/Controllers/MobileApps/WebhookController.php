@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MobileApps;
 use App\Http\Controllers\Controller;
 use App\Models\CallRecord;
 use App\Models\Customer;
+use App\Models\LogData;
 use Illuminate\Http\Request;
 
 class WebhookController extends Controller
@@ -12,6 +13,12 @@ class WebhookController extends Controller
     public function receive(Request $request){
 
         $content=Request::createFromGlobals()->getContent();
+
+        LogData::create([
+            'data'=>$content,
+            'type'=>'call'
+        ]);
+
         $content=json_decode($content, true);
 
         if(isset($content['category']) && isset($content['direct_call']) && isset($content['direct_call']['call_id']) && isset($content['direct_call']['caller_id']) && isset($content['direct_call']['callee_id'])){
