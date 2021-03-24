@@ -101,6 +101,11 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 
         $api->post('send-bulk', 'MobileApps\AdminUsersApp\ChatController@bulkMessage');
 
+        $api->get('like/{id}', 'MobileApps\AdminUsersApp\LikeDislikeController@like');
+        $api->get('dislike/{id}', 'MobileApps\AdminUsersApp\LikeDislikeController@dislike');
+        $api->get('ilike', 'MobileApps\AdminUsersApp\LikeDislikeController@ilike');
+        $api->get('likeme', 'MobileApps\AdminUsersApp\LikeDislikeController@likeme');
+
     });
 
 
