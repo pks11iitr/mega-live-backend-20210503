@@ -84,6 +84,19 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
         $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');
         $api->post('send-message/{user_id}', 'MobileApps\AdminUsersApp\ChatController@send');
         $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
+
+        $api->get('get-profile', 'MobileApps\AdminUsersApp\ProfileController@getprofile');
+        $api->post('update-profile', 'MobileApps\AdminUsersApp\ProfileController@updateprofile');
+
+        $api->get('pictures', 'MobileApps\AdminUsersApp\ProfileController@picures');
+        $api->post('upload-pictures', 'MobileApps\AdminUsersApp\ProfileController@uploadpictures');
+        $api->get('delete-picture/{id}', 'MobileApps\AdminUsersApp\ProfileController@deletepic');
+        $api->get('set-profile-pic/{id}', 'MobileApps\AdminUsersApp\ProfileController@updateProfilePic');
+
+        $api->get('profile', 'MobileApps\AdminUsersApp\ProfileController@profile');
+
+        $api->post('send-bulk', 'MobileApps\AdminUsersApp\ChatController@bulkMessage');
+
     });
 
 

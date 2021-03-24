@@ -114,7 +114,8 @@ class LoginController extends Controller
             //return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
             $user=Customer::create([
                'mobile'=>$request->mobile,
-               'password'=>'none'
+               'password'=>'none',
+                'user_id'=>'MCN'.time()
             ]);
         }
 
