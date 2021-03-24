@@ -98,7 +98,7 @@ class CoinAggregator extends Command
                 if($videocalls[0]->minutes>0)
                     Earning::create([
                         'user_id'=>$user->id,
-                        'type'=>'gifts',
+                        'type'=>'video',
                         'count'=>$videocalls[0]->minutes,
                         'coins'=>$videocalls[0]->coins,
                         'date'=>$date
@@ -116,7 +116,7 @@ class CoinAggregator extends Command
                 if($audiocalls[0]->minutes>0)
                     Earning::create([
                         'user_id'=>$user->id,
-                        'type'=>'gifts',
+                        'type'=>'calls',
                         'count'=>$audiocalls[0]->minutes,
                         'coins'=>$audiocalls[0]->coins,
                         'date'=>$date
