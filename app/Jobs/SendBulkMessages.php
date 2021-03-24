@@ -48,9 +48,8 @@ class SendBulkMessages implements ShouldQueue
 
 
     private function sendCallInvites($user){
-        $users=User::where('account_type', 'USER')->select('id','notification_token');
 
-        $users=User::where('account_type', 'USER')->select('id','notification_token');
+        $users=User::where('account_type', 'USER')->select('id','notification_token')->get();
 
         foreach($users as $u) {
             Chat::create([
@@ -66,7 +65,7 @@ class SendBulkMessages implements ShouldQueue
     }
 
     private function sendChats($user, $message_type, $message, $image){
-        $users=User::where('account_type', 'USER')->select('id','notification_token');
+        $users=User::where('account_type', 'USER')->select('id','notification_token')->get();
 
         if($message_type=='text'){
             foreach($users as $u){
