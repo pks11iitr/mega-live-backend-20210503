@@ -24,6 +24,8 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 
 $api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
+$api->post('webhook-receive-133232983892', 'MobileApps\WebhookController@receive');
+
 
 $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
 
@@ -84,6 +86,26 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
         $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');
         $api->post('send-message/{user_id}', 'MobileApps\AdminUsersApp\ChatController@send');
         $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
+
+        $api->get('get-profile', 'MobileApps\AdminUsersApp\ProfileController@getprofile');
+        $api->post('update-profile', 'MobileApps\AdminUsersApp\ProfileController@updateprofile');
+
+        $api->get('pictures', 'MobileApps\AdminUsersApp\ProfileController@picures');
+        $api->post('upload-pictures', 'MobileApps\AdminUsersApp\ProfileController@uploadpictures');
+        $api->get('delete-picture/{id}', 'MobileApps\AdminUsersApp\ProfileController@deletepic');
+        $api->get('set-profile-pic/{id}', 'MobileApps\AdminUsersApp\ProfileController@updateProfilePic');
+
+        $api->get('profile', 'MobileApps\AdminUsersApp\ProfileController@profile');
+
+        $api->get('earnings', 'MobileApps\AdminUsersApp\EarningsController@earnings');
+
+        $api->post('send-bulk', 'MobileApps\AdminUsersApp\ChatController@bulkMessage');
+
+        $api->get('like/{id}', 'MobileApps\AdminUsersApp\LikeDislikeController@like');
+        $api->get('dislike/{id}', 'MobileApps\AdminUsersApp\LikeDislikeController@dislike');
+        $api->get('ilike', 'MobileApps\AdminUsersApp\LikeDislikeController@ilike');
+        $api->get('likeme', 'MobileApps\AdminUsersApp\LikeDislikeController@likeme');
+
     });
 
 

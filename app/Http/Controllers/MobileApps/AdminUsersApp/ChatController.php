@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileApps\AdminUsersApp;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendBulkMessages;
 use App\Models\Chat;
 use App\Models\Customer;
 use App\Services\Notification\FCMNotification;
@@ -165,4 +166,32 @@ class ChatController extends Controller
         ];
 
     }
+
+    public function bulkMessage(Request $request){
+        $request->validate([
+            'type'=>'required|in:chat,call',
+            'message_type'=>'required_if:type,chat|in:text,image',
+            'message'=>'required_if:message_type,text|max:150',
+            'image'=>'required_if:message_type,image'
+        ]);
+
+        $user=$request->user;
+
+        if($request->image){
+            $image=$request->image;
+            $name = $image->getClientOriginalName();
+            $contents = file_get_contents($image);
+            $path = 'chats/' . $user->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
+            \Storage::put($path, $contents, 'public');
+        }
+
+        $this->dispatch(new SendBulkMessages($user, $request->type, $request->message_type,$request->message,$path));
+
+        return [
+            'status'=>'success',
+            'message'=>'Message has been sent'
+        ];
+
+    }
+
 }
