@@ -12,4 +12,8 @@ class Earning extends Model
     protected $table='earnings';
 
     protected $fillable=['user_id', 'type', 'count', 'coins', 'date'];
+
+    public function customer(){
+        return $this->belongsTo('App\Models\Customer', 'user_id');
+    }
 }

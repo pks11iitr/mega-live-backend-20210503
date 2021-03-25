@@ -28,4 +28,13 @@ trait DocumentUploadTrait {
         $this->save();
     }
 
+    public function saveShortVideo($file, $urlprefix){
+        $name = $file->getClientOriginalName();
+        $contents = file_get_contents($file);
+        $path = $urlprefix.'/' . $this->id . '/' . rand(111, 999) . '_' . str_replace(' ','_', $name);
+        \Storage::put($path, $contents, 'public');
+        $this->short_video=$path;
+        $this->save();
+    }
+
 }

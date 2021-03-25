@@ -98,7 +98,7 @@
                              @endif
                       </td>
                       <td>
-                          <a href="{{route('customer.edit',['id'=>$customer->id])}}" class="btn btn-success">Edit</a>
+                          <a href="{{route('customer.edit',['id'=>$customer->id])}}" class="btn btn-success">Edit</a><br><br>
                           <a href="{{route('customer.chat',['id'=>$customer->id])}}" class="btn btn-info">Chat</a>
 {{--                          <a href="{{route('customer.details',['id'=>$customer->id])}}" class="btn btn-info">Details</a>--}}
 {{--                          <br><br>--}}

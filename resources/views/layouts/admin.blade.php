@@ -135,15 +135,15 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('membership.list')}}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Membership
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('membership.list')}}" class="nav-link">--}}
+{{--                            <i class="nav-icon fas fa-th"></i>--}}
+{{--                            <p>--}}
+{{--                                Membership--}}
 
-                            </p>
-                        </a>
-                    </li>
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a href="{{route('coins.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -177,6 +177,16 @@
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Payment
+
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('earning.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Earning
 
                             </p>
                         </a>

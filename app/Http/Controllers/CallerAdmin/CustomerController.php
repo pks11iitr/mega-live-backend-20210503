@@ -38,4 +38,45 @@ class CustomerController extends Controller
 
         return view('caller-admin.customer.view', ['customers' => $customers]);
     }
+
+    public function chat(Request $request,$id){
+        $chats =Chat::orderBy('id','ASC')->where('user_2','=',$id)->get();
+        return view('caller-admin.customer.chat',['chats'=>$chats]);
+    }
+
+    public function sendChat(Request $request){
+
+        $request->validate([
+            'type'=>'required|in:text,image',
+            'message'=>'required_if:type,text',
+            'image'=>'required_if:type,image',
+        ]);
+
+        $user=$request->user;
+
+        $receiver=Customer::findOrFail($request->id);
+
+        $chat=Chat::create([
+            'user_1'=>($user->id < $request->id)?$user->id:$request->id,
+            'user_2'=>($user->id < $request->id)?$request->id:$user->id,
+            'direction'=>($user->id < $request->id)?0:1,
+            'message'=>$request->message??'',
+            'type'=>$request->type
+        ]);
+
+        switch($request->type){
+            case 'image':
+                $chat->saveImage($request->image, 'chats');
+                break;
+        }
+
+        $receiver->notify(new FCMNotification('New Chat', 'New Chat From User', ['message'=>'New Chat']));
+
+        if($chat){
+            return response()->json(['chat' => $chat], 200);
+        }else{
+            return response()->json(['msg' => 'No result found!'], 404);
+        }
+
+    }
 }
