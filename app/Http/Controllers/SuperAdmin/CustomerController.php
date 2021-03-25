@@ -149,7 +149,8 @@ class CustomerController extends Controller
             'occupation_id' => 'required',
             'religion_id' => 'required',
             'job_id' => 'required',
-            'image' => 'image'
+            'image' => 'image',
+//            'short_video'=>'mimes:mp4,mov,ogg,3gp'
         ]);
         $customers = Customer::findOrFail($id);
         $country = Country::find($request->country);
@@ -194,6 +195,11 @@ class CustomerController extends Controller
             if($request->image){
                 $customers->saveImage($request->image, 'customers');
             }
+
+            if($request->short_video){
+                $customers->saveShortVideo($request->short_video, 'customers');
+            }
+
             return redirect()->route('customer.list')->with('success', 'Customer has been updated');
         }
         return redirect()->back()->with('error', 'Customer update failed');

@@ -3,7 +3,11 @@
   <!-- Content Wrapper. Contains page content -->
 
 {{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1  /jquery.min.js"></script>--}}
+  <link rel="stylesheet" href="{{asset('admin-theme/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('../admin-theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -260,16 +264,16 @@
                               <input type="text" name="address" class="form-control" id="exampleInputEmail1" placeholder="Enter address" value="{{$customers->address}}">
                           </div>
                       </div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label>Plan:-</label> {{$customers->plan->title??''}}
-                          </div>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label>Membership Expiry:-</label> {{$customers->membership_expiry}}
-                          </div>
-                      </div>
+{{--                      <div class="col-md-6">--}}
+{{--                          <div class="form-group">--}}
+{{--                              <label>Plan:-</label> {{$customers->plan->title??''}}--}}
+{{--                          </div>--}}
+{{--                      </div>--}}
+{{--                      <div class="col-md-6">--}}
+{{--                          <div class="form-group">--}}
+{{--                              <label>Membership Expiry:-</label> {{$customers->membership_expiry}}--}}
+{{--                          </div>--}}
+{{--                      </div>--}}
                       <div class="col-md-6">
                           <div class="form-group">
                               <label>Interests</label>
@@ -279,6 +283,13 @@
                                   <option value="{{$intersst->id}}" @foreach($customers->interests as $int) @if($int->id==$intersst->id){{'selected'}}@endif @endforeach>{{$intersst->name??''}}</option>
                                   @endforeach
                               </select>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="exampleInputFile">Video</label>
+                              <input type="file" class="form-control" name="short_video" id="exampleInputFile"><br>
+                              <a href="{{$customers->short_video}}"> <button type="button" class="btn btn-warning btn-sm">View Video</button></a>
                           </div>
                       </div>
                       <div class="col-md-12">
@@ -384,6 +395,8 @@
 <!-- ./wrapper -->
 @endsection
 @section('scripts')
+
+    <script src="{{asset('admin-theme/plugins/select2/js/select2.full.min.js')}}"></script>
     <script>
         $(document).ready(function () {
             //$('.select2').select2();

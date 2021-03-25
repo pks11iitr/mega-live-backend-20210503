@@ -115,6 +115,11 @@ Route::group(['middleware'=>['auth', 'acl'], 'is'=>'admin'], function() {
 
     });
 
+    Route::group(['prefix'=>'earning'], function(){
+        Route::get('/','SuperAdmin\EarningController@index')->name('earning.list');
+
+    });
+
 });
 
 Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller'], function() {

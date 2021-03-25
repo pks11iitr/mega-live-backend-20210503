@@ -19,7 +19,7 @@ class Customer extends Authenticatable implements JWTSubject
     protected $table='customers';
 
     protected $fillable = [
-        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'employement_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender','smoking','marijuana','drugs','drinking','job_id','ethicity_id', 'account_type', 'rate', 'country', 'country_flag','age_show','distance_show','plan_id','membership_expiry', 'interests', 'from_height','to_height', 'system_messages'];
+        'name', 'email', 'mobile', 'password', 'image', 'dob', 'address','country_id', 'city_id', 'state_id','pincode', 'status','notification_token', 'gender', 'education_id', 'occupation_id', 'employement_id', 'salaray_id', 'religion_id', 'height_id', 'language_id', 'marital_status_id', 'salary_id', 'about_me','image','height_feet', 'from_age', 'to_age','from_distance','to_distance','pref_gender','smoking','marijuana','drugs','drinking','job_id','ethicity_id', 'account_type', 'rate', 'country', 'country_flag','age_show','distance_show','plan_id','membership_expiry', 'interests', 'from_height','to_height', 'system_messages','short_video'];
 
     protected $hidden = [
         'password','created_at','deleted_at','updated_at','email','mobile'
@@ -79,6 +79,12 @@ class Customer extends Authenticatable implements JWTSubject
         if($value)
             return Storage::url($value);
         return Storage::url('customers/default.jpeg');
+    }
+
+    public function getShortVideoAttribute($value){
+        if($value)
+            return Storage::url($value);
+        return null;
     }
 
     /*public function getImageAttribute($value){
