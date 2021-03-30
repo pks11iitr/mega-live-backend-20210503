@@ -44,7 +44,7 @@ class MatchesController extends Controller
 //        }
 
         //$profiles=$profiles->inRandomOrder();
-        $profiles=$profiles->paginate(10);
+        $profiles=$profiles->orderBy('last_active', 'desc')->paginate(10);
 
         $next_page_url=$profiles->nextPageUrl();
         $prev_page_url=$profiles->previousPageUrl();
