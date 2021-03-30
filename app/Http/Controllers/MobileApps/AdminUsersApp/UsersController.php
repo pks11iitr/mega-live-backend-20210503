@@ -14,7 +14,7 @@ class UsersController extends Controller
         $users=Customer::where('account_type', 'USER')
             ->select('image', 'id','name','dob', 'country')
             ->inRandomOrder()
-            ->paginate(100);
+            ->paginate(10);
 
         foreach($users as $u){
             $u->balance=CoinWallet::balance($u->id);
