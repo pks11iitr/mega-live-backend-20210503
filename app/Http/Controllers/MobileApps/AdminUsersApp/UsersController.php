@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index(Request $request){
 
-        $users=Customer::where('account_type', 'USER')
+        $users=Customer::with('countryName')->where('account_type', 'USER')
             ->select('image', 'id','name','dob', 'country', 'last_active')
             ->orderBy('last_active', 'desc')
             ->paginate(10);
