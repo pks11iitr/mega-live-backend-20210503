@@ -41,14 +41,14 @@ class SendBulkMessages implements ShouldQueue
     public function handle()
     {
         if($this->type=='call'){
-            $this->sendCallInvites($this->user);
+            $this->sendCallInvites($this->user, $this->message);
         }else if($this->type=='chat'){
             $this->sendChats($this->user, $this->message_type,$this->message,$this->image);
         }
     }
 
 
-    private function sendCallInvites($user){
+    private function sendCallInvites($user, $message){
 
         $users=Customer::where('account_type', 'USER')->select('id','notification_token')->get();
 
