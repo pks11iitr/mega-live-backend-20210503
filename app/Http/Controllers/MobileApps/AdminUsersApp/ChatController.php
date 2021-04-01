@@ -189,7 +189,7 @@ class ChatController extends Controller
 
         return [
             'status'=>'success',
-            'message'=>'Message has been sent'
+            'message'=>'Message has been sent'.time()
         ];
 
     }
