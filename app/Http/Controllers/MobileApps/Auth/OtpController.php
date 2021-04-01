@@ -44,9 +44,12 @@ class OtpController extends Controller
         $user=Customer::where('mobile', $request->mobile)->first();
         if($user->status==0){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
-                $user->notification_token=$request->notification_token;
-                $user->status=1;
-                $user->save();
+                if($request->notification_token){
+                    Customer::where('notification_token', $request->notification_token)->update(['notification_token'=>null]);
+                    $user->notification_token=$request->notification_token;
+                    $user->status=1;
+                    $user->save();
+                }
 
                 return [
                     'status'=>'success',
@@ -74,9 +77,13 @@ class OtpController extends Controller
         $user=Customer::where('mobile', $request->mobile)->first();
         if(in_array($user->status, [0,1])){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
-                $user->notification_token=$request->notification_token;
-                $user->status=1;
-                $user->save();
+                if($request->notification_token){
+                    Customer::where('notification_token', $request->notification_token)->update(['notification_token'=>null]);
+                    $user->notification_token=$request->notification_token;
+                    $user->status=1;
+                    $user->save();
+                }
+
 
                 return [
                     'status'=>'success',
