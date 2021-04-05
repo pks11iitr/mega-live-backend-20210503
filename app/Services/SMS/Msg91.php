@@ -7,15 +7,15 @@ namespace App\Services\SMS;
 class Msg91
 {
 
-    protected static $authkey='';
-
+    protected static $authkey='356411ArsmC6YGm2604b3160P1';
+    protected static $DLT_TE_ID='1207161589782046450';
     public static function send($mobile, $message){
 
         //return true;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.msg91.com/api/sendhttp.php?authkey=".self::$authkey."&mobiles=$mobile&unicode=&country=91&message=".urlencode($message)."&sender=SHOPPR&route=4",
+            CURLOPT_URL => "https://api.msg91.com/api/sendhttp.php?authkey=".self::$authkey."&mobiles=$mobile&unicode=&country=91&message=".urlencode($message)."&sender=IMATCH&route=4&DLT_TE_ID=".self::$DLT_TE_ID,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
