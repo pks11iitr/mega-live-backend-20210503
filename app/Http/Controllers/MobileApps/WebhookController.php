@@ -61,7 +61,7 @@ class WebhookController extends Controller
             }
             else if($content['category']=='direct_call:end'){
                 $call=CallRecord::with(['caller', 'callee'])->where('call_id', $content['direct_call']['call_id'])->first();
-                if($call){
+                if($call && $call->start > 0){
                     $minutes=ceil(intval(($content['occurred_at'])-$call->start)/60000);
                     if($call->caller->account_type=='ADMIN'){
                         $rate=$call->caller->rate;
