@@ -150,4 +150,65 @@ class LoginController extends Controller
         ]);
     }
 
+    public function googleLogin(Request $request){
+        $request->validate([
+            'google_token'=>'required',
+            'notification_token'=>'required',
+        ]);
+
+        $client= new \Google_Client(['client_id'=>env('GOOGLE_WEB_CLIENT_ID')]);
+        $payload = $client->verifyIdToken($request->google_token);
+        if (!isset($payload['email'])) {
+            return [
+                'status'=>'failed',
+                'message'=>'Invalid Token Request'
+            ];
+        }
+        $email=$payload['email'];
+        $name=$payload['email']??'';
+        $picture=$payload['picture']??'';
+
+        $user=Customer::where('email', $email)->first();
+        if(!$user){
+            $user=Customer::create([
+                'email'=>$email,
+                'name'=>$name,
+                'status'=>1,
+                'user_id'=>'MCN'.time(),
+                'password'=>'none',
+                //'notification_token'=>$request->notification_token
+            ]);
+        }
+
+        if(!in_array($user->status, [0,1]))
+            return ['status'=>'failed', 'message'=>'This account has been blocked'];
+
+        if(!$user->sendbird_token){
+            //register on sendbird app
+            $sendbird=app('App\Services\SendBird\SendBird');
+            $response=$sendbird->createUser($user);
+
+            if(isset($response['user_id'])){
+                $user->sendbird_token=$response['access_token']??null;
+                $user->save();
+            }else{
+                return ['status'=>'failed', 'message'=>'Something went wrong please. Please try again'];
+            }
+        }
+
+
+        $user->notification_token=$request->notification_token;
+        $user->save();
+
+        return [
+            'status'=>'success',
+            'message'=>'OTP has been verified successfully',
+            'token'=>Auth::guard('customerapi')->fromUser($user),
+            'user_id'=>'Matchon'.$user->id,
+            'sendbird_token'=>$user->sendbird_token
+        ];
+
+
+    }
+
 }

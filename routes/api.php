@@ -21,6 +21,8 @@ $api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
 $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
 $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 //$api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
+$api->post('google-login', 'MobileApps\Auth\LoginController@googleLogin');
+
 
 $api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
