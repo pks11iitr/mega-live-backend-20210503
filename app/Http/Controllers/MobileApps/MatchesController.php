@@ -87,7 +87,7 @@ class MatchesController extends Controller
         $user=$request->user;
 
         $details=Customer::with(['gallery', 'Height', 'Ethnicity', 'Education', 'Job', 'Work', 'Religion', 'interests'])
-            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs')
+            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'rate')
             ->findOrFail($id);
 
         $like=LikeDislike::where('sender_id', $user->id)

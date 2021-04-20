@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="be102a8a-ab93-4d88-a58f-26bbba78daa6" name="Default Changelist" comment="google login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/LoginController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +232,7 @@
       <workItem from="1618463678438" duration="2738000" />
       <workItem from="1618546849926" duration="597000" />
       <workItem from="1618589586829" duration="593000" />
-      <workItem from="1618806249941" duration="4475000" />
+      <workItem from="1618806249941" duration="5079000" />
     </task>
     <task id="LOCAL-00001" summary="apis">
       <created>1610114860219</created>
@@ -319,7 +318,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618903509815</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="google login">
+      <created>1618908193937</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1618908193937</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
