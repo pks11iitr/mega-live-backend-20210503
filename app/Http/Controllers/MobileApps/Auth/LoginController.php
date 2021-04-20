@@ -165,7 +165,7 @@ class LoginController extends Controller
             ];
         }
         $email=$payload['email'];
-        $name=$payload['email']??'';
+        $name=$payload['name']??'';
         $picture=$payload['picture']??'';
 
         $user=Customer::where('email', $email)->first();
