@@ -17,4 +17,10 @@ class UrlController extends Controller
 
         return view('admin.url.faqs');
     }
+
+
+    public function customercare(Request  $request){
+
+        return view('admin.url.customercare');
+    }
 }
