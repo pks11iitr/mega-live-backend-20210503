@@ -23,4 +23,9 @@ class UrlController extends Controller
 
         return view('admin.url.customercare');
     }
+
+    public function about(Request  $request){
+
+        return view('admin.url.about');
+    }
 }

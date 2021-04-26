@@ -119,3 +119,4 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 $api->get('privacy-policy','SuperAdmin\UrlController@privacy');
 $api->get('faq','SuperAdmin\UrlController@faq');
 $api->get('support','SuperAdmin\UrlController@customercare');
+$api->get('about','SuperAdmin\UrlController@about');
