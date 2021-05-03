@@ -75,8 +75,12 @@ class LoginController extends Controller
     }
 
     protected function getCustomer(Request $request){
-        $customer=Customer::where($this->userId($request),$request->user_id)->first();
-        return $customer;
+        if($request->user_id){
+            $customer=Customer::where($this->userId($request),$request->user_id)->first();
+            return $customer;
+        }
+        return null;
+
     }
 
     protected function sendLoginResponse($request, $user, $token){
