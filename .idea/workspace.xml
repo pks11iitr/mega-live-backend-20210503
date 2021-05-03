@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be102a8a-ab93-4d88-a58f-26bbba78daa6" name="Default Changelist" comment="resend otp">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/ForgotPasswordController.php" afterDir="false" />
+    <list default="true" id="be102a8a-ab93-4d88-a58f-26bbba78daa6" name="Default Changelist" comment="forgot password">
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,7 +235,7 @@
       <workItem from="1618806249941" duration="6225000" />
       <workItem from="1618982789710" duration="17000" />
       <workItem from="1619426938273" duration="1556000" />
-      <workItem from="1620027592698" duration="4410000" />
+      <workItem from="1620027592698" duration="5077000" />
     </task>
     <task id="LOCAL-00001" summary="apis">
       <created>1610114860219</created>
@@ -378,7 +377,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620034298462</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="forgot password">
+      <created>1620034718206</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1620034718206</updated>
+    </task>
+    <task id="LOCAL-00022" summary="forgot password">
+      <created>1620034971449</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620034971449</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,6 +416,7 @@
     <MESSAGE value="google login" />
     <MESSAGE value="register api modifiesd" />
     <MESSAGE value="resend otp" />
-    <option name="LAST_COMMIT_MESSAGE" value="resend otp" />
+    <MESSAGE value="forgot password" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot password" />
   </component>
 </project>
