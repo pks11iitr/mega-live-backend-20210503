@@ -42,7 +42,8 @@ class OtpController extends Controller
 
     protected function verifyRegister(Request $request){
         $user=Customer::where('email', $request->email)->first();
-        if($user->status==0){
+        //die('gahs');
+        if($user->status==0 || $user->status==1){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
                 if($request->notification_token){
                     Customer::where('notification_token', $request->notification_token)->update(['notification_token'=>null]);
