@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Hash;
 class ForgotPasswordController extends Controller
 {
     public function forgot(Request $request){
-
+        //return $request;
         $customer=$this->getCustomer($request);
+        //return $customer;
         if(!$customer){
             return [
                 'status'=>'failed',
@@ -28,10 +29,14 @@ class ForgotPasswordController extends Controller
 
 
     protected function getCustomer(Request $request){
-        $customer=Customer::where($this->userId($request),$request->user_id)->first();
+        if($request->user_id){
+            $customer=Customer::where($this->userId($request),$request->user_id)->first();
 //        $customer->notification_token=$request->notification_token;
 //        $customer->save();
-        return $customer;
+            return $customer;
+        }
+        return null;
+
     }
 
     /**
