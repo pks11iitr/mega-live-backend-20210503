@@ -143,10 +143,10 @@ class OtpController extends Controller
     public function resend(Request $request){
         $request->validate([
             'type'=>'required|string|max:15',
-            'mobile'=>'required|string|digits:10|exists:customers',
+            'email'=>'required|email|exists:customers',
         ]);
 
-        $user=Customer::where('mobile', $request->mobile)->first();
+        $user=Customer::where('email', $request->email)->first();
         if(in_array($user->status, [0,1])){
                 $otp=OTPModel::createOTP('customer', $user->id, $request->type);
                 $msg=str_replace('{{otp}}', $otp, config('sms-templates.'.$request->type));
