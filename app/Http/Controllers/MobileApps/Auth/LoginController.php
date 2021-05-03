@@ -56,7 +56,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         if ($token=$this->attemptLogin($request)) {
-            return $this->sendLoginResponse($this->getCustomer($request), $token);
+            return $this->sendLoginResponse($request, $this->getCustomer($request), $token);
         }
         return [
             'status'=>'failed',
@@ -76,16 +76,16 @@ class LoginController extends Controller
 
     protected function getCustomer(Request $request){
         $customer=Customer::where($this->userId($request),$request->user_id)->first();
-        $customer->notification_token=$request->notification_token;
-        $customer->save();
         return $customer;
     }
 
-    protected function sendLoginResponse($user, $token){
+    protected function sendLoginResponse($request, $user, $token){
         if($user->status==0){
             $otp=OTPModel::createOTP('customer', $user->id, 'login');
             $msg=str_replace('{{otp}}', $otp, config('sms-templates.login'));
             Msg91::send($user->mobile,$msg);
+            $user->notification_token=$request->notification_token;
+            $user->save();
             return ['status'=>'success', 'message'=>'otp verify', 'token'=>''];
         }
         else if($user->status==1)
@@ -104,51 +104,51 @@ class LoginController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
 
-    public function loginWithOtp(Request $request){
-        $this->validateOTPLogin($request);
-        //die('aaad');
-        $user=Customer::where('mobile', $request->mobile)->first();
-
-        if(!$user){
-            //return $request->all();
-            //return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
-            $user=Customer::create([
-               'mobile'=>$request->mobile,
-               'password'=>'none',
-                'user_id'=>'MCN'.time()
-            ]);
-        }
-
-        if(!in_array($user->status, [0,1]))
-            return ['status'=>'failed', 'message'=>'This account has been blocked'];
-
-        if(!$user->sendbird_token){
-            //register on sendbird app
-            $sendbird=app('App\Services\SendBird\SendBird');
-            $response=$sendbird->createUser($user);
-
-            if(isset($response['user_id'])){
-                $user->sendbird_token=$response['access_token']??null;
-                $user->save();
-            }else{
-                return ['status'=>'failed', 'message'=>'Something went wrong please. Please try again'];
-            }
-        }
-
-        $otp=OTPModel::createOTP('customer', $user->id, 'login');
-        $msg=str_replace('{{otp}}', $otp, config('sms-templates.login'));
-        event(new SendOtp($user->mobile, $msg));
-
-        return ['status'=>'success', 'message'=>'Please verify OTP to continue'];
-    }
-
-
-    protected function validateOTPLogin(Request $request)
-    {
-        $request->validate([
-            'mobile' => 'required|digits:10|string',
-        ]);
-    }
+//    public function loginWithOtp(Request $request){
+//        $this->validateOTPLogin($request);
+//        //die('aaad');
+//        $user=Customer::where('mobile', $request->mobile)->first();
+//
+//        if(!$user){
+//            //return $request->all();
+//            //return ['status'=>'failed', 'message'=>'This account is not registered with us. Please signup to continue'];
+//            $user=Customer::create([
+//               'mobile'=>$request->mobile,
+//               'password'=>'none',
+//                'user_id'=>'MCN'.time()
+//            ]);
+//        }
+//
+//        if(!in_array($user->status, [0,1]))
+//            return ['status'=>'failed', 'message'=>'This account has been blocked'];
+//
+//        if(!$user->sendbird_token){
+//            //register on sendbird app
+//            $sendbird=app('App\Services\SendBird\SendBird');
+//            $response=$sendbird->createUser($user);
+//
+//            if(isset($response['user_id'])){
+//                $user->sendbird_token=$response['access_token']??null;
+//                $user->save();
+//            }else{
+//                return ['status'=>'failed', 'message'=>'Something went wrong please. Please try again'];
+//            }
+//        }
+//
+//        $otp=OTPModel::createOTP('customer', $user->id, 'login');
+//        $msg=str_replace('{{otp}}', $otp, config('sms-templates.login'));
+//        event(new SendOtp($user->mobile, $msg));
+//
+//        return ['status'=>'success', 'message'=>'Please verify OTP to continue'];
+//    }
+//
+//
+//    protected function validateOTPLogin(Request $request)
+//    {
+//        $request->validate([
+//            'mobile' => 'required|digits:10|string',
+//        ]);
+//    }
 
     public function googleLogin(Request $request){
         $request->validate([

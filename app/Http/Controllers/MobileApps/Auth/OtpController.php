@@ -24,13 +24,13 @@ class OtpController extends Controller
     public function verify(Request $request){
         $request->validate([
             'type'=>'required|string|max:15',
-            'mobile'=>'required|string|digits:10|exists:customers',
+            'email'=>'required|email|exists:customers',
             'otp'=>'required|digits:6'
         ]);
 
         switch($request->type){
             case 'register': return $this->verifyRegister($request);
-            case 'login': return $this->verifyLogin($request);
+            //case 'login': return $this->verifyLogin($request);
             case 'reset': return $this->verifyResetPassword($request);
         }
 
@@ -41,7 +41,7 @@ class OtpController extends Controller
     }
 
     protected function verifyRegister(Request $request){
-        $user=Customer::where('mobile', $request->mobile)->first();
+        $user=Customer::where('email', $request->email)->first();
         if($user->status==0){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
                 if($request->notification_token){
@@ -73,44 +73,44 @@ class OtpController extends Controller
     }
 
 
-    protected function verifyLogin(Request $request){
-        $user=Customer::where('mobile', $request->mobile)->first();
-        if(in_array($user->status, [0,1])){
-            if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
-                if($request->notification_token){
-                    Customer::where('notification_token', $request->notification_token)->update(['notification_token'=>null]);
-                    $user->notification_token=$request->notification_token;
-                    $user->status=1;
-                    $user->save();
-                }
-
-
-                return [
-                    'status'=>'success',
-                    'message'=>'OTP has been verified successfully',
-                    'token'=>Auth::guard('customerapi')->fromUser($user),
-                    'user_id'=>'Matchon'.$user->id,
-                    'sendbird_token'=>$user->sendbird_token
-                ];
-            }
-
-            return [
-                'status'=>'failed',
-                'message'=>'OTP is not correct',
-                'token'=>''
-            ];
-
-        }
-        return [
-            'status'=>'failed',
-            'message'=>'Account has been blocked',
-            'token'=>''
-        ];
-    }
+//    protected function verifyLogin(Request $request){
+//        $user=Customer::where('email', $request->email)->first();
+//        if(in_array($user->status, [0,1])){
+//            if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
+//                if($request->notification_token){
+//                    Customer::where('notification_token', $request->notification_token)->update(['notification_token'=>null]);
+//                    $user->notification_token=$request->notification_token;
+//                    $user->status=1;
+//                    $user->save();
+//                }
+//
+//
+//                return [
+//                    'status'=>'success',
+//                    'message'=>'OTP has been verified successfully',
+//                    'token'=>Auth::guard('customerapi')->fromUser($user),
+//                    'user_id'=>'Matchon'.$user->id,
+//                    'sendbird_token'=>$user->sendbird_token
+//                ];
+//            }
+//
+//            return [
+//                'status'=>'failed',
+//                'message'=>'OTP is not correct',
+//                'token'=>''
+//            ];
+//
+//        }
+//        return [
+//            'status'=>'failed',
+//            'message'=>'Account has been blocked',
+//            'token'=>''
+//        ];
+//    }
 
 
     protected function verifyResetPassword(Request $request){
-        $user=Customer::where('mobile', $request->mobile)->first();
+        $user=Customer::where('email', $request->email)->first();
         if(in_array($user->status, [0,1])){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
 

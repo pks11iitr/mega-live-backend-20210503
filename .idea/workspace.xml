@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be102a8a-ab93-4d88-a58f-26bbba78daa6" name="Default Changelist" comment="google login">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/url/about.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdmin/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdmin/UrlController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/OtpController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/OtpController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MobileApps/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,6 +238,7 @@
       <workItem from="1618806249941" duration="6225000" />
       <workItem from="1618982789710" duration="17000" />
       <workItem from="1619426938273" duration="1556000" />
+      <workItem from="1620027592698" duration="3207000" />
     </task>
     <task id="LOCAL-00001" summary="apis">
       <created>1610114860219</created>

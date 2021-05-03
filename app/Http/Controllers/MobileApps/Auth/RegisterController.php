@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileApps\Auth;
 
 use App\Events\CustomerRegistered;
+use App\Models\Country;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:100'],
             'password' => ['required', 'string', 'min:6'],
-            'mobile'=>['required', 'string', 'max:10']
+            //'mobile'=>['required', 'string', 'max:10'],
         ]);
     }
 
@@ -35,11 +36,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $country=Country::find($data['country']);
         return Customer::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'mobile'=>$data['mobile'],
+            //'mobile'=>$data['mobile'],
+            'country'=>$country->id,
+            'country_flag'=>$country->image
         ]);
     }
 
@@ -47,10 +51,10 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        if($customer=Customer::where('mobile', $request->mobile)->orWhere('email', $request->email)->first()){
+        if(Customer::where('email', $request->email)->first()){
             return [
                 'status'=>'failed',
-                'message'=>'Email or mobile already registered'
+                'message'=>'Email already registered. Please login to continue'
             ];
         }
         $user = $this->create($request->all());
