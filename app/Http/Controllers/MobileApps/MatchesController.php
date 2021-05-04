@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MobileApps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\CoinWallet;
 use App\Models\Customer;
 use App\Models\LikeDislike;
@@ -14,6 +15,8 @@ class MatchesController extends Controller
     public function findMatches(Request $request){
 
         $user=$request->user;
+
+        $banners=Banner::active()->get();
 
         $profiles=Customer::with('gallery', 'countryName', 'Height')
             ->select('id', 'name','image', 'dob','country', 'country_flag', 'height_id', 'last_active', 'short_video', 'rate')
@@ -74,7 +77,7 @@ class MatchesController extends Controller
 
             'status'=>'success',
             'message'=>'',
-            'apidata'=>compact('profiles', 'next_page_url', 'prev_page_url')
+            'apidata'=>compact('profiles', 'next_page_url', 'prev_page_url', 'banners')
 
 
         ];
