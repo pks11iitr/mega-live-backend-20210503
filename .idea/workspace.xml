@@ -180,11 +180,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/MobileApps/AdminUsersApp/Auth" />
       <recent name="$PROJECT_DIR$/resources/views/admin/customer" />
       <recent name="$PROJECT_DIR$/resources/views/admin/gift" />
       <recent name="$PROJECT_DIR$/resources/views/admin/coins" />
       <recent name="$PROJECT_DIR$/resources/views/admin/membership" />
-      <recent name="$PROJECT_DIR$/resources/views/admin" />
     </key>
   </component>
   <component name="RunManager">
