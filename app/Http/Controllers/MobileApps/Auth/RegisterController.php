@@ -43,7 +43,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             //'mobile'=>$data['mobile'],
             'country'=>$country->id,
-            'country_flag'=>$country->image
+            'country_flag'=>$country->image,
+            'account_type'=>(($data['user_type']??'')=='admin')?'ADMIN':'USER'
         ]);
     }
 
