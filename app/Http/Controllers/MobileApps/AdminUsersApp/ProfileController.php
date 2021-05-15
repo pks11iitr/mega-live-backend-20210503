@@ -104,7 +104,7 @@ class ProfileController extends Controller
     public function updateprofile(Request $request){
         $user=$request->user;
 
-        $user->update($request->only('name','gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'interests'));
+        $user->update($request->only('name','gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'interests', 'rate', 'video_rate'));
 
         $sendbird=app('App\Services\SendBird\SendBird');
         $sendbird->updateUser($user);
