@@ -65,7 +65,7 @@ class ProfileController extends Controller
 
         $ethnicity=$user->Ethnicity->name??'';
 
-        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image', 'interests','age');
+        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image', 'interests','age', 'rate', 'video_rate');
 
         $profile['coins']=$coins;
         $profile['height']=$height;

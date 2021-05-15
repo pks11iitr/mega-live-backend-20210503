@@ -19,7 +19,7 @@ class MatchesController extends Controller
         $banners=Banner::active()->get();
 
         $profiles=Customer::with('gallery', 'countryName', 'Height')
-            ->select('id', 'name','image', 'dob','country', 'country_flag', 'height_id', 'last_active', 'short_video', 'rate')
+            ->select('id', 'name','image', 'dob','country', 'country_flag', 'height_id', 'last_active', 'short_video', 'rate', 'video_rate')
             ->where('id', '!=', $user->id)
             ->where('account_type', 'ADMIN');
 
@@ -90,7 +90,7 @@ class MatchesController extends Controller
         $user=$request->user;
 
         $details=Customer::with(['gallery', 'Height', 'Ethnicity', 'Education', 'Job', 'Work', 'Religion', 'interests'])
-            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'rate')
+            ->select('id', 'name', 'image', 'mobile', 'gender', 'dob', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs', 'rate', 'video_rate')
             ->findOrFail($id);
 
         $like=LikeDislike::where('sender_id', $user->id)

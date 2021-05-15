@@ -23,7 +23,7 @@ class HomeController extends Controller
             ->where('gender', ($user->gender=='Female')?'Male':'Female')
             ->whereNotNull('gender')
             ->where('id', '!=', $user->id)
-            ->select('id', 'name','image', 'dob')
+            ->select('id', 'name','image', 'dob', 'rate', 'video_rate')
             ->get();
         $stories=Story::active()->get();
         $news=NewsUpdate::active()->get();
