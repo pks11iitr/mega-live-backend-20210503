@@ -24,8 +24,8 @@ class WebhookController extends Controller
 
         if(isset($content['category']) && isset($content['direct_call']) && isset($content['direct_call']['call_id']) && isset($content['direct_call']['caller_id']) && isset($content['direct_call']['callee_id'])){
             if($content['category']=='direct_call:dial'){
-                $caller=str_replace('Matchon', '', $content['direct_call']['caller_id']);
-                $callee=str_replace('Matchon', '', $content['direct_call']['callee_id']);
+                $caller=str_replace(env('APP_USER_PREFIX'), '', $content['direct_call']['caller_id']);
+                $callee=str_replace(env('APP_USER_PREFIX'), '', $content['direct_call']['callee_id']);
 
                 $caller=Customer::find($caller);
                 $callee=Customer::find($callee);

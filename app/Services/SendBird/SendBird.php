@@ -25,9 +25,9 @@ class SendBird
 //            $img_url=$user->image;
 //            $nick_name=$user->name;
 //        }else if($user instanceof Customer){
-            $user_id='Matchon'.$user->id;
+            $user_id=env('APP_USER_PREFIX').$user->id;
             $img_url=$user->image;
-            $nick_name=$user->name??'Matchon'.$user->id;
+            $nick_name=$user->name??(env('APP_USER_PREFIX').$user->id);
 //        }else{
 //            //die('sds');
 //            return;
@@ -73,7 +73,7 @@ class SendBird
 //        }else if($user instanceof Customer){
 //        $user_id='Matchon'.$user->id;
         $img_url=$user->image;
-        $nick_name=$user->name??'Matchon'.$user->id;
+        $nick_name=$user->name??(env('APP_USER_PREFIX').$user->id);
 //        }else{
 //            //die('sds');
 //            return;
@@ -84,7 +84,7 @@ class SendBird
 //Api-Token: {master_api_token or secondary_api_token}
 
         try{
-            $response=$this->client->request('PUT', $this->base_url.'/users/'.'Matchon'.$user->id, [
+            $response=$this->client->request('PUT', $this->base_url.'/users/'.env('APP_USER_PREFIX').$user->id, [
                 'headers'        => ['Content-Type' => 'application/json; charset=utf8', 'Api-Token'=>env('SENDBIRD_API_TOKEN')],
                 //'decode_content' => false,
                 'json' => [

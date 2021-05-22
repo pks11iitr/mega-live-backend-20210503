@@ -71,7 +71,7 @@
 {{--                                                @if($chat->type=='admin')--}}
                                                     <div class="direct-chat-msg right">
                                                         <div class="direct-chat-infos clearfix">
-                                                            <span class="direct-chat-name float-right">matchon</span>
+                                                            <span class="direct-chat-name float-right">{{env('APP_USER_PREFIX')}}</span>
                                                             <span class="direct-chat-timestamp float-left">{{$chats->created_at}}</span>
                                                         </div>
                                                         <!-- /.direct-chat-infos -->

@@ -42,9 +42,9 @@ class OrderConfirmListner
 
         $message='';
         if($order->entity_type == 'App\Models\Coin'){
-            $message='Congratulations! Your coin purchase of Rs. '.$order->amount.' at Matchon is successful. Order Reference ID: '.$order->refid;
+            $message='Congratulations! Your coin purchase of Rs. '.$order->amount.' at '.env('APP_USER_PREFIX').' is successful. Order Reference ID: '.$order->refid;
         }else if($order->entity_type == 'App\Models\Membership'){
-            $message='Congratulations! Your membership subscription of Rs. '.$order->amount.' at Matchon is successful. Order Reference ID: '.$order->refid;
+            $message='Congratulations! Your membership subscription of Rs. '.$order->amount.' at '.env('APP_USER_PREFIX').' is successful. Order Reference ID: '.$order->refid;
 
         }
 

@@ -38,7 +38,7 @@ class CallController extends Controller
             $minutes=floor($balance/$user->rate);
         }
 
-        $user_id='Matchon'.$receiver->id;
+        $user_id=env('APP_USER_PREFIX').$receiver->id;
 
         return [
             'status'=>'success',

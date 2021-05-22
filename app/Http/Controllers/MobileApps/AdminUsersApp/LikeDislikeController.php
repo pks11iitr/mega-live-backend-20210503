@@ -90,7 +90,7 @@ class LikeDislikeController extends Controller
                 'sender'=>[
                     'name'=>$user->name,
                     'image'=>$user->image,
-                    'sendbird_id'=>'Matchon'.$user->id,
+                    'sendbird_id'=>env('APP_USER_PREFIX').$user->id,
                     'sendbird_token'=>$user->sendbird_token
                 ],
                 'receiver'=>[

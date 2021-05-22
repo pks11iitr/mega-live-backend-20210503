@@ -9,7 +9,7 @@
     <meta name="keywords" content="KMS Vets">
     <meta name="author" content="KMS Vets">
 
-    <title>MATCHON</title>
+    <title>{{env('APP_USER_PREFIX')}}</title>
     <link rel="icon" href="homepage/img/favicon.png">
     <!-- CSS Files -->
     <link rel="stylesheet" href="homepage/css/bootstrap.min.css">
@@ -31,14 +31,15 @@
             <div class="row">
                 <div class="col-12 py-2">
                     <span class="left" style="color: white;  font-size:25px;">
-                        <img style="width:6%;" src="homepage/img/logo.png" height="80%">MATCHON
+{{--                        <img style="width:6%;" src="homepage/img/logo.png" height="80%">--}}
+                        {{env('APP_USER_PREFIX')}}
 {{--                      <p style="font-size: 25px; margin-bottom: -17px; padding: 14px 15px; color: white;">MATCHON</p>--}}
                     </span>
                     <span class="right">
                         <a href="tel:+91 9718379922">
-                          <i class="fa fa-phone"></i>+91 9718379922
+                          <i class="fa fa-phone"></i>+91 000000000
                       </a><br>
-                      <a href="mailto:matchon99@gmail.com"><i class="fa fa-envelope"></i>matchon99@gmail.com</a>
+                      <a href="mailto:megalive@gmail.com"><i class="fa fa-envelope"></i>megalive@gmail.com</a>
                     </span>
                 </div>
             </div>
@@ -86,7 +87,7 @@
         <div class="row">
             <div class="col-xl-8 mx-auto mb-3 text-center">
                 <div class="section-title">
-                    <h4>Welcome to "MATCHON"</h4>
+                    <h4>Welcome to {{env('APP_USER_PREFIX')}}</h4>
                 </div>
             </div>
         </div>
@@ -95,8 +96,8 @@
                 <p>
                     Start Chatting Now and Fun on Video call & Voice call<br><br>
 
-                    "MatchOn Best app for interesting people nearby you & chat online with millions of people !<br><br>
-                    If you are getting bored in home then why don't you install MatchOn .Our goal is to match you with the best person whether it's someone nearby or the location you desire. Tired of scrolling through photos? We have millions of members with video profiles too so you can get a better sense of chemistry. Chat and Fun with Interesting people .Enjoy your time on MatchOn.
+                    "{{env('APP_USER_PREFIX')}} Best app for interesting people nearby you & chat online with millions of people !<br><br>
+                    If you are getting bored in home then why don't you install {{env('APP_USER_PREFIX')}} .Our goal is to match you with the best person whether it's someone nearby or the location you desire. Tired of scrolling through photos? We have millions of members with video profiles too so you can get a better sense of chemistry. Chat and Fun with Interesting people .Enjoy your time on {{env('APP_USER_PREFIX')}}.
                 </p>
                     <h4>FEATURES:</h4>
                 <ol>
@@ -116,9 +117,9 @@
                 </ol>
 
                 <p>
-                    MatchOn aims at keeping platform free from fake profiles.<br>
+                    {{env('APP_USER_PREFIX')}} aims at keeping platform free from fake profiles.<br>
 
-                    Customer support team are right here to help you. So Install matchon right now and start browsing profiles of users from India in a minute . Who knows, it might change your destiny!
+                    Customer support team are right here to help you. So Install {{env('APP_USER_PREFIX')}} right now and start browsing profiles of users from India in a minute . Who knows, it might change your destiny!
                 </p>
 
             </div>
@@ -254,7 +255,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="footer-text text-center">
-                    <p class="mb-3">Copyright © 2021 | MATCHON | Privacy Policy </p>
+                    <p class="mb-3">Copyright © 2021 | {{env('APP_USER_PREFIX')}} | Privacy Policy </p>
 
                 </div>
             </div>

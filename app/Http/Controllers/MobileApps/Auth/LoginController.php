@@ -208,7 +208,7 @@ class LoginController extends Controller
             'status'=>'success',
             'message'=>'OTP has been verified successfully',
             'token'=>Auth::guard('customerapi')->fromUser($user),
-            'user_id'=>'Matchon'.$user->id,
+            'user_id'=>env('APP_USER_PREFIX').$user->id,
             'sendbird_token'=>$user->sendbird_token
         ];
 

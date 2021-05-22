@@ -99,7 +99,7 @@
                     <img src="{{\Illuminate\Support\Facades\Storage::url('images/logo.jpeg')}}" class="img-circle elevation-2" alt="">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">MATCHON</a>
+                    <a href="#" class="d-block">{{env('APP_USER_PREFIX')}}</a>
                 </div>
             </div>
 

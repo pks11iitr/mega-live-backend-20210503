@@ -59,7 +59,7 @@ class PaymentController extends Controller
                     'total'=>$payment->amount*100,
                     'email'=>$user->email??'',
                     'mobile'=>$user->mobile??'',
-                    'description'=>'Coin Purchase at Matchon',
+                    'description'=>'Coin Purchase at '.env('APP_USER_PREFIX'),
                     'name'=>$user->name??'',
                     'currency'=>'INR',
                     //'merchantid'=>$this->pay->merchantkey,
@@ -111,7 +111,7 @@ class PaymentController extends Controller
 
             return [
                 'status'=>'success',
-                'message'=> 'Congratulations! Your coin purchase at Matchon is successful',
+                'message'=> 'Congratulations! Your coin purchase at '.env('APP_USER_PREFIX').' is successful',
                 'data'=>[
                     'ref_id'=>$payment->refid,
                     'order_id'=>$payment->id,
