@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Matchon</title>
+    <title>{{env('APP_USER_PREFIX')}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -88,7 +88,7 @@
         <a href="{{route('home')}}" class="brand-link">
             <img src="{{asset('admin-theme/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">MATCHON CMS</span>
+            <span class="brand-text font-weight-light">{{env('APP_USER_PREFIX')}} CMS</span>
         </a>
 
         <!-- Sidebar -->

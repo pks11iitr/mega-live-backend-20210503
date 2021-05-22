@@ -1,4 +1,4 @@
-<p>Matchon is an advertising platform providing targeted advertising services for the purpose of matchmaking ("Service"). In order to do provide the services, we ask for certain personal information which is displayed on the site on behalf of you to find the perfect life partner. You hereby provide your consent to collect, process, and share of your personal information in order to provide the service.<br /><br /><strong>Matchon gathers following types of information:</strong><br /><br />i. Information you submit; and<br />ii. Information not directly submitted by the you<br />iii. Information we receive from others</p>
+<p>{{env('APP_USER_PREFIX')}} is an advertising platform providing targeted advertising services for the purpose of matchmaking ("Service"). In order to do provide the services, we ask for certain personal information which is displayed on the site on behalf of you to find the perfect life partner. You hereby provide your consent to collect, process, and share of your personal information in order to provide the service.<br /><br /><strong>{{env('APP_USER_PREFIX')}} gathers following types of information:</strong><br /><br />i. Information you submit; and<br />ii. Information not directly submitted by the you<br />iii. Information we receive from others</p>
 <div class="privacy_policy_inner_wrap">
     <ol>
         <li><strong>Information submitted by you</strong><br />In order to avail the service you provide the following information:-
@@ -23,7 +23,7 @@
         </li>
         <li><strong>Information we receive from others</strong><br />In addition to the information you provide us directly, we receive information about you from others, such as:
             <ul class="list_disc">
-                <li><strong>Social Media</strong><br />You have an option to use your social media login (such as Facebook Login) to create and log into your Matchon account. This saves you from remembering one more login credentials and allows you to share some information from your social media account with us.</li>
+                <li><strong>Social Media</strong><br />You have an option to use your social media login (such as Facebook Login) to create and log into your {{env('APP_USER_PREFIX')}} account. This saves you from remembering one more login credentials and allows you to share some information from your social media account with us.</li>
             </ul>
         </li>
     </ol>
