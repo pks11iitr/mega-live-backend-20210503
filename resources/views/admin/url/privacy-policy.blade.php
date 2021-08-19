@@ -1,30 +1,45 @@
-<p>{{env('APP_USER_PREFIX')}} is an advertising platform providing targeted advertising services for the purpose of matchmaking ("Service"). In order to do provide the services, we ask for certain personal information which is displayed on the site on behalf of you to find the perfect life partner. You hereby provide your consent to collect, process, and share of your personal information in order to provide the service.<br /><br /><strong>{{env('APP_USER_PREFIX')}} gathers following types of information:</strong><br /><br />i. Information you submit; and<br />ii. Information not directly submitted by the you<br />iii. Information we receive from others</p>
-<div class="privacy_policy_inner_wrap">
-    <ol>
-        <li><strong>Information submitted by you</strong><br />In order to avail the service you provide the following information:-
-            <ul class="list_disc">
-                <li>While registering for our service, you share with us your personal details, such as name, your gender, date of birth, contact details, educational qualification, employment details, photos, marital status and your interests etc...</li>
-                <li>When you avail for a paid service, you provide us or our payment service provider with information, such as your debit or credit card number or UPI.</li>
-                <li>Testimonials submitted by you including your success story and photos.</li>
-                <li>Information submitted by you voluntarily while participating in surveys contest, promotions or events.</li>
-                <li>Details shared with our customer care team. (This information used to monitor or for training purposes and to ensure a better service).</li>
-                <li>You have the option to send interesting profiles/ articles to your friends. We will use your friend's email address only to send a one-time message to them per request. Then they will never ever hear from us again unless they voluntarily subscribe to our services.</li>
-                <li>Your chats and messages with other users as well as the content you publish will be processed as a part of the service.</li>
-            </ul>
-        </li>
-        <li><strong>Information not directly submitted by you</strong><br />
-            <ul class="list_disc">
-                <li><strong>User activity</strong><br />We collect information about your activity on our services, such as date and time you logged in, features you've been using, searches, clicks and pages visited by you, your interaction with other users including messages exchanged.</li>
-                <li><strong>Device Information</strong><br />We collect information from and about the device(s) such as IP address, device ID and type, device-specification and apps settings, app error reports, browser type and version, operating system, identifiers associated with cookies or other technologies that may uniquely identify your device or browser.</li>
-                <li>
-                    <div class="bold">SMS permission</div>
-                    We need SMS permission for authenticating transactions via OTP, sent by the Payment Gateway.</li>
-            </ul>
-        </li>
-        <li><strong>Information we receive from others</strong><br />In addition to the information you provide us directly, we receive information about you from others, such as:
-            <ul class="list_disc">
-                <li><strong>Social Media</strong><br />You have an option to use your social media login (such as Facebook Login) to create and log into your {{env('APP_USER_PREFIX')}} account. This saves you from remembering one more login credentials and allows you to share some information from your social media account with us.</li>
-            </ul>
-        </li>
-    </ol>
-</div>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><em><span style="color: #0e101a;"><u><strong>MegaLive--- Privacy Policy</strong></u></span></em></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">MegaLive lays special emphasis on safeguarding the users' privacy and ensure a hassle-free online experience. Apart from that, we would make sure that optimal quality is rendered to our esteemed members. As we, the team of MegaLive collects various types of information from you, users, and subscribers; you should be quite familiar with our terms and conditions revolving around the collection.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Privacy policy shares what information we have collected, the method in which it is utilized, make necessary changes or modifications. Moreover, certain steps are taken to protect the personal information that is delivered online and offline. Members are requested to go through the Privacy policy, terms of use and enquire us for further clarifications.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><em><span style="color: #0e101a;"><strong>What type of information is gathered from members?</strong></span></em></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">For gaining access to our website, users are supposed to disclose personally identifiable pieces of information. To ensure top-notch services and grab the attention of the public, we might request our valued users to collect data in an automated format.</span></span></span></p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We primarily gather personal information such as name, age, gender, email, and demographic data once the users have subscribed, create a fresh account, and register on our website. There are times during which registration could be completed by inputting a valid user name and password.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><em><span style="color: #0e101a;"><strong>Data collected in an automated format</strong></span></em></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We might gather the user's IP and referral website address, website access, domain name, and type of browsers in an automated format. By doing so, it would ensure a seamless online experience for the members. Apart from that, we make use of cookies to monitor usage patterns on our official website and thereby regulate the display of advertisements. This is also helpful in boosting the speed of log-in and landing pages. Users do have the option to deactivate cookies but it might hamper the online experience.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><em><span style="color: #0e101a;"><strong>How do we make use of the collected information?</strong></span></em></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We take advantage of data provided by the users to enhance the online dating app experience along with products and services. The team of MegaLive generates reports for vendors, advertisers, and sponsors that feature unique information regarding subscribers and users. It consists of age, duration of online usage, and demographic location.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">The information collected enables us to deliver content that is more appropriate for our members, users, and subscribers. This would help in effectively working with advertisers. We use personal information to send customized content to our active website visitors. In addition, we could send newsletters, features as well as promotional materials.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">In the long run, we will be able to establish a robust relationship with various corporate entities that are authentic and privacy policy is consistent. The internal team of MegaLive takes advantage of your personal information to access and administer products and services thereby fulfilling customer requests. The response time can be improved and ensure smooth navigation of the website. This is also helpful in evaluating the latest trends in determining the most sought-after products and services by our esteemed users.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We do permit our users to submit articles and links through email to third parties. We do not preserve or disclose the email address of both the sender and recipient after they are delivered. Apart from that, we do not share the 'send a friend' email ID with other people. It is a fact that we make use of personal information to enable users to subscribe online.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><strong><span style="color: #0e101a;"><em>How do we exchange personal information?</em></span></strong></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Most of the prominent website hosting firms, advertising agencies, and numerous corporate entities have instant access to personally identifiable information thereby promoting products and services online. Each company that is working in collaboration with MegaLive should comply with the privacy policies and they are not entitled to sell information to various people or use it unless authorized by us.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We do share aggregated demographic information including age, name, address, hobbies, monthly income and interests gathered from cookies with our sponsors, advertisers, and several business partners. However, no personally identifiable information is shared with our third parties in delivering the above-mentioned reports.</span></span></span></p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">The email address of users will not be shared or disclosed with third parties unless they give written consent. We may sometimes extend email offers to subscribers or users on behalf of some of the renowned business partners regarding products and services. If you intend to receive certain offers, we will not disclose personal information such as name and address to the above-mentioned business partners.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Therefore, MegaLive procure a fee from the business partners. There are times during which we the team of Mega liven provide an opportunity for our members to obtain email offers from third parties. If the users agree to accept the offers, by obtaining your written consent, we would proceed with sharing the personally identifiable information with third parties.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Another major highlight concerning the official website of MegaLive is that it does provide an opportunity for our users to register with certain sponsors to access sweepstakes contests and grab amazing prizes. Moreover, the members would receive email updates regarding daily offers and similar information. We request our valued members to go through the privacy policy of the above-mentioned corporate entities twice.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Under any circumstances, MegaLive will not be solely responsible for the procedures and privacy policy of third parties. The chances of receiving unsolicited information are high when the users make use of chat session boxes, bulletin boards, message boards, or blogs. Note that we have no control over the usage of personal information.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">We do have the right to share information without written consent from users for the below-mentioned criteria--- to carry out an investigation of grievances filed by the members of Mega live. We need to safeguard the interests of our valued users while protecting the integrity of our company. The Users should cooperate with us for any legal investigation</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><strong><span style="color: #0e101a;"><em>How do we leverage the cookies?</em></span></strong></span></span></p>
+<p align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;"><span style="color: #0e101a;">Cookies do not contain any sort of personally identifiable information. It stores tiny volumes of data on your desktop PCs.</span></span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><br /> </p>

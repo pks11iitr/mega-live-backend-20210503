@@ -121,3 +121,4 @@ $api->get('faq','SuperAdmin\UrlController@faq');
 $api->get('support','SuperAdmin\UrlController@customercare');
 $api->get('about','SuperAdmin\UrlController@about');
 $api->get('countries','DataController@countries');
+$api->get('terms-conditions','SuperAdmin\UrlController@terms');

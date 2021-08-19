@@ -28,4 +28,9 @@ class UrlController extends Controller
 
         return view('admin.url.about');
     }
+
+    public function terms(Request $request){
+        return view('admin.url.terms');
+    }
+
 }
