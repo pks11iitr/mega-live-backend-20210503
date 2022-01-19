@@ -17,21 +17,42 @@ class PaymentController extends Controller
         $this->pay=$pay;
     }
 
-    public function initiateCoinPayment(Request $request, $plan_id){
-        $user=$request->user;
-
+    public function initiateCoinPayment(Request $request, $plan_id){ 
+         //$request->status; 
+        //return $request->orderid; die;
+        $user=auth()->guard('customerapi')->user();
+        $user=$user->id ?? 2;
         $plan=Coin::active()->findOrFail($plan_id);
-
         $refid=env('MACHINE_ID').time();
         $payment=Payment::create([
             'refid'=>$refid,
-            'user_id'=>$user->id,
+            'user_id'=>$user,
             'amount'=>$plan->price,
             'entity_type'=>'App\Models\Coin',
             'entity_id'=>$plan->id,
+            'is_complete'=>$request->status,
+            'order_id'=>$request->orderid
         ]);
+        if($payment){
+         return [
+                'status'=>'success',
+                'message'=> 'Congratulations! Your coin purchase Successfully',
+                'data'=>[
+                    'ref_id'=>$payment->refid,
+                    'payment_id'=>$payment->id,
+                    'orderid'=>$request->orderid
+                ]
+            ];
+        }else{
+            return [
+                'status'=>'failed',
+                'message'=>'Payment cannot be initiated',
+                'data'=>[
+                ],
+            ];
+        }
 
-        return $this->initiateGatewayPayment($payment);
+        //return $this->initiateGatewayPayment($payment);
 
     }
 
@@ -128,5 +149,16 @@ class PaymentController extends Controller
             ];
         }
     }
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
 
 }

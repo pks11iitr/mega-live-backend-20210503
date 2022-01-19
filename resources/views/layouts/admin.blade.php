@@ -159,10 +159,22 @@
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Gifts
-
                             </p>
                         </a>
                     </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{route('Admincoinadd.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Add Coins
+                            </p>
+                        </a>
+                    </li>
+
+
+                    
                     <li class="nav-item">
                         <a href="{{route('interest.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>

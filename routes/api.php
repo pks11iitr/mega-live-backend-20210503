@@ -15,7 +15,7 @@ $api = app('Dingo\Api\Routing\Router');
 */
 
 $api->post('login', 'MobileApps\Auth\LoginController@login');
-//$api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
+$api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
 $api->post('register', 'MobileApps\Auth\RegisterController@register');
 $api->post('forgot', 'MobileApps\Auth\ForgotPasswordController@forgot');
 $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
@@ -23,6 +23,10 @@ $api->post('resend-otp', 'MobileApps\Auth\OtpController@resend');
 $api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePassword');
 $api->post('google-login', 'MobileApps\Auth\LoginController@googleLogin');
 
+
+ $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
+$api->post('request_otp', 'MobileApps\AuthController@requestOtp');
+$api->post('verify_otp', 'MobileApps\AuthController@verifyOtp');
 
 //$api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
@@ -73,8 +77,11 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
     $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
 
 
-    $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
+   // $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
     $api->post('verify-payment', 'MobileApps\PaymentController@verifyPayment');
+    $api->get('genrate_order', 'MobileApps\PaymentController@genrate_order');
+
+
 
     $api->get('my-interests', 'MobileApps\ProfileController@getInterests');
     $api->post('update-interests', 'MobileApps\ProfileController@updateInterests');

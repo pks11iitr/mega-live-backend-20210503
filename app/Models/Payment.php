@@ -11,7 +11,7 @@ class Payment extends Model
 
     protected $table='payments';
 
-    protected $fillable=['entity_id', 'entity_type', 'user_id', 'amount', 'is_complete', 'refid'];
+    protected $fillable=['entity_id', 'entity_type', 'user_id', 'amount', 'is_complete', 'refid','order_id'];
 
 
     public function customer(){
