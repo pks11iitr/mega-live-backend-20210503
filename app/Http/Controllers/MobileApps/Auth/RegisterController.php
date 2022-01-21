@@ -5,10 +5,12 @@ namespace App\Http\Controllers\MobileApps\Auth;
 use App\Events\CustomerRegistered;
 use App\Models\Country;
 use App\Models\Customer;
+use App\Models\OTPModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\Email\ConnectExpress;
 
 class RegisterController extends Controller
 {
@@ -36,7 +38,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $country=Country::find($data['country']);
+        
+         $country=Country::where('id',$data['country'])->first();
+
+       
         return Customer::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -58,9 +63,15 @@ class RegisterController extends Controller
                 'message'=>'Email already registered. Please login to continue'
             ];
         }
-        $user = $this->create($request->all());
-        event(new CustomerRegistered($user));
-
+         $user = $this->create($request->all());
+       
+        if($user->status==0){
+            $otp=OTPModel::createOTP('customer', $user->id, 'register');
+            $msg=str_replace('{{otp}}', $otp, config('sms-templates.register'));
+            ConnectExpress::send($user->email,$msg);
+           // return ['status'=>'success', 'message'=>'otp verify', 'token'=>''];
+        }
+        event(new CustomerRegistered($user)); 
         return [
             'status'=>'success',
             'message'=>'Please verify otp to continue'
