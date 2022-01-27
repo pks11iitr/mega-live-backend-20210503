@@ -15,7 +15,7 @@ $api = app('Dingo\Api\Routing\Router');
 */
 
 $api->post('login', 'MobileApps\Auth\LoginController@login');
-//$api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
+$api->post('login-with-otp', 'MobileApps\Auth\LoginController@loginWithOtp');
 $api->post('register', 'MobileApps\Auth\RegisterController@register');
 $api->post('forgot', 'MobileApps\Auth\ForgotPasswordController@forgot');
 $api->post('verify-otp', 'MobileApps\Auth\OtpController@verify');
@@ -24,13 +24,17 @@ $api->post('update-password', 'MobileApps\Auth\ForgotPasswordController@updatePa
 $api->post('google-login', 'MobileApps\Auth\LoginController@googleLogin');
 
 
+ $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
+$api->post('request_otp', 'MobileApps\AuthController@requestOtp');
+$api->post('verify_otp', 'MobileApps\AuthController@verifyOtp');
+
 //$api->post('admin/login-with-otp', 'MobileApps\AdminUsersApp\Auth\LoginController@loginWithOtp');
 
 $api->post('webhook-receive-133232983892', 'MobileApps\WebhookController@receive');
 
 
 $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
-
+    $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
     $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
     $api->post('update-profile', 'MobileApps\ProfileController@updateprofile');
 
@@ -70,11 +74,14 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
     $api->get('chats/{user_id}', 'MobileApps\ChatCotroller@chatDetails');
     $api->post('send-message/{user_id}', 'MobileApps\ChatCotroller@send');
 
-    $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
 
 
-    $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
+
+   // $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
     $api->post('verify-payment', 'MobileApps\PaymentController@verifyPayment');
+    $api->get('genrate_order', 'MobileApps\PaymentController@genrate_order');
+
+
 
     $api->get('my-interests', 'MobileApps\ProfileController@getInterests');
     $api->post('update-interests', 'MobileApps\ProfileController@updateInterests');
@@ -82,7 +89,7 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 
 
 
-    $api->group(['prefix' => 'admin','middleware' => ['admin-api-auth']], function ($api) {
+    $api->group(['prefix' => 'admin'], function ($api) {
         $api->get('users', 'MobileApps\AdminUsersApp\UsersController@index');
         $api->get('chats', 'MobileApps\AdminUsersApp\ChatController@chatlist');
         $api->get('chats/{user_id}', 'MobileApps\AdminUsersApp\ChatController@chatDetails');

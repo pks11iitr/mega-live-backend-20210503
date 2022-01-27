@@ -10,13 +10,27 @@ use Illuminate\Http\Request;
 
 class CoinsController extends Controller
 {
+    
+    
+     public function genrate_order($userid){
+         
+         $unique_id = time() . mt_rand() . $userid;
+         return $unique_id;       
+    }
+    
+    
     public function index()
-    {
+    {   
+        
+        $user=auth()->guard('customerapi')->user();
+        $orderid=$this->genrate_order($user->id);
+        
         $coins = Coin::active()->get();
         if (count($coins) > 0) {
             return [
                 'status' => 'success',
                 'message' => 'success',
+                'orderid'=>$orderid,
                 'data' => compact('coins')
             ];
         } else {

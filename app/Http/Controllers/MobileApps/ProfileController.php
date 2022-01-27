@@ -30,7 +30,8 @@ class ProfileController extends Controller
 
 
     public function getprofile(Request $request){
-        $user=$request->user;
+      
+        $user=$request->user; 
 //        $profile=array(
 //                      'id'=>$user->id,
 //                      'image'=>$user->image,
@@ -65,7 +66,7 @@ class ProfileController extends Controller
         $ethnicity=$user->Ethnicity->name??'';
 
 
-        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image', 'interests','age');
+        $profile=$user->only('id','name','gender', 'dob', 'mobile', 'email', 'about_me', 'height_id', 'ethicity_id', 'education_id', 'occupation_id', 'job_id', 'religion_id', 'drinking', 'smoking', 'marijuana', 'drugs','age_show', 'distance_show', 'image', 'interests','age','regno');
         $profile['coins']=$coins;
         $profile['height']=$height;
         $profile['ethnicity']=$ethnicity;
@@ -147,7 +148,7 @@ class ProfileController extends Controller
 
 //upload user images
     public function uploadpictures(Request $request){
-
+    
         $request->validate([
             'images'=>'required|array',
         ]);

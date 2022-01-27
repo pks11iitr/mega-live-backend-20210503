@@ -41,7 +41,8 @@ class OtpController extends Controller
     }
 
     protected function verifyRegister(Request $request){
-        $user=Customer::where('email', $request->email)->first();
+         
+         $user=Customer::where('email', $request->email)->first();
         //die('gahs');
         if($user->status==0 || $user->status==1){
             if(OTPModel::verifyOTP('customer',$user->id,$request->type,$request->otp)){
@@ -51,11 +52,28 @@ class OtpController extends Controller
                     $user->status=1;
                     $user->save();
                 }
+                
+                
+                 if(!$user->sendbird_token){
+                    //register on sendbird app
+                    $sendbird=app('App\Services\SendBird\SendBird');
+                    $response=$sendbird->createUser($user);
+        
+                    if(isset($response['user_id'])){
+                        $user->sendbird_token=$response['access_token']??null;
+                        $user->save();
+                    }else{
+                        return ['status'=>'failed', 'message'=>'Something went wrong please. Please try again'];
+                    }
+                }
 
                 return [
+                    
                     'status'=>'success',
                     'message'=>'OTP has been verified successfully',
-                    'token'=>Auth::guard('customerapi')->fromUser($user)
+                    'token'=>Auth::guard('customerapi')->fromUser($user),
+                    'user_id'=>env('APP_USER_PREFIX').$user->id,
+                    'sendbird_token'=>$user->sendbird_token
                 ];
             }
 

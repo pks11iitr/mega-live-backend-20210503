@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 class WebhookController extends Controller
 {
     public function receive(Request $request){
-
+        
+        return $request;
         $content=Request::createFromGlobals()->getContent();
 
         LogData::create([

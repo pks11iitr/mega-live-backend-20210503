@@ -15,7 +15,6 @@ class SendBird
         $this->token=env('SENDBIRD_API_TOKEN');
         $this->client=$client;
     }
-
     public function createUser($user){
 
         //die('hello');

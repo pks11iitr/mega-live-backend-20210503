@@ -137,7 +137,14 @@ Route::group(['prefix'=>'caller', 'middleware'=>['auth', 'acl'], 'is'=>'caller']
 
 });
 
+Route::group(['prefix'=>'Admincoinadd'], function(){
+    Route::get('/','SuperAdmin\CoinAddbyAdminController@index')->name('Admincoinadd.list');
+    Route::get('create','SuperAdmin\CoinAddbyAdminController@create')->name('Admincoinadd.create');        
+    Route::post('store','SuperAdmin\CoinAddbyAdminController@store')->name('Admincoinadd.store');
 
+    Route::get('edit/{id}','SuperAdmin\CoinAddbyAdminController@edit')->name('Admincoinadd.edit');
+    Route::post('update/{id}','SuperAdmin\CoinAddbyAdminController@update')->name('Admincoinadd.update');
+});
 
 Route::group(['prefix'=>'url'], function(){
     Route::get('privacy-policy','SuperAdmin\UrlController@privacy');
