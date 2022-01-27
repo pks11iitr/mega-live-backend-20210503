@@ -33,7 +33,7 @@ $api->post('verify_otp', 'MobileApps\AuthController@verifyOtp');
 $api->post('webhook-receive-133232983892', 'MobileApps\WebhookController@receive');
 
 
-$api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
+    $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
 
     $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
     $api->post('update-profile', 'MobileApps\ProfileController@updateprofile');
