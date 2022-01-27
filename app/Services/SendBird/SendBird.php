@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\TransferException;
 
 class SendBird
 {
-
+ 
     public function __construct(Client $client){
         $this->base_url="https://api-".env('SENDBIRD_APP_ID').".sendbird.com/v3";
         $this->token=env('SENDBIRD_API_TOKEN');
@@ -71,8 +71,8 @@ class SendBird
 //            $nick_name=$user->name;
 //        }else if($user instanceof Customer){
 //        $user_id='Matchon'.$user->id;
-        $img_url=$user->image;
-        $nick_name=$user->name??(env('APP_USER_PREFIX').$user->id);
+            $img_url=$user->image;
+            $nick_name=$user->name??(env('APP_USER_PREFIX').$user->id);
 //        }else{
 //            //die('sds');
 //            return;

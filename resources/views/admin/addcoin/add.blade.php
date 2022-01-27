@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+<<<<<<< HEAD
 
 <style>
     .select2-container .select2-selection--single {
@@ -11,6 +12,8 @@
     -webkit-user-select: none;
 }
 </style>
+=======
+>>>>>>> 407cc086e51af3b64f372c82c1b72c33b8c686f1
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,19 +49,29 @@
               <form role="form" method="post" enctype="multipart/form-data" action="{{route('Admincoinadd.store')}}">
                  @csrf
                  <input type="hidden" name="sender_id" value="1"/>                 
+<<<<<<< HEAD
                  
                  
                  
                  
+=======
+>>>>>>> 407cc086e51af3b64f372c82c1b72c33b8c686f1
                    <div class="card-body">
                     <div class="row">
                       <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Customers</label><br>
+<<<<<<< HEAD
                                 <select name="receiver_id" class="form-control select2">
                                     <option value="">--Select Customers--</option>
                                     @foreach($customers as $user)
                                     <option value="{{$user->id}}">{{$user->name}} - {{$user->regno ?? ''}}</option>
+=======
+                                <select name="receiver_id" class="form-control">
+                                    <option value="">--Select Customers--</option>
+                                    @foreach($customers as $user)
+                                    <option value="{{$user->id}}">{{$user->name}} - {{$user->id}}</option>
+>>>>>>> 407cc086e51af3b64f372c82c1b72c33b8c686f1
                                     @endforeach
                                 </select>   
                             </div>

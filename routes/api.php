@@ -33,8 +33,13 @@ $api->post('verify_otp', 'MobileApps\AuthController@verifyOtp');
 $api->post('webhook-receive-133232983892', 'MobileApps\WebhookController@receive');
 
 
+<<<<<<< HEAD
 $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
     $api->get('initiate-call/{profile_id}', 'MobileApps\CallController@initiateVideoCall');
+=======
+    $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) {
+
+>>>>>>> 407cc086e51af3b64f372c82c1b72c33b8c686f1
     $api->get('get-profile', 'MobileApps\ProfileController@getprofile');
     $api->post('update-profile', 'MobileApps\ProfileController@updateprofile');
 
@@ -76,7 +81,10 @@ $api->group(['middleware' => ['customer-api-auth', 'lastlog']], function ($api) 
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 407cc086e51af3b64f372c82c1b72c33b8c686f1
    // $api->get('initiate-coin-payment/{plan_id}', 'MobileApps\PaymentController@initiateCoinPayment');
     $api->post('verify-payment', 'MobileApps\PaymentController@verifyPayment');
     $api->get('genrate_order', 'MobileApps\PaymentController@genrate_order');
